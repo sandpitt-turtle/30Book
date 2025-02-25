@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer"; // Import Footer
+import Footer from "./components/Footer"; 
 import Books from "./components/AllBooks";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -15,12 +15,12 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [darkMode, setDarkMode] = useState(false);
 
-  // Toggle dark theme
+
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
   };
 
-  // Apply dark mode to body when theme changes
+
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark-theme");

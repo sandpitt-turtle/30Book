@@ -31,7 +31,7 @@ function Navigation() {
       </div>
 
       <div className="nav-list">
-        <div className="account-container">
+        <div className="accountnav-container">
           <div className="login-register">
             <Link to="/register" className="small-link">Register</Link>
             <Link to="/login" className="small-link">Login</Link>

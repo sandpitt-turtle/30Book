@@ -49,31 +49,31 @@ const Account = ({ token }) => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
-      <h2>Account Details</h2>
+    <div className="account-container">
+      <h2 className="account-heading">Account Details</h2>
       {user ? (
         <>
-          <p><strong>Username:</strong> {user.username}</p>
-          <p><strong>Email:</strong> {user.email}</p>
+          <p className="account-info"><strong>Username:</strong> {user.username}</p>
+          <p className="account-info"><strong>Email:</strong> {user.email}</p>
         </>
       ) : (
-        <p>Failed to load user details.</p>
+        <p className="error-message">Failed to load user details.</p>
       )}
-
-      <h3>Checked-Out Books</h3>
+  
+      <h3 className="checked-out-heading">Checked-Out Books</h3>
       {checkedOutBooks.length > 0 ? (
-        <ul>
+        <ul className="checked-out-list">
           {checkedOutBooks.map((book) => (
-            <li key={book.id}>
+            <li key={book.id} className="checked-out-item">
               <strong>{book.title}</strong> by {book.author}
             </li>
           ))}
         </ul>
       ) : (
-        <p>You have no checked-out books.</p>
+        <p className="no-books-message">You have no checked-out books.</p>
       )}
     </div>
   );
-};
+}
 
 export default Account;

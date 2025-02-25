@@ -1,4 +1,4 @@
-// Footer.jsx
+
 import React from "react";
 
 function Footer({ onToggleTheme, darkMode }) {

@@ -29,7 +29,7 @@ export default function SingleBook() {
   }
 
   return (
-    <div className="book-details">
+    <div className="book-details-container">
       <h2 className="book-title">{book.title}</h2>
       <p className="book-author"><strong>Author:</strong> {book.author}</p>
       <p className="book-description"><strong>Description:</strong> {book.description}</p>
