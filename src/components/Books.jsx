@@ -1,1 +1,40 @@
-/* TODO - add your code to create a functional React component that displays all of the available books in the library's catalog. Fetch the book data from the provided API. Users should be able to click on an individual book to navigate to the SingleBook component and view its details. */
+import { useState, useEffect } from 'react';
+
+function Books() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+
+    async function fetchBooks() {
+      try {
+        const response = await fetch('');
+        const data = await response.json();
+        setBooks(data);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
+    }
+
+    fetchBooks();
+  }, []);
+
+  return (
+    <div>
+      <h2>Books</h2>
+      <ul>
+        {books.length > 0 ? (
+          books.map((book) => (
+            <li key={book.id}>
+              <h3>{book.title}</h3>
+              <p>{book.description}</p>
+            </li>
+          ))
+        ) : (
+          <p>Loading books...</p>
+        )}
+      </ul>
+    </div>
+  );
+}
+
+export default Books;
