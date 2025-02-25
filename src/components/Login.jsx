@@ -26,8 +26,8 @@ export default function Login() {
 
       if (result.success) {
         setError(null);
-        localStorage.setItem("token", result.token);  // Store JWT token
-        setToken(result.token);  // Set token in parent App state
+        localStorage.setItem("token", result.token);  
+        setToken(result.token);  
         alert("Login successful!");
       } else {
         throw new Error(result.message);
