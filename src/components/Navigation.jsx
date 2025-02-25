@@ -41,9 +41,7 @@ function Navigation() {
           </Link>
           <Link to="/account" className="account-link">Account</Link>
         </div>
-        <button onClick={toggleTheme} className="theme-toggle-btn">
-          Switch to {isDarkMode ? 'Light' : 'Dark'} Mode
-        </button>
+  
       </div>
     </nav>
   );

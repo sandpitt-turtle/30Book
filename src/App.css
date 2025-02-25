@@ -47,7 +47,8 @@ body {
   border: 1px solid var(--card-border-light);
   border-radius: 8px;
   padding: 15px;
-  max-width: 300px;
+  width: 300px;
+  height: 100px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(160, 95, 255, 0.4);
   display: flex;
@@ -150,6 +151,10 @@ button.dark-theme:hover {
   margin: 0;
 }
 
+
+
+
+
 /* Profile Pic */
 .profile-pic {
   width: 35px;
@@ -180,6 +185,39 @@ button.dark-theme:hover {
   background-color: #6a4eae;
   box-shadow: 0 0 8px rgba(160, 95, 255, 0.6);
 }
+
+
+/* General App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* Ensure content fills the entire screen */
+}
+
+main {
+  flex: 1;  /* Makes sure the main content takes up all available space */
+  padding-bottom: 60px; /* Add bottom padding to prevent content from hiding behind the footer */
+}
+
+/* Footer Styles */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Ensure footer spans across the entire screen */
+  background-color: #6a4eae; /* Adjust to your theme */
+  color: white;
+  text-align: center;
+  padding: 20px;
+  z-index: 100; /* Ensure the footer is above other content */
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
 
 /* Modal */
 .overlay {
