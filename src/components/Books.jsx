@@ -32,7 +32,6 @@ function Books() {
           books.map((book) => (
             <li key={book.id}>
               <h3>{book.title}</h3>
-              <p>{book.description}</p>
             </li>
           ))
         ) : (

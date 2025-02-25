@@ -1,21 +1,26 @@
 import { useState } from "react";
 
 export default function Register({ setToken }) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
+    if (!email || !password) {
+      setError("All fields are required.");
+      return;
+    }
     try {
-      const response = await fetch("https://fsa-jwt-practice.herokuapp.com/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ email, password }),
+});
+
 
       const result = await response.json();
 
@@ -36,12 +41,12 @@ export default function Register({ setToken }) {
       {error && <p className="error-message">{error}</p>}
       <form className="register-form" onSubmit={handleSubmit}>
         <div className="input-group">
-          <label>Username:</label>
+          <label>Email:</label>
           <input
             type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className="input-field"
           />
