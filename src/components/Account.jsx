@@ -10,31 +10,26 @@ const Account = ({ token }) => {
     if (!token) return;
 
     const fetchUserData = async () => {
-      try {
-        const userResponse = await fetch('https://your-api.com/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      setLoading(true);
+      setError(null);
 
-        if (!userResponse.ok) {
-          throw new Error('Failed to fetch user data');
-        }
+      try {
+        const [userResponse, booksResponse] = await Promise.all([
+          fetch('https://your-api.com/user', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch('https://your-api.com/user/books', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
+
+        if (!userResponse.ok) throw new Error('Failed to fetch user data');
+        if (!booksResponse.ok) throw new Error('Failed to fetch checked-out books');
 
         const userData = await userResponse.json();
-        setUser(userData);
-
-        const booksResponse = await fetch('https://your-api.com/user/books', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!booksResponse.ok) {
-          throw new Error('Failed to fetch checked-out books');
-        }
-
         const booksData = await booksResponse.json();
+
+        setUser(userData);
         setCheckedOutBooks(booksData);
       } catch (err) {
         setError(err.message);

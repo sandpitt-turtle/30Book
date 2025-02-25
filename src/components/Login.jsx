@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Login() {
+export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -9,31 +9,33 @@ export default function Login() {
     event.preventDefault();
 
     if (!email || !password) {
-      setError("Both fields are required.");
-      return;
+      return setError("Both fields are required.");
     }
 
     try {
-      const response = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
-      const result = await response.json();
+      const { success, message, token } = await response.json();
 
-      if (result.success) {
+      if (success) {
         setError(null);
-        localStorage.setItem("token", result.token);  
-        setToken(result.token);  
+        localStorage.setItem("token", token);
+        setToken(token);
         alert("Login successful!");
       } else {
-        throw new Error(result.message);
+        throw new Error(message);
       }
-    } catch (error) {
-      setError(error.message);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -45,7 +47,7 @@ export default function Login() {
         <div className="input-group">
           <label>Email:</label>
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
