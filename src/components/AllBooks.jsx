@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 function Books() {
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     async function fetchBooks() {
@@ -10,7 +12,6 @@ function Books() {
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
 
-     
         if (data.books && Array.isArray(data.books)) {
           setBooks(data.books);
         } else {
@@ -24,6 +25,10 @@ function Books() {
     fetchBooks();
   }, []);
 
+  const handleDetailsClick = (bookId) => {
+    navigate(`/books/${bookId}`);  
+  };
+  
   return (
     <div>
       <h2>Books</h2>
@@ -32,6 +37,7 @@ function Books() {
           books.map((book) => (
             <li key={book.id}>
               <h3>{book.title}</h3>
+              <button onClick={() => handleDetailsClick(book.id)}>See details</button>
             </li>
           ))
         ) : (

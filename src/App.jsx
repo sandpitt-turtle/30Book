@@ -1,10 +1,10 @@
 import React, { useState } from "react"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import Books from "./components/Books";
+import Books from "./components/AllBooks";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import Details from "./components/Details";
+import SingleBook from "./components/SingleBook";  
 import './App.css'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Books />} />  
         <Route path="/books" element={<Books />} />
-        {/* <Route path="/books/:bookId" element={<Details />}/> */}
+        <Route path="/books/:bookId" element={<SingleBook />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
       </Routes>
