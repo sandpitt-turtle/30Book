@@ -4,7 +4,8 @@ import Navigation from "./components/Navigation";
 import Books from "./components/AllBooks";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import SingleBook from "./components/SingleBook";  
+import SingleBook from "./components/SingleBook"; 
+import Account from "./components/Account"; 
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/books/:bookId" element={<SingleBook />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route path="/account" element={<Account setToken={setToken}/> } />
       </Routes>
     </Router>
   );
