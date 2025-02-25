@@ -1,23 +1,15 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import bookLogo from './assets/books.png';
-import Books from './components/Books';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Books from "./components/Books";
+
 
 function App() {
-  const [token, setToken] = useState(null);
-
   return (
     <Router>
-      <h1>
-        <img id="logo-image" src={bookLogo} alt="Logo" />
-        Library App
-      </h1>
-
-      <p>Hello</p>
-
+      <Navigation />
       <Routes>
+        <Route path="/" element={<Books />} />  {/* Ensure there's a route for "/" */}
         <Route path="/books" element={<Books />} />
-  
       </Routes>
     </Router>
   );
