@@ -1,0 +1,103 @@
+.carousel .book-card {
+    flex: 0 0 55vw;
+    max-width: 1200px;
+    aspect-ratio: 21 / 9;
+    scroll-snap-align: center;
+    border-radius: 10px;
+    background-color: #1a1d29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel .book-card::before,
+  .carousel .book-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  .carousel .book-card::before {
+    left: -10px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.45), transparent);
+  }
+  
+  .carousel .book-card::after {
+    right: -10px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.45), transparent);
+  }
+  
+  .carousel .book-card:hover {
+    box-shadow: 0 10px 30px rgba(160, 95, 255, 0.5);
+    transform: scale(1.05);
+  }
+  
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    background: none;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    overflow: hidden;
+    justify-content: center;
+  }
+  
+  @media (max-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 85vw;
+      height: calc(85vw * 0.42);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-item {
+      flex: 0 0 90vw;
+      height: calc(90vw * 0.42);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .carousel-item {
+      flex: 0 0 95vw;
+      height: calc(95vw * 0.42);
+    }
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+  
+  .carousel-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .carousel-indicator.active {
+    background-color: white;
+    transform: scale(1.2);
+  }
+  

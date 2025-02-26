@@ -3,16 +3,35 @@ body {
   font-family: 'Roboto Condensed', serif;
   margin: 0;
   padding: 0;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--text);
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  
 }
 
 main {
   padding-bottom: 60px;
+}
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .book-card {
+    width: 100%;
+    padding: 15px;
+  }
 }

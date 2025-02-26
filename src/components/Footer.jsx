@@ -11,7 +11,7 @@ function Footer() {
     
       <button onClick={toggleTheme} className="theme-toggle">
         {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button>
+      </button> 
     </footer>
   );
 }

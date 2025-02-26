@@ -2,8 +2,9 @@ body {
   font-family: "Roboto Condensed", serif;
   margin: 0;
   padding: 0;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--text);
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
 .app-container {
@@ -16,8 +17,21 @@ main {
   padding-bottom: 60px;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+  .book-card {
+    width: 100%;
+    padding: 15px;
+  }
+}
 :root {
-  --background: #f5f1f9;
+  --background: linear-gradient(to bottom, #f9f6ff, #e5daf5);
   --text: #6a4eae;
   --card-background: white;
   --card-border: #e0b3e0;
@@ -30,7 +44,7 @@ main {
 }
 
 .dark-theme {
-  --background: #1e1e1e;
+  --background: linear-gradient(180deg, #141b29 0%, #0c111b 100%);
   --text: #dcdcdc;
   --card-background: #2a2a2a;
   --card-border: #444444;
@@ -43,86 +57,153 @@ main {
 }
 
 .navbar {
-  background-color: var(--button-background);
-  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  height: 64px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(160, 95, 255, 0.3);
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  padding: 0 20px;
 }
 
-.nav-left,
-.accountnav-container {
+.nav-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 30px;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  opacity: 0.7;
+}
+
+.nav-right {
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-.nav-list {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
+  padding-right: 20px;
 }
 
 .profile-pic {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
   cursor: pointer;
   border: 2px solid white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .profile-pic:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(160, 95, 255, 0.5);
 }
 
-.small-link,
-.account-link {
-  font-size: 14px;
-  padding: 5px 8px;
-  background-color: var(--button-hover);
-  border-radius: 4px;
-  text-decoration: none;
+.nav-button {
   color: white;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  font-size: 15px;
+  font-weight: bold;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
 }
 
-.small-link:hover,
-.account-link:hover {
-  background-color: var(--button-background);
-  box-shadow: 0 0 8px rgba(160, 95, 255, 0.6);
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.books-container {
-  padding: 20px;
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.book-details-container {
-  padding: 20px;
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.books-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  justify-items: center;
-  margin-top: 20px;
+.search-icon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.search-label {
+  font-size: 14px;
+  color: white;
+}
+
+.nav-search {
+  display: block;
+  width: 200px;
+  height: 32px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-search::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-search::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-search:focus {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .book-card {
   background: var(--card-background);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 15px;
-  width: 300px;
-  height: flex;
+  width: 400px;
+  height: auto;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(160, 95, 255, 0.4);
+  box-shadow: 0 3px 4px rgba(160, 95, 255, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,6 +219,58 @@ main {
   font-size: 1.2em;
   color: var(--text);
   margin-bottom: 10px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.books-grid .book-card {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 21/9;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .book-card {
+    flex: 0 0 85vw;
+    height: 35.7vw;
+  }
+}
+@media (max-width: 768px) {
+  .book-card {
+    flex: 0 0 90vw;
+    height: 37.8vw;
+  }
+}
+@media (max-width: 480px) {
+  .book-card {
+    flex: 0 0 95vw;
+    height: 39.9vw;
+  }
+}
+.carousel .book-card {
+  flex: 0 0 50vw;
+  max-width: 1100px;
+  aspect-ratio: 21/9;
+  height: auto;
+  scroll-snap-align: center;
+  border-radius: 10px;
+  background-color: #1a1d29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
 }
 
 button,
@@ -164,8 +297,10 @@ button:hover,
 }
 
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
   background-color: var(--button-background);
@@ -178,6 +313,10 @@ footer {
 footer p {
   margin: 0;
   font-size: 14px;
+}
+
+footer .theme-toggle {
+  margin-left: 10px;
 }
 
 input {
@@ -241,4 +380,104 @@ input::placeholder {
   top: 10px;
   right: 15px;
   cursor: pointer;
+}
+
+.carousel .book-card {
+  flex: 0 0 55vw;
+  max-width: 1200px;
+  aspect-ratio: 21/9;
+  scroll-snap-align: center;
+  border-radius: 10px;
+  background-color: #1a1d29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel .book-card::before,
+.carousel .book-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.carousel .book-card::before {
+  left: -10px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.45), transparent);
+}
+
+.carousel .book-card::after {
+  right: -10px;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.45), transparent);
+}
+
+.carousel .book-card:hover {
+  box-shadow: 0 10px 30px rgba(160, 95, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  background: none;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+  padding: 20px 0;
+  scroll-snap-type: x mandatory;
+  overflow: hidden;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .carousel-item {
+    flex: 0 0 85vw;
+    height: 35.7vw;
+  }
+}
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 90vw;
+    height: 37.8vw;
+  }
+}
+@media (max-width: 480px) {
+  .carousel-item {
+    flex: 0 0 95vw;
+    height: 39.9vw;
+  }
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 10;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-indicator.active {
+  background-color: white;
+  transform: scale(1.2);
 }

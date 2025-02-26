@@ -19,6 +19,8 @@ function App() {
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
+  const [searchTerm, setSearchTerm] = useState(""); 
+
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
@@ -39,11 +41,16 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="app-container">
-          <Navigation isAuthenticated={isAuthenticated} setUser={setUser} setToken={setToken} />
+          <Navigation 
+            isAuthenticated={isAuthenticated} 
+            setUser={setUser} 
+            setToken={setToken} 
+            onSearch={setSearchTerm} 
+          />
           <main>
             <Routes>
-              <Route path="/" element={<Books isAuthenticated={isAuthenticated} />} />
-              <Route path="/books" element={<Books isAuthenticated={isAuthenticated} />} />
+              <Route path="/" element={<Books isAuthenticated={isAuthenticated} searchTerm={searchTerm} />} />
+              <Route path="/books" element={<Books isAuthenticated={isAuthenticated} searchTerm={searchTerm} />} />
               <Route path="/books/:bookId" element={<SingleBook isAuthenticated={isAuthenticated} />} />
               <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
               <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
@@ -56,6 +63,7 @@ function App() {
     </ThemeProvider>
   );
 }
+
 
 export default App;
 

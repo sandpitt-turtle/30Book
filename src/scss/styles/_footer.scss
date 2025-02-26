@@ -1,7 +1,8 @@
-
 footer {
+  display: flex;               
+  justify-content: center;         
+  align-items: center;             
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
   background-color: var(--button-background);
@@ -15,3 +16,8 @@ footer p {
   margin: 0;
   font-size: 14px;
 }
+
+footer .theme-toggle {
+  margin-left: 10px;
+}
+
