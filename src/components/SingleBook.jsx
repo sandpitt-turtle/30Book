@@ -5,6 +5,7 @@ export default function SingleBook() {
   const [book, setBook] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [userHasBook, setUserHasBook] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   let { bookId } = useParams();
   const navigate = useNavigate();
 
@@ -53,6 +54,8 @@ export default function SingleBook() {
       return;
     }
 
+    setIsProcessing(true);
+
     try {
       const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/checkout/${bookId}`, {
         method: "POST",
@@ -65,8 +68,10 @@ export default function SingleBook() {
       if (!response.ok) throw new Error("Failed to checkout book");
 
       setBook((prevBook) => ({ ...prevBook, isAvailable: false }));
+      setIsProcessing(false);
     } catch (error) {
       console.error("Checkout failed:", error);
+      setIsProcessing(false);
     }
   };
 
@@ -76,6 +81,8 @@ export default function SingleBook() {
       navigate("/login");
       return;
     }
+
+    setIsProcessing(true);
 
     try {
       const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/return/${bookId}`, {
@@ -90,8 +97,10 @@ export default function SingleBook() {
 
       setBook((prevBook) => ({ ...prevBook, isAvailable: true }));
       setUserHasBook(false);
+      setIsProcessing(false);
     } catch (error) {
       console.error("Return failed:", error);
+      setIsProcessing(false);
     }
   };
 

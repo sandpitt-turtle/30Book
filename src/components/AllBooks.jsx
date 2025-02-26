@@ -46,7 +46,7 @@ function Books() {
     <div className="books-container">
       <h2>Books</h2>
 
-      {/* Search Bar */}
+   
       <SearchBar onSearch={handleSearch} />
 
       <div className="books-grid">
