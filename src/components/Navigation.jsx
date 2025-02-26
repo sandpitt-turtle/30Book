@@ -1,28 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
 import profilePic from '../assets/default-profile.png';
 
 function Navigation() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'dark');
-    } else {
-
-      setIsDarkMode(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.toggle('dark-theme', isDarkMode);
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
-
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
+  const { isDarkMode } = useContext(ThemeContext);
 
   return (
     <nav className="navbar">
@@ -41,7 +23,6 @@ function Navigation() {
           </Link>
           <Link to="/account" className="account-link">Account</Link>
         </div>
-  
       </div>
     </nav>
   );

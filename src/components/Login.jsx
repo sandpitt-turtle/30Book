@@ -19,14 +19,14 @@ export default function Login({ setToken, setUser }) {
       );
   
       const data = await response.json();
-      console.log("Login API Response:", data); // Debugging
+      console.log("Login API Response:", data); 
   
       if (!data.token) throw new Error("Login failed: No token received");
   
       localStorage.setItem("token", data.token);
       setToken(data.token);
   
-      // Fetch user details using the token
+  
       const userResponse = await fetch(
         "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me",
         {
@@ -38,7 +38,7 @@ export default function Login({ setToken, setUser }) {
       );
   
       const userData = await userResponse.json();
-      console.log("Fetched User Data:", userData); // Debugging
+      console.log("Fetched User Data:", userData);
   
       if (!userData || !userData.id) throw new Error("Failed to fetch user data");
   

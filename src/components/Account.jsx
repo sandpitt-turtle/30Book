@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-
-
+import CheckedOutBooks from "./CheckedOutBooks";
 
 export default function Account({ user }) {
   const [checkedOutBooks, setCheckedOutBooks] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
-  console.log("User in Account.jsx:", user);
-  console.log("Stored user in localStorage:", localStorage.getItem("user"));
-  
 
   useEffect(() => {
     if (!user || !user.id) return;
 
     const fetchCheckedOutBooks = async () => {
       try {
-        const token = localStorage.getItem("token"); 
+        const token = localStorage.getItem("token");
+        if (!token) return;
 
         const response = await fetch(
           `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/${user.id}/checked-out-books`,
@@ -58,17 +55,13 @@ export default function Account({ user }) {
         <li><b>Email:</b> {user.email}</li>
       </ul>
 
-      <h3>Checked-Out Books</h3>
-      {checkedOutBooks.length > 0 ? (
-        <ul>
-          {checkedOutBooks.map((book) => (
-            <li key={book.id}>
-              <b>{book.title}</b>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No books checked out.</p>
+      <button onClick={() => setShowPopup(true)}>View Checked-Out Books</button>
+
+      {showPopup && (
+        <CheckedOutBooks
+          checkedOutBooks={checkedOutBooks}
+          onClose={() => setShowPopup(false)}
+        />
       )}
 
       <button onClick={() => navigate("/")}>Back</button>

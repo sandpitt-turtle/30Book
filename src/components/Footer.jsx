@@ -1,12 +1,16 @@
+import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
 
-import React from "react";
+function Footer() {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
-function Footer({ onToggleTheme, darkMode }) {
   return (
-    <footer>
-      <p>Library App &copy; 2025</p>
-      <button className="theme-toggle" onClick={onToggleTheme}>
-        {darkMode ? "Light Mode" : "Dark Mode"}
+    <footer className="footer">
+      <p>© 2025 BookBuddy.</p>
+      
+    
+      <button onClick={toggleTheme} className="theme-toggle">
+        {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
       </button>
     </footer>
   );
