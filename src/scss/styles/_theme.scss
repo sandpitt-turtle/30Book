@@ -1,7 +1,5 @@
-
 :root {
-
-  --background: #f5f1f9;
+  --background: linear-gradient(to bottom, #f9f6ff, #e5daf5);
   --text: #6a4eae;
   --card-background: white;
   --card-border: #e0b3e0;
@@ -11,11 +9,10 @@
   --input-background: #f9f1f9;
   --input-border: #e0b3e0;
   --overlay-background: rgba(0, 0, 0, 0.5);
-}
-
+} 
 
 .dark-theme {
-  --background: #1e1e1e;
+  --background: linear-gradient(180deg, #141b29 0%, #0c111b 100%);
   --text: #dcdcdc;
   --card-background: #2a2a2a;
   --card-border: #444444;
