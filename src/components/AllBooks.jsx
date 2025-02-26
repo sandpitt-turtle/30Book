@@ -54,6 +54,7 @@ function Books() {
           filteredBooks.map((book) => (
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
+              <p className="book-author"><strong>Author:</strong> {book.author}</p>
               <button
                 onClick={() => handleDetailsClick(book.id)}
                 className="details-button"
