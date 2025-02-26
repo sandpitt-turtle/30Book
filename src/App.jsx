@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"; 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"; 
@@ -33,26 +33,31 @@ function App() {
     }
   }, [token, user]);
 
-  return (
-    <ThemeProvider>
-      <Router>
-        <div className="app-container">
-          <Navigation />
-          <main>
-            <Routes>
-              <Route path="/" element={<Books />} />
-              <Route path="/books" element={<Books />} />
-              <Route path="/books/:bookId" element={<SingleBook />} />
-              <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
-              <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
-              <Route path="/account" element={<Account user={user} />} />
-            </Routes>
-          </main>
-          <Footer /> 
-        </div>
-      </Router>
-    </ThemeProvider>
-  );
+const isAuthenticated = !!token;
+
+
+return (
+  <ThemeProvider>
+    <Router>
+      <div className="app-container">
+        <Navigation isAuthenticated={isAuthenticated} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Books isAuthenticated={isAuthenticated} />} />
+            <Route path="/books" element={<Books isAuthenticated={isAuthenticated} />} />
+            <Route path="/books/:bookId" element={<SingleBook isAuthenticated={isAuthenticated} />} />
+            <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
+            <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
+            
+           ///
+            <Route path="/account" element={isAuthenticated ? <Account user={user} /> : <Navigate to="/login" />} />
+          </Routes>
+        </main>
+        <Footer /> 
+      </div>
+    </Router>
+  </ThemeProvider>
+);
 }
 
 export default App;

@@ -29,14 +29,18 @@ export default function SingleBook() {
   }
 
   return (
+    
     <div className="book-details-container">
+       <button className="back-button" onClick={() => navigate(`/books`)}>Back to Books</button>
       <h2 className="book-title">{book.title}</h2>
       <p className="book-author"><strong>Author:</strong> {book.author}</p>
       <p className="book-description"><strong>Description:</strong> {book.description}</p>
       <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
         <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
       </p>
-      <button className="back-button" onClick={() => navigate(`/books`)}>Back to Books</button>
+      <button onClick={() => handleCheckoutClick(book.id)} className= "checkout-button">Checkout</button>
+      <button onClick={() => handleReturnClick(book.id)} className= "return-button">Return</button>
+     
     </div>
   );
 }

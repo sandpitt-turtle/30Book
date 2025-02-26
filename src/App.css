@@ -59,7 +59,7 @@ body {
   border-radius: 8px;
   padding: 15px;
   width: 300px;
-  height: 100px;
+  height: flex;
   text-align: center;
   box-shadow: 0 2px 4px rgba(160, 95, 255, 0.4);
   display: flex;
@@ -81,7 +81,7 @@ body {
 
 
 button,
-.details-button, .login-button, .back-button, .submit-button {
+.details-button, .login-button, .back-button, .submit-button .checkout-button {
   padding: 10px;
   background-color: var(--button-background);
   color: white;

@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 function Books() {
   const [books, setBooks] = useState([]);
   // const [isLoginVisible, setIsLoginVisible] = useState(false); 
+  const [checkedOutBooks, setCheckedOutBooks] = useState(new Set()); 
   const navigate = useNavigate();
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
@@ -29,9 +30,12 @@ function Books() {
     fetchBooks();
   }, []);
 
+  
+
   const handleDetailsClick = (bookId) => {
     navigate(`/books/${bookId}`);
   };
+  
 
   return (
     <div className="books-container">
@@ -45,7 +49,7 @@ function Books() {
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
               <button onClick={() => handleDetailsClick(book.id)} className="details-button">See details</button>
-            </div>
+             </div>
           ))
         ) : (
           <p>Loading books...</p>
