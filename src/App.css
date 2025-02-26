@@ -245,7 +245,7 @@ footer p {
   cursor: pointer;
 } */
 
-/* Form */
+
 .login-container,
 .input-group,
 .register-container {
@@ -256,9 +256,6 @@ footer p {
 } 
 
 
-
-
-/* Error Message */
 .error-message {
   color: #e60000;
   font-size: 14px;

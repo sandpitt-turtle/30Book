@@ -15,10 +15,10 @@ const Account = ({ token }) => {
 
       try {
         const [userResponse, booksResponse] = await Promise.all([
-          fetch('https://your-api.com/user', {
+          fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/user', {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch('https://your-api.com/user/books', {
+          fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/user/books', {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
