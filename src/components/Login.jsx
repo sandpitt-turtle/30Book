@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,6 +43,8 @@ export default function Login({ setToken, setUser }) {
       setUser(userData);
 
       alert("Login successful!");
+      navigate("/account");
+
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message);

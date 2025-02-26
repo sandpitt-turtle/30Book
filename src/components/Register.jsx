@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Register({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,6 +36,8 @@ export default function Register({ setToken, setUser }) {
         setToken(result.token);
         setUser(result.user);
         alert("Registration successful! You are now logged in.");
+
+        navigate("/account");
       } else {
         throw new Error(result.message);
       }
