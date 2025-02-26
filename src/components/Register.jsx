@@ -12,28 +12,32 @@ export default function Register({ setToken }) {
       setError("All fields are required.");
       return;
     }
+    
     try {
       const response = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ email, password }),
-});
-
-
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
       const result = await response.json();
-
+  
       if (result.success) {
         setError(null);
-        alert("Registration successful! You can now log in.");
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        setToken(result.token);
+        setUser(result.user);  // <-- Fix missing setUser
+        alert("Registration successful! You are now logged in.");
       } else {
         throw new Error(result.message);
       }
     } catch (error) {
       setError(error.message);
     }
-  }
+  };
 
   return (
     <div className="register-container">

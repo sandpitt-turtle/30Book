@@ -13,42 +13,44 @@ import './index.css';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [darkMode, setDarkMode] = useState(false);
-
-
-  const toggleTheme = () => {
-    setDarkMode((prevMode) => !prevMode);
-  };
-
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark-theme");
+    if (token) {
+      localStorage.setItem("token", token);
     } else {
-      document.body.classList.remove("dark-theme");
+      localStorage.removeItem("token");
     }
-  }, [darkMode]);
+
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [token, user]);
 
   return (
     <Router>
-      <div className="app-container">  
-        <Navigation onToggleTheme={toggleTheme} darkMode={darkMode} />
-        
-        <main> 
+      <div className="app-container">
+        <Navigation />
+        <main>
           <Routes>
-            <Route path="/" element={<Books />} />  
+            <Route path="/" element={<Books />} />
             <Route path="/books" element={<Books />} />
             <Route path="/books/:bookId" element={<SingleBook />} />
-            <Route path="/login" element={<Login setToken={setToken} />} />
-            <Route path="/register" element={<Register setToken={setToken} />} />
-            <Route path="/account" element={<Account setToken={setToken}/> } />
+            <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
+            <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
+            <Route path="/account" element={<Account user={user} />} />
           </Routes>
         </main>
-        
-        <Footer onToggleTheme={toggleTheme} darkMode={darkMode} />
       </div>
     </Router>
   );
 }
+
+
 
 export default App;
