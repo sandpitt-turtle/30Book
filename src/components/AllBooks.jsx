@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchBar from './SearchBar';
 
 function Books() {
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ function Books() {
         const { books } = await response.json();
         if (Array.isArray(books)) {
           setBooks(books);
+          setFilteredBooks(books); 
         } else {
           console.error("Fetched data does not contain an array of books");
         }
@@ -27,6 +30,14 @@ function Books() {
     fetchBooks();
   }, []);
 
+  const handleSearch = (query) => {
+    const filtered = books.filter((book) =>
+      book.title.toLowerCase().includes(query.toLowerCase()) ||
+      book.author.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredBooks(filtered);
+  };
+
   const handleDetailsClick = (bookId) => {
     navigate(`/books/${bookId}`);
   };
@@ -35,9 +46,12 @@ function Books() {
     <div className="books-container">
       <h2>Books</h2>
 
+      {/* Search Bar */}
+      <SearchBar onSearch={handleSearch} />
+
       <div className="books-grid">
-        {books.length ? (
-          books.map((book) => (
+        {filteredBooks.length ? (
+          filteredBooks.map((book) => (
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
               <button
@@ -49,7 +63,7 @@ function Books() {
             </div>
           ))
         ) : (
-          <p>Loading books...</p>
+          <p>No books found.</p>
         )}
       </div>
     </div>

@@ -1,0 +1,28 @@
+/* theme.scss */
+:root {
+  /* Default Light Theme */
+  --background: #f5f1f9;
+  --text: #6a4eae;
+  --card-background: white;
+  --card-border: #e0b3e0;
+  --button-background: #6a4eae;
+  --button-hover: #8e64be;
+  --input-color: black;
+  --input-background: #f9f1f9;
+  --input-border: #e0b3e0;
+  --overlay-background: rgba(0, 0, 0, 0.5);
+}
+
+/* Dark Theme */
+.dark-theme {
+  --background: #1e1e1e;
+  --text: #dcdcdc;
+  --card-background: #2a2a2a;
+  --card-border: #444444;
+  --button-background: #3a3a3a;
+  --button-hover: #5a5a5a;
+  --input-color: #dcdcdc;
+  --input-background: #333333;
+  --input-border: #444444;
+  --overlay-background: rgba(0, 0, 0, 0.8);
+}

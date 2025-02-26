@@ -1,0 +1,18 @@
+/* global.scss */
+body {
+  font-family: 'Roboto Condensed', serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  padding-bottom: 60px;
+}

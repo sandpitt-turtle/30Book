@@ -8,8 +8,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import SingleBook from "./components/SingleBook"; 
 import Account from "./components/Account"; 
-import './App.css';
+import './scss/App.scss'; 
 import './index.css';
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");

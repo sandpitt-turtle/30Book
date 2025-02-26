@@ -1,0 +1,55 @@
+/* nav.scss */
+.navbar {
+  background-color: var(--button-background);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(160, 95, 255, 0.3);
+}
+
+.nav-left,
+.accountnav-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.profile-pic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(160, 95, 255, 0.5);
+}
+
+.small-link,
+.account-link {
+  font-size: 14px;
+  padding: 5px 8px;
+  background-color: var(--button-hover);
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.small-link:hover,
+.account-link:hover {
+  background-color: var(--button-background);
+  box-shadow: 0 0 8px rgba(160, 95, 255, 0.6);
+}
