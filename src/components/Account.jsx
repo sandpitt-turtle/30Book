@@ -7,8 +7,16 @@ export default function Account({ user }) {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    if (!user || !user.id) return;
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+
+  useEffect(() => {
+    if (!user?.id) return;
 
     const fetchCheckedOutBooks = async () => {
       try {
@@ -37,22 +45,12 @@ export default function Account({ user }) {
     fetchCheckedOutBooks();
   }, [user?.id]);
 
-  if (!user) {
-    return (
-      <div className="account-container">
-        <h2>Account</h2>
-        <p>Please log in to view your account details.</p>
-        <button onClick={() => navigate("/login")}>Go to Login</button>
-      </div>
-    );
-  }
-
   return (
     <div className="account-container">
       <h2>Account Details</h2>
       <ul>
-        <li><b>Username:</b> {user.username || "N/A"}</li>
-        <li><b>Email:</b> {user.email}</li>
+        <li><b>Username:</b> {user?.username || "N/A"}</li>
+        <li><b>Email:</b> {user?.email || "N/A"}</li>
       </ul>
 
       <button onClick={() => setShowPopup(true)}>View Checked-Out Books</button>

@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default function Login({ setToken, setUser }) {  
+export default function Login({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await fetch(
         "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login",
@@ -17,42 +17,35 @@ export default function Login({ setToken, setUser }) {
           body: JSON.stringify({ email, password }),
         }
       );
-  
-      const data = await response.json();
-      console.log("Login API Response:", data); 
-  
-      if (!data.token) throw new Error("Login failed: No token received");
-  
-      localStorage.setItem("token", data.token);
-      setToken(data.token);
-  
-  
+
+      const { token } = await response.json();
+      if (!token) throw new Error("Login failed: No token received");
+
+      localStorage.setItem("token", token);
+      setToken(token);
+
       const userResponse = await fetch(
         "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me",
         {
           headers: {
-            Authorization: `Bearer ${data.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
       );
-  
+
       const userData = await userResponse.json();
-      console.log("Fetched User Data:", userData);
-  
-      if (!userData || !userData.id) throw new Error("Failed to fetch user data");
-  
+      if (!userData?.id) throw new Error("Failed to fetch user data");
+
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
+
       alert("Login successful!");
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message);
     }
   };
-  
-  
-  
 
   return (
     <div className="login-container">
@@ -77,7 +70,7 @@ export default function Login({ setToken, setUser }) {
             required
           />
         </div>
-        <button type="submit" className ="login-button">Login</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );

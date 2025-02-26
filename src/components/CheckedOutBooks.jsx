@@ -2,17 +2,8 @@ import { useEffect } from "react";
 
 export default function CheckedOutBooks({ checkedOutBooks, onClose }) {
   useEffect(() => {
-    const closeOnEscape = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    const closeOnOutsideClick = (e) => {
-      if (e.target.id === "popup-overlay") {
-        onClose();
-      }
-    };
+    const closeOnEscape = (e) => e.key === "Escape" && onClose();
+    const closeOnOutsideClick = (e) => e.target.id === "popup-overlay" && onClose();
 
     document.addEventListener("keydown", closeOnEscape);
     document.addEventListener("click", closeOnOutsideClick);

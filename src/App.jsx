@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"; 
-import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"; 
@@ -8,7 +8,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import SingleBook from "./components/SingleBook"; 
 import Account from "./components/Account"; 
-
 import './App.css';
 import './index.css';
 
@@ -33,31 +32,28 @@ function App() {
     }
   }, [token, user]);
 
-const isAuthenticated = !!token;
+  const isAuthenticated = !!token;
 
-
-return (
-  <ThemeProvider>
-    <Router>
-      <div className="app-container">
-        <Navigation isAuthenticated={isAuthenticated} />
-        <main>
-          <Routes>
-            <Route path="/" element={<Books isAuthenticated={isAuthenticated} />} />
-            <Route path="/books" element={<Books isAuthenticated={isAuthenticated} />} />
-            <Route path="/books/:bookId" element={<SingleBook isAuthenticated={isAuthenticated} />} />
-            <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
-            <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
-            
-           ///
-            <Route path="/account" element={isAuthenticated ? <Account user={user} /> : <Navigate to="/login" />} />
-          </Routes>
-        </main>
-        <Footer /> 
-      </div>
-    </Router>
-  </ThemeProvider>
-);
+  return (
+    <ThemeProvider>
+      <Router>
+        <div className="app-container">
+          <Navigation isAuthenticated={isAuthenticated} setUser={setUser} setToken={setToken} />
+          <main>
+            <Routes>
+              <Route path="/" element={<Books isAuthenticated={isAuthenticated} />} />
+              <Route path="/books" element={<Books isAuthenticated={isAuthenticated} />} />
+              <Route path="/books/:bookId" element={<SingleBook isAuthenticated={isAuthenticated} />} />
+              <Route path="/login" element={<Login setToken={setToken} setUser={setUser} />} />
+              <Route path="/register" element={<Register setToken={setToken} setUser={setUser} />} />
+              <Route path="/account" element={isAuthenticated ? <Account user={user} /> : <Navigate to="/login" />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
+  );
 }
 
 export default App;

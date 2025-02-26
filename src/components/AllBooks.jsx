@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import LoginForm from "./LoginForm";
 
 function Books() {
   const [books, setBooks] = useState([]);
-  // const [isLoginVisible, setIsLoginVisible] = useState(false); 
-  const [checkedOutBooks, setCheckedOutBooks] = useState(new Set()); 
   const navigate = useNavigate();
 
- useEffect(() => {
+  useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
@@ -30,26 +27,26 @@ function Books() {
     fetchBooks();
   }, []);
 
-  
-
   const handleDetailsClick = (bookId) => {
     navigate(`/books/${bookId}`);
   };
-  
 
   return (
     <div className="books-container">
       <h2>Books</h2>
-      {/* <button onClick={() => setIsLoginVisible(true)} className="login-button">Login</button>
-      <LoginForm isVisible={isLoginVisible} setIsVisible={setIsLoginVisible}  */}
 
       <div className="books-grid">
         {books.length ? (
           books.map((book) => (
             <div key={book.id} className="book-card">
               <h3>{book.title}</h3>
-              <button onClick={() => handleDetailsClick(book.id)} className="details-button">See details</button>
-             </div>
+              <button
+                onClick={() => handleDetailsClick(book.id)}
+                className="details-button"
+              >
+                See details
+              </button>
+            </div>
           ))
         ) : (
           <p>Loading books...</p>

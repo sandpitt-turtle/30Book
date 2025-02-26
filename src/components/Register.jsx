@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Register({ setToken }) {
+export default function Register({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -12,24 +12,25 @@ export default function Register({ setToken }) {
       setError("All fields are required.");
       return;
     }
-    
+
     try {
-      const response = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-  
+      const response = await fetch(
+        "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
       const result = await response.json();
-  
+
       if (result.success) {
         setError(null);
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         setToken(result.token);
-        setUser(result.user);  // <-- Fix missing setUser
+        setUser(result.user);
         alert("Registration successful! You are now logged in.");
       } else {
         throw new Error(result.message);
