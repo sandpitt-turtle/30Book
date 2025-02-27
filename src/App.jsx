@@ -9,7 +9,7 @@ import Register from "./components/Register";
 import SingleBook from "./components/SingleBook"; 
 import Account from "./components/Account"; 
 import './scss/App.scss'; 
-import './index.css';
+// import './index.css';
 
 
 function App() {

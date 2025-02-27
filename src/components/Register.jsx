@@ -47,6 +47,7 @@ export default function Register({ setToken, setUser }) {
   };
 
   return (
+    <div className="login-page">
     <div className="register-container">
       <h2>Register</h2>
       {error && <p className="error-message">{error}</p>}
@@ -75,6 +76,7 @@ export default function Register({ setToken, setUser }) {
         </div>
         <button type="submit" className="submit-button">Register</button>
       </form>
+    </div>
     </div>
   );
 }

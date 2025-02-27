@@ -1,15 +1,15 @@
 :root {
-  --background: linear-gradient(to bottom, #f9f6ff, #e5daf5);
-  --text: #6a4eae;
-  --card-background: white;
-  --card-border: #e0b3e0;
-  --button-background: #6a4eae;
-  --button-hover: #8e64be;
-  --input-color: black;
-  --input-background: #f9f1f9;
-  --input-border: #e0b3e0;
-  --overlay-background: rgba(0, 0, 0, 0.5);
-} 
+  --background: linear-gradient(to bottom, #d0d6e0, #a8b7d1);
+  --text: #3c3c3c;
+  --card-background: #ffffff;
+  --card-border: #b4a5b5;
+  --button-background: #3f356f;
+  --button-hover: #594a9d;
+  --input-color: #333333;
+  --input-background: #f4f4f4;
+  --input-border: #b4a5b5;
+  --overlay-background: rgba(0, 0, 0, 0.3);
+}
 
 .dark-theme {
   --background: linear-gradient(180deg, #141b29 0%, #0c111b 100%);
@@ -22,4 +22,6 @@
   --input-background: #333333;
   --input-border: #444444;
   --overlay-background: rgba(0, 0, 0, 0.8);
+  
+  
 }

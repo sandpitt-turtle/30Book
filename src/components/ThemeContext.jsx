@@ -8,7 +8,7 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    document.body.classList.toggle("dark-theme", isDarkMode);
+    document.body.classList.add("dark-theme", isDarkMode);
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
