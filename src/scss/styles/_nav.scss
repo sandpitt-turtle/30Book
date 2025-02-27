@@ -12,19 +12,23 @@
 }
 
 .nav-container {
-  width: 100%;
   max-width: 1400px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+}
+
+.nav-logo,
+.nav-item,
+.nav-button {
+  color: white;
+  text-decoration: none;
 }
 
 .nav-logo {
   font-size: 22px;
   font-weight: bold;
-  color: white;
-  text-decoration: none;
 }
 
 .nav-links {
@@ -35,10 +39,9 @@
 }
 
 .nav-item {
-  color: white;
-  text-decoration: none;
   font-size: 16px;
   font-weight: 500;
+  transition: opacity 0.3s;
 }
 
 .nav-item:hover {
@@ -49,7 +52,6 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  padding-right: 20px;
 }
 
 .profile-pic {
@@ -59,7 +61,7 @@
   object-fit: cover;
   cursor: pointer;
   border: 2px solid white;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
 }
 
 .profile-pic:hover {
@@ -67,15 +69,13 @@
 }
 
 .nav-button {
-  color: white;
   font-size: 15px;
   font-weight: bold;
-  border: 2px solid white;
   border-radius: 8px;
   padding: 10px 20px;
-  text-decoration: none;
   background: none;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .nav-button:hover {
@@ -88,29 +88,18 @@
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
 }
 
-.search-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px; 
-}
-
+.search-wrapper,
 .search-icon {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   cursor: pointer;
 }
 
-.search-label {
-  font-size: 14px;
-  color: white;
-}
-
 .nav-search {
-  display: block;
   width: 200px;
   height: 32px;
   padding: 5px 10px;
@@ -120,7 +109,7 @@
   background: rgba(255, 255, 255, 0.2);
   color: white;
   outline: none;
-  transition: all 0.3s ease-in-out;
+  transition: background 0.3s;
 }
 
 .nav-search::placeholder {

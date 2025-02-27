@@ -9,6 +9,7 @@ export default function Login({ setToken, setUser }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
 
     try {
       const response = await fetch(
@@ -21,7 +22,7 @@ export default function Login({ setToken, setUser }) {
       );
 
       const { token } = await response.json();
-      if (!token) throw new Error("Login failed: No token received");
+      if (!token) throw new Error("Invalid credentials");
 
       localStorage.setItem("token", token);
       setToken(token);
@@ -42,40 +43,44 @@ export default function Login({ setToken, setUser }) {
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
 
-      alert("Login successful!");
       navigate("/account");
-
     } catch (err) {
-      console.error("Login error:", err);
       setError(err.message);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="login-button">Login</button>
-      </form>
+    <div className="login-page">
+      <div className="login-container">
+        <h2>Sign in to BookBuddy</h2>
+        {error && <p className="error-message">{error}</p>}
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email address</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Enter your password"
+            />
+          </div>
+          <button type="submit" className="login-button">Sign in</button>
+        </form>
+      </div>
+      <p className="footer">
+  
+      </p>
     </div>
   );
 }

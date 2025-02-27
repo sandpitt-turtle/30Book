@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import fetchBookImage from "../utils/fetchBookImage"; // Make sure the path is correct
 
 export default function SingleBook() {
   const [book, setBook] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [userHasBook, setUserHasBook] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [bookImage, setBookImage] = useState(""); // State for book cover image
   let { bookId } = useParams();
   const navigate = useNavigate();
 
@@ -20,6 +22,10 @@ export default function SingleBook() {
         
         setBook(bookDetails.book);
 
+        // Fetch the book cover image based on the title
+        const image = await fetchBookImage(bookDetails.book.title);
+        setBookImage(image);
+
         if (token) {
           const userBooksResponse = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/account/books`, {
             headers: {
@@ -32,7 +38,6 @@ export default function SingleBook() {
             if (userBooks.books && userBooks.books.length > 0) {
               setUserHasBook(userBooks.books.some((userBook) => userBook.id === bookId));
             } else {
-            
               setUserHasBook(false);
             }
           }
@@ -117,6 +122,9 @@ export default function SingleBook() {
       <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
         <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
       </p>
+
+      {/* Display book cover */}
+      {bookImage && <img src={bookImage} alt={book.title} className="book-cover" />}
 
       {token && (
         <button

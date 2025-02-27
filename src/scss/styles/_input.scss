@@ -1,24 +1,31 @@
-
 input {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
   border: 1px solid var(--input-border);
-  background-color: var(--input-background);
-  color: var(--input-color); 
-  transition: box-shadow 0.3s ease;
+  border-radius: 6px;
+  background: var(--input-background);
+  color: var(--input-color);
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 input:focus {
   outline: none;
   border-color: var(--button-background);
-  box-shadow: 0 0 8px rgba(160, 95, 255, 0.6);
+  box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
 }
 
 input::placeholder {
-  color: rgba(106, 78, 174, 0.7); 
+  color: rgba(106, 78, 174, 0.6);
 }
 
 .dark-theme input::placeholder {
   color: rgba(220, 220, 220, 0.7);
 }
+
+
+
+.login-container, .register-container {
+  width: 100%;
+}
+

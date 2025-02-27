@@ -9,9 +9,9 @@ function Footer() {
       <p>© 2025 BookBuddy.</p>
       
     
-      <button onClick={toggleTheme} className="theme-toggle">
+      {/* <button onClick={toggleTheme} className="theme-toggle">
         {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button> 
+      </button>  */}
     </footer>
   );
 }

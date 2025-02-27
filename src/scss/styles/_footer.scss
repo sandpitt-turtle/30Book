@@ -1,13 +1,12 @@
 footer {
-  display: flex;               
-  justify-content: center;         
-  align-items: center;             
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: var(--button-background);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  text-align: center;
   padding: 20px;
   z-index: 100;
 }
@@ -17,7 +16,6 @@ footer p {
   font-size: 14px;
 }
 
-footer .theme-toggle {
+.theme-toggle {
   margin-left: 10px;
 }
-
