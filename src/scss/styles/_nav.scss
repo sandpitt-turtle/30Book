@@ -21,15 +21,68 @@
 
 .nav-logo,
 .nav-item,
-.nav-button {
+.nav-button, .lognav-logo {
   color: white;
   text-decoration: none;
 }
 
+
+.lognav-logo {
+font-size: 36px;
+font-weight: bold; 
+color: white; 
+background: none;
+background-clip: text; 
+-webkit-background-clip: text; 
+display: inline-block;
+padding: 5px;
+transition: transform 0.3s ease-in-out; 
+background-size: 200% 200%; 
+}
+
+
+
+
 .nav-logo {
   font-size: 22px;
-  font-weight: bold;
+  font-weight: bold; 
+  color: white; 
+  background: linear-gradient(70deg, #a4fffc, #003B5C); 
+  background-clip: text; 
+  -webkit-background-clip: text; 
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out; 
+  background-size: 200% 200%; 
 }
+
+.lognav-logo:hover, .nav-logo:hover {
+  animation: double_flash 1.2s ease-in-out forwards;
+}
+
+@keyframes double_flash {
+  0% {
+    color: transparent;
+    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-position: -120% 0;
+  }
+  40% {
+    background-position: 100% 0; 
+  }
+  70% {
+    background-position: -80% 0; 
+  }
+  90% {
+    background-position: 0% 0; 
+  }
+  100% {
+    color: white; 
+    background: none;
+  }
+}
+
 
 .nav-links {
   display: flex;
@@ -119,3 +172,5 @@
 .nav-search:focus {
   background: rgba(255, 255, 255, 0.3);
 }
+
+

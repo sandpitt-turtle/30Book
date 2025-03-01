@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import fetchBookImage from "../utils/fetchBookImage"; // Make sure the path is correct
+import fetchBookImage from "../utils/fetchBookImage"; 
 
 export default function SingleBook() {
   const [book, setBook] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [userHasBook, setUserHasBook] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [bookImage, setBookImage] = useState(""); // State for book cover image
+  const [bookImage, setBookImage] = useState(""); 
   let { bookId } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function SingleBook() {
         
         setBook(bookDetails.book);
 
-        // Fetch the book cover image based on the title
+
         const image = await fetchBookImage(bookDetails.book.title);
         setBookImage(image);
 
@@ -123,10 +123,12 @@ export default function SingleBook() {
         <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
       </p>
 
-      {/* Display book cover */}
-      {bookImage && <img src={bookImage} alt={book.title} className="book-cover" />}
-
+        <div className="single-cover">
+      {bookImage && <img src={bookImage} alt={book.title} className="single-book-cover" />}
+</div>
+<div className= "exchange-items">  
       {token && (
+
         <button
           onClick={() => {
             if (book.isAvailable) {
@@ -164,5 +166,8 @@ export default function SingleBook() {
         <p className="book-message">This book is already checked out.</p>
       )}
     </div>
+
+    </div>
+    
   );
 }

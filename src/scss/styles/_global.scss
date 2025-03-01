@@ -1,15 +1,21 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+
 body {
-  font-family: 'Roboto Condensed', serif;
-  margin: 0;
-  padding: 64px;
-  background: var(--background);
+  font-family: "Inter", "Helvetica", "Arial", sans-serif;
+  font-size: var(--body-font-size, 14px);
+  background: radial-gradient(circle at top, #192133 10%, #0c111b 80%);
+  background-attachment: fixed;
   color: var(--text);
   transition: background 0.5s, color 0.5s;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
+
 
 .app-container {
   display: flex;
@@ -17,8 +23,10 @@ body {
   min-height: 100vh;
 }
 
+
+
 main {
-  padding-bottom: 60px;
+  padding: 20px;
 }
 
 @media (max-width: 768px) {
@@ -37,8 +45,6 @@ main {
   }
 }
 
-
-
 .loading-placeholder {
   display: flex;
   justify-content: center;
@@ -49,8 +55,32 @@ main {
   border-radius: 5px;
 }
 
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 50px;
+}
+
 .loading-spinner {
   width: 50px;
   height: 50px;
 }
+
+code, pre {
+  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
+}
+
+
+
+h2 {
+  color: lightgrey;
+
+}
+
+
+
+
+
+
+
 

@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CheckedOutBooks from "./CheckedOutBooks";
 
-export default function Account({ user }) {
+export default function Account({ user, setUser }) {
   const [checkedOutBooks, setCheckedOutBooks] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    if (!user) {
+   
+    if (user === null) {
       navigate("/login");
     }
   }, [user, navigate]);
-
 
   useEffect(() => {
     if (!user?.id) return;
@@ -21,7 +20,11 @@ export default function Account({ user }) {
     const fetchCheckedOutBooks = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) return;
+        if (!token) {
+          setUser(null);
+          navigate("/login");
+          return;
+        }
 
         const response = await fetch(
           `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/${user.id}/checked-out-books`,
@@ -43,7 +46,18 @@ export default function Account({ user }) {
     };
 
     fetchCheckedOutBooks();
-  }, [user?.id]);
+  }, [user?.id, navigate, setUser]);
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);  
+  
+   
+    navigate("/books", { replace: true }); 
+  };
+  
 
   return (
     <div className="account-container">
@@ -62,6 +76,7 @@ export default function Account({ user }) {
         />
       )}
 
+      <button onClick={handleLogout} className="nav-button">Logout</button>
       <button onClick={() => navigate("/")}>Back</button>
     </div>
   );

@@ -12,7 +12,7 @@
   scroll-behavior: smooth;
   padding: 15px 0;
   white-space: nowrap;
-  scrollbar-width: none; /* Hides scrollbar for Firefox */
+  scrollbar-width: none; 
 }
 
 .carousel::-webkit-scrollbar {
@@ -21,7 +21,7 @@
 
 .carousel-item {
   flex: 0 0 auto;
-  width: 600px; /* Ensuring a cinematic panel effect */
+  width: 600px; 
   transition: transform 0.3s ease-in-out;
 }
 
@@ -41,11 +41,6 @@
   height: 300px;
 }
 
-.carousel-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Maintains aspect ratio while covering the area */
-}
 
 
 
@@ -83,11 +78,7 @@
   text-align: center;
 }
 
-@media (max-width: 1024px) {
-  .carousel-item {
-    width: 500px;
-  }
-}
+
 
 @media (max-width: 768px) {
   .carousel-card {
@@ -100,26 +91,26 @@
   }
 }
 
-@media (max-width: 480px) {
-  .carousel-item {
-    width: 90vw;
-  }
-}
+
 
 .carousel-indicators {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 12px;
+  gap: 10px; 
 }
 
 .carousel-indicator {
   width: 12px;
-  height: 12px;
+  height: 12px; 
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  margin: 0 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex-shrink: 0; 
+  min-width: 12px; 
+  min-height: 12px;
 }
 
 .carousel-indicator.active {
@@ -127,9 +118,9 @@
 }
 
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #fff;
-}
+// h2 {
+//   font-size: 24px;
+//   margin-bottom: 20px;
+//   color: #fff;
+// }
 
