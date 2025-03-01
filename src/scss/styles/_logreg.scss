@@ -1,0 +1,184 @@
+
+
+  .login-page, .register-page {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 40px; 
+  }
+  
+  .login-container, .register-container {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 24px;
+    padding: 56px 72px;
+    width: 580px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  
+    transform: translateY(50px);
+    animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
+  }
+  
+  
+  .login-container input, .register-container input {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #f8f8f8;
+    color: #333;
+    margin-bottom: 16px;
+    outline: none;
+  }
+
+  .login-container input::placeholder, .register-container input::placeholder {
+    color: #888;
+  }
+
+
+  .login-container button, .register-container button {
+    width: 90%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    margin-top: 8px;
+  }
+  
+  
+
+
+  
+/* 🔵 Logo */
+.login-logo, .register-logo {
+  width: 160px;
+  margin-bottom: 32px;
+}
+
+
+.logo-wrapper {
+  margin-bottom: 20px; 
+}
+
+
+
+
+
+@keyframes disney_fade_slide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+@keyframes disney_fade_inner {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.inner-content {
+  opacity: 0;
+  animation: disney_fade_inner 0.5s ease-out 0.7s forwards; 
+
+
+
+
+
+@media (max-width: 600px) {
+  .register-container {
+    width: 90%;
+    padding: 40px 24px;
+  }
+}
+
+
+
+
+
+
+
+
+.account-container .signup-text {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.account-container .signup-text a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.account-container .signup-text a:hover {
+  text-decoration: underline;
+}
+  
+
+
+.logreg-title h2 {
+  color: black;
+  font-weight: light;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+.my-book h3 {
+  color: black;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.my-book {
+  width: 100%; 
+  text-align: left; 
+}
+
+
+
+
+.login-title {
+  font-size: 12px;
+  margin-bottom: 10px
+
+}
+
+
+
+
+.login-instr h4  {
+  color: black;
+  font-weight: lighter;
+  margin-bottom: 20px;
+
+
+}
+
+}

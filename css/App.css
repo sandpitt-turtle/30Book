@@ -1,14 +1,17 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: "Roboto Condensed", serif;
-  margin: 0;
-  padding: 64px;
-  background: var(--background);
+  font-family: "Inter", "Helvetica", "Arial", sans-serif;
+  font-size: var(--body-font-size, 14px);
+  background: radial-gradient(circle at top, #192133 0%, #0c111b 70%);
   color: var(--text);
   transition: background 0.5s, color 0.5s;
+  line-height: 1.6;
 }
 
 .app-container {
@@ -18,7 +21,7 @@ body {
 }
 
 main {
-  padding-bottom: 60px;
+  padding: 20px;
 }
 
 @media (max-width: 768px) {
@@ -44,34 +47,44 @@ main {
   border-radius: 5px;
 }
 
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 50px;
+}
+
 .loading-spinner {
   width: 50px;
   height: 50px;
 }
 
+code, pre {
+  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
+}
+
+h2 {
+  color: lightgrey;
+}
+
 :root {
-  --background: linear-gradient(to bottom, #d0d6e0, #a8b7d1);
-  --text: #3c3c3c;
+  --background: linear-gradient(to bottom, #e0e4ec, #c0c9d7);
+  --text: #2e2e2e;
   --card-background: #ffffff;
-  --card-border: #b4a5b5;
+  --card-border: #a8a8a8;
   --button-background: #3f356f;
   --button-hover: #594a9d;
-  --input-color: #333333;
   --input-background: #f4f4f4;
-  --input-border: #b4a5b5;
-  --overlay-background: rgba(0, 0, 0, 0.3);
+  --overlay-background: rgba(0, 0, 0, 0.4);
 }
 
 .dark-theme {
-  --background: linear-gradient(180deg, #141b29 0%, #0c111b 100%);
-  --text: #dcdcdc;
-  --card-background: #2a2a2a;
-  --card-border: #444444;
-  --button-background: #3a3a3a;
-  --button-hover: #5a5a5a;
-  --input-color: #dcdcdc;
-  --input-background: #333333;
-  --input-border: #444444;
+  --background: linear-gradient(180deg, #121826, #0a0f1a);
+  --text: #e5e5e5;
+  --card-background: #1e1e1e;
+  --card-border: #333;
+  --button-background: #444;
+  --button-hover: #666;
+  --input-background: #262626;
   --overlay-background: rgba(0, 0, 0, 0.8);
 }
 
@@ -99,16 +112,63 @@ main {
 
 .nav-logo,
 .nav-item,
-.nav-button {
+.nav-button, .lognav-logo {
   color: white;
   text-decoration: none;
+}
+
+.lognav-logo {
+  font-size: 36px;
+  font-weight: bold;
+  color: white; /* ✅ Default solid white */
+  background: none;
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
 }
 
 .nav-logo {
   font-size: 22px;
   font-weight: bold;
+  color: white; /* ✅ Default solid white */
+  background: linear-gradient(70deg, #a4fffc, #003B5C);
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
 }
 
+.lognav-logo:hover, .nav-logo:hover {
+  animation: double_flash 1.2s ease-in-out forwards;
+}
+
+@keyframes double_flash {
+  0% {
+    color: transparent;
+    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-position: -120% 0;
+  }
+  40% {
+    background-position: 100% 0; /* Moves right */
+  }
+  70% {
+    background-position: -80% 0; /* Moves back left */
+  }
+  90% {
+    background-position: 0% 0; /* Settles to center */
+  }
+  100% {
+    color: white; /* ✅ Returns to solid white */
+    background: none;
+  }
+}
 .nav-links {
   display: flex;
   justify-content: center;
@@ -206,7 +266,7 @@ main {
 .book-card {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  padding: var(--_4gtk8f0, 16px);
+  padding: var(--pad, 16px);
   width: 260px;
   max-width: 100%;
   text-align: center;
@@ -218,8 +278,6 @@ main {
   overflow: hidden;
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
-  scrollbar-width: none; /* Hide scrollbar on Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar on Edge */
 }
 
 .book-card:hover {
@@ -227,44 +285,91 @@ main {
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
-.book-author {
-  font-size: 0.875rem;
-  color: gray;
-  margin: 4px 0;
+.book-title,
+.book-author,
+.book-description {
+  margin-bottom: 10px;
 }
 
 .book-title {
-  font-size: 1rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 4px;
+  color: var(--text);
 }
 
-.book-details {
+.book-author {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.book-description {
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.5;
+  text-align: justify;
+  max-width: 600px;
+}
+
+.book-details-container {
+  max-width: 300px;
+  margin: 80px auto;
+  padding: 20px;
+  background: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex: 1;
-  padding-right: 10px;
+  align-items: center;
+}
+
+.exchange-items {
+  padding: px;
 }
 
 .book-cover {
-  width: 100%;
-  height: 220px; /* Fixed height for uniform covers */
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 5px;
+  width: 250px;
+  height: 300px;
+  border-radius: 6px;
+  margin-bottom: 20px;
 }
 
-h3 {
+.book-cover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.book-status {
   font-size: 1rem;
   font-weight: bold;
-  margin-top: 8px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
-/* Grid Layout */
+.available {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.checked-out {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.book-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Allows responsiveness */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px;
   justify-items: center;
   width: 100%;
@@ -273,101 +378,119 @@ h3 {
   padding: 20px;
 }
 
-/* Responsive Adjustments */
+.login-page,
+.register-page,
+.account-container {
+  margin-top: 64px;
+}
+
+.books-container {
+  padding-top: 60px;
+  width: 100%;
+  text-align: center;
+}
+
+.book-cover-placeholder {
+  width: 100px;
+  height: 150px;
+  display: block;
+  margin: auto;
+}
+
 @media (max-width: 1024px) {
   .book-card {
     width: 85vw;
-  }
-  .carousel .book-card {
-    flex: 0 0 75vw;
   }
 }
 @media (max-width: 768px) {
   .book-card {
     width: 90vw;
   }
-  .carousel .book-card {
-    flex: 0 0 85vw;
-  }
 }
 @media (max-width: 480px) {
   .book-card {
     width: 95vw;
   }
-  .carousel .book-card {
-    flex: 0 0 95vw;
-  }
 }
-/* Prevent navbar overlap */
-.login-page, .register-page, .account-container {
-  margin-top: 64px;
-}
-
-.books-container {
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.book-cover-placeholder {
-  width: 100px; /* Adjust size */
-  height: 150px;
-  display: block;
-  margin: auto;
-}
-
 button,
 .login-button,
 .back-button,
 .submit-button,
-.checkout-button {
-  padding: 10px;
-  background-color: var(--button-background, #333);
+.checkout-button,
+.return-button,
+.details-button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 6px;
+  margin: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 4px;
+  background-color: var(--button-background);
   color: white;
-  border: none;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 button:hover,
 .login-button:hover,
 .back-button:hover,
 .submit-button:hover,
-.checkout-button:hover {
-  background-color: var(--button-hover, #222);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  transform: translateY(-3px) scale(1.05);
-}
-
-.details-button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1f80e0;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
+.checkout-button:hover,
+.return-button:hover,
 .details-button:hover {
-  background-color: #1665b8;
+  background-color: var(--button-hover, #1a5cb0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  background-color: #174c91;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled,
+.login-button:disabled,
+.back-button:disabled,
+.submit-button:disabled,
+.checkout-button:disabled,
+.return-button:disabled,
+.details-button:disabled {
+  background-color: #6c757d;
+  border: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.cover-button {
+  all: unset;
+  display: contents;
+  cursor: pointer;
+}
+
+.cover-button img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(10, 15, 30, 0.9);
+  color: white;
+  padding: 15px;
+  font-size: 14px;
+  text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 20px;
-  z-index: 100;
 }
 
 footer p {
@@ -416,6 +539,25 @@ input::placeholder {
   width: 100%;
 }
 
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-field, input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -461,7 +603,7 @@ input::placeholder {
   scroll-behavior: smooth;
   padding: 15px 0;
   white-space: nowrap;
-  scrollbar-width: none; /* Hides scrollbar for Firefox */
+  scrollbar-width: none;
 }
 
 .carousel::-webkit-scrollbar {
@@ -470,7 +612,7 @@ input::placeholder {
 
 .carousel-item {
   flex: 0 0 auto;
-  width: 600px; /* Ensuring a cinematic panel effect */
+  width: 600px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -494,7 +636,7 @@ input::placeholder {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover; /* Maintains aspect ratio while covering the area */
+     object-fit: cover;
 }
 
 .carousel-card:hover {
@@ -555,25 +697,287 @@ input::placeholder {
 .carousel-indicators {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 12px;
+  gap: 10px; /* Fixed spacing */
 }
 
 .carousel-indicator {
-  width: 12px;
-  height: 12px;
+  width: 12px; /* Fixed size */
+  height: 12px; /* Fixed size */
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  margin: 0 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+  min-width: 12px; /* Ensures it never gets thinner */
+  min-height: 12px;
 }
 
 .carousel-indicator.active {
   background-color: #1f80e0;
 }
 
-h2 {
+.login-page, .register-page {
+  display: flex;
+  flex-direction: column; /* ✅ Ensures elements stack vertically */
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 40px; /* 🔥 Adjust to bring everything higher on the page */
+}
+
+.login-container, .register-container {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 24px;
+  padding: 56px 72px;
+  width: 580px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(50px);
+  animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
+}
+
+.login-container input, .register-container input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  color: #333;
+  margin-bottom: 16px;
+  outline: none;
+}
+
+.login-container input::-moz-placeholder, .register-container input::-moz-placeholder {
+  color: #888;
+}
+
+.login-container input::placeholder, .register-container input::placeholder {
+  color: #888;
+}
+
+.login-container button, .register-container button {
+  width: 90%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: 8px;
+}
+
+/* 🔵 Logo */
+.login-logo, .register-logo {
+  width: 160px;
+  margin-bottom: 32px;
+}
+
+.logo-wrapper {
+  margin-bottom: 20px; /* ✅ Space between logo and login box */
+}
+
+/* 🔵 Main Login Container Animation (Disney+ Style) */
+/* 🔵 Main Login Container Animation (Disney+ Style) */
+@keyframes disney_fade_slide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 🔵 Inner Content Staggered Appearance */
+@keyframes disney_fade_inner {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.inner-content {
+  opacity: 0;
+  animation: disney_fade_inner 0.5s ease-out 0.7s forwards; /* 🔥 Slight delay after the container */
+}
+
+/* 🔵 Responsive */
+@media (max-width: 600px) {
+  .register-container {
+    width: 90%;
+    padding: 40px 24px;
+  }
+}
+/* 🔵 Sign Up Link */
+.account-container .signup-text {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.account-container .signup-text a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.account-container .signup-text a:hover {
+  text-decoration: underline;
+}
+
+.logreg-title h2 {
+  color: black;
+  font-weight: light;
   font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.my-book h3 {
+  color: black;
+  margin-bottom: 10px;
+  text-align: left; /* ✅ Explicitly aligns text */
+}
+
+.my-book {
+  width: 100%; /* ✅ Ensures it spans the full container */
+  text-align: left; /* ✅ Aligns the text inside */
+}
+
+.login-title {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.login-instr h4 {
+  color: black;
+  font-weight: lighter;
   margin-bottom: 20px;
-  color: #fff;
+}
+
+/* 🌌 Full Page Centering */
+.account-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #0c111b;
+  padding: 32px 24px;
+}
+
+/* 🌌 Account Container - Centered Glassmorphism */
+.account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Ensure proper vertical centering */
+  background: rgba(255, 255, 255, 0.08); /* Frosted effect */
+  border-radius: 16px;
+  padding: 48px;
+  width: 480px;
+  max-width: 90%;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  animation: fade_in 0.3s ease-out, slide_up 0.5s ease-out;
+  text-align: center; /* Ensure text alignment is clean */
+}
+
+/* 🌌 Disney+ Typography */
+.account-container h2 {
+  font-size: 1.9rem;
+  font-family: "Inspire-Regular", Helvetica, sans-serif;
+  color: hsl(0, 0%, 97.6%);
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.account-container ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.account-container li {
+  font-size: 1rem;
+  font-family: "Inspire-Regular", Helvetica, sans-serif;
+  color: hsl(0, 0%, 97.6%);
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 🌌 Buttons - Disney+ Inspired */
+.account-container button {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: "Inspire-Regular", Helvetica, sans-serif;
+  border-radius: 8px;
+  background: #0072d2;
+  color: hsl(0, 0%, 97.6%);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  margin-top: 12px;
+}
+
+.account-container button:hover {
+  background: #005bb5;
+  transform: scale(1.02);
+}
+
+.account-container button:active {
+  transform: scale(0.98);
+}
+
+/* 🌌 Logout Button - Special Styling */
+.account-container .nav-button {
+  background: #d32f2f;
+}
+
+.account-container .nav-button:hover {
+  background: #b71c1c;
+}
+
+/* 🌌 Animations */
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide_up {
+  from {
+    transform: translateY(60px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* 🌌 Responsive */
+@media (max-width: 600px) {
+  .account-container {
+    width: 90%;
+    padding: 30px;
+  }
 }

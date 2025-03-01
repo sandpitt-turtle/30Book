@@ -1,27 +1,21 @@
 :root {
-  --background: linear-gradient(to bottom, #d0d6e0, #a8b7d1);
-  --text: #3c3c3c;
+  --background: linear-gradient(to bottom, #e0e4ec, #c0c9d7);
+  --text: #2e2e2e;
   --card-background: #ffffff;
-  --card-border: #b4a5b5;
+  --card-border: #a8a8a8;
   --button-background: #3f356f;
   --button-hover: #594a9d;
-  --input-color: #333333;
   --input-background: #f4f4f4;
-  --input-border: #b4a5b5;
-  --overlay-background: rgba(0, 0, 0, 0.3);
+  --overlay-background: rgba(0, 0, 0, 0.4);
 }
 
 .dark-theme {
-  --background: linear-gradient(180deg, #141b29 0%, #0c111b 100%);
-  --text: #dcdcdc;
-  --card-background: #2a2a2a;
-  --card-border: #444444;
-  --button-background: #3a3a3a;
-  --button-hover: #5a5a5a;
-  --input-color: #dcdcdc;
-  --input-background: #333333;
-  --input-border: #444444;
+  --background: linear-gradient(180deg, #121826, #0a0f1a);
+  --text: #e5e5e5;
+  --card-background: #1e1e1e;
+  --card-border: #333;
+  --button-background: #444;
+  --button-hover: #666;
+  --input-background: #262626;
   --overlay-background: rgba(0, 0, 0, 0.8);
-  
-  
 }

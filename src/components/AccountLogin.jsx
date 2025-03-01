@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 export default function Login({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isMounted, setIsMounted] = useState(false); // 🔵 Track component mount state
-
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsMounted(true); // 🔵 Set to true after component mounts
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,17 +21,17 @@ export default function Login({ setToken, setUser }) {
         }
       );
 
-      const result = await response.json();
-      if (!result.token) throw new Error("Invalid credentials");
+      const { token } = await response.json();
+      if (!token) throw new Error("Invalid credentials");
 
-      localStorage.setItem("token", result.token);
-      setToken(result.token);
+      localStorage.setItem("token", token);
+      setToken(token);
 
       const userResponse = await fetch(
         "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me",
         {
           headers: {
-            Authorization: `Bearer ${result.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -56,57 +49,41 @@ export default function Login({ setToken, setUser }) {
     }
   };
 
-  if (!isMounted) return null; // 🔵 Prevent rendering before mount (Fixes flickering)
-
   return (
-    
     <div className="login-page">
-     <div className="logo-wrapper">
-      <Link to="/books" className="lognav-logo">BookBuddy</Link>
-    </div>
       <div className="login-container">
-  
-      <div className= "my-book">
-        <h3>myBookBuddy</h3>
-        </div>
-
-        <div className="inner-content">
-        <div className="logreg-title">
-          <h2>Enter your email to continue</h2>
-          {error && <p className="error-message">{error}</p>}
-        </div>
-
-        <div className= "login-instr">
-          <h4>Log in to BookBuddy with your email. If you don't have an account, you can click below to create one. </h4>
-          </div>
+        <h2>Sign in to BookBuddy</h2>
+        {error && <p className="error-message">{error}</p>}
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="input-group">
+            
+            <label>
+              Email</label>
             <input
               type="email"
-              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              placeholder="Enter email"
             />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
             <input
               type="password"
-              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              placeholder="Enter password"
             />
           </div>
-
           <button type="submit" className="login-button">Sign in</button>
         </form>
-
-        <p className="forgot-password">Forgot password?</p>
-        <p className="signup-text">
-          New to BookBuddy? <Link to="/register">Sign up</Link>
-        </p>
       </div>
-    </div>
+      <p className="footer">
+  
+      </p>
     </div>
   );
 }

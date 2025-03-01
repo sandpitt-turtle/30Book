@@ -2,14 +2,16 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(10, 15, 30, 0.9);
+  color: white;
+  padding: 15px;
+  font-size: 14px;
+  text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 20px;
-  z-index: 100;
 }
+
 
 footer p {
   margin: 0;

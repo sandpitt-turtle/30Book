@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -47,33 +48,43 @@ export default function Register({ setToken, setUser }) {
   };
 
   return (
-    <div className="login-page">
+    <div className="register-page">
+         <div className="logo-wrapper">
+            <Link to="/books" className="lognav-logo">BookBuddy</Link>
+          </div>
     <div className="register-container">
-      <h2>Register</h2>
+   
+    <div className="logreg-title">
+      <h2>Register for BookBuddy</h2>
+      </div>
       {error && <p className="error-message">{error}</p>}
+
       <form className="register-form" onSubmit={handleSubmit}>
+
+
         <div className="input-group">
-          <label>Email:</label>
+
+          {/* <label>Email:</label> */}
+
           <input
             type="text"
-            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="input-field"
+            placeholder="Enter email"
           />
-        </div>
-        <div className="input-group">
-          <label>Password:</label>
+
           <input
             type="password"
-            name="password"
+
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="input-field"
+   r
+            placeholder="Set password"
           />
         </div>
+        
         <button type="submit" className="submit-button">Register</button>
       </form>
     </div>

@@ -1,42 +1,88 @@
+
 button,
 .login-button,
 .back-button,
 .submit-button,
-.checkout-button{
-  padding: 10px;
-  background-color: var(--button-background, #333);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-button:hover,
-.login-button:hover,
-.back-button:hover,
-.submit-button:hover,
-.checkout-button:hover
-{
-  background-color: var(--button-hover, #222);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  transform: translateY(-3px) scale(1.05);
-}
-
-
+.checkout-button,
+.return-button,
 .details-button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1f80e0;
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 6px;
+  margin: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 4px;
+  background-color: var(--button-background);
   color: white;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+
+
+.account-container button {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  background: #0072d2;
+  color: hsl(0, 0%, 97.6%);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  margin-top: 12px;
+}
+
+
+
+
+
+button:hover, 
+.login-button:hover, 
+.back-button:hover, 
+.submit-button:hover, 
+.checkout-button:hover, 
+.return-button:hover, 
 .details-button:hover {
-  background-color: #1665b8;
+  background-color: var(--button-hover, #1a5cb0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  background-color: #174c91;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled, 
+.login-button:disabled, 
+.back-button:disabled, 
+.submit-button:disabled, 
+.checkout-button:disabled, 
+.return-button:disabled, 
+.details-button:disabled {
+  background-color: #6c757d;
+  border: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+
+.cover-button {
+  all: unset;
+  display: contents; 
+  cursor: pointer;
+}
+
+.cover-button img {
+  display: block; 
+  width: 100%;
+  height: auto;
 }
