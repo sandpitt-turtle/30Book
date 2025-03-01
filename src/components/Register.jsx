@@ -53,12 +53,24 @@ export default function Register({ setToken, setUser }) {
             <Link to="/books" className="lognav-logo">BookBuddy</Link>
           </div>
     <div className="register-container">
-   
-    <div className="logreg-title">
-      <h2>Register for BookBuddy</h2>
-      </div>
-      {error && <p className="error-message">{error}</p>}
 
+    <div className= "my-book">
+        <h3>myBookBuddy</h3>
+        </div>
+
+    <div className="inner-content">
+    <div className="logreg-title">
+      <h2> Register </h2>
+   
+      {error && <p className="error-message">{error}</p>}
+      </div>
+      <div className= "login-instr">
+          <h4>Enter your email and set a password to create your BookBuddy account.</h4>
+          </div>
+
+
+
+      
       <form className="register-form" onSubmit={handleSubmit}>
 
 
@@ -85,8 +97,10 @@ export default function Register({ setToken, setUser }) {
           />
         </div>
         
+        
         <button type="submit" className="submit-button">Register</button>
       </form>
+      </div>
     </div>
     </div>
   );

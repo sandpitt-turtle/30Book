@@ -21,6 +21,8 @@
 
 // }
 
+
+
 .book-title,
 .book-author,
 .book-description {
@@ -66,8 +68,11 @@
 }
 
 .book-cover {
-  border-radius: 6px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: 12px;
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .book-cover:hover {
@@ -134,20 +139,4 @@
   margin: auto;
 }
 
-@media (max-width: 1024px) {
-  .book-card {
-    width: 85vw;
-  }
-}
 
-@media (max-width: 768px) {
-  .book-card {
-    width: 90vw;
-  }
-}
-
-@media (max-width: 480px) {
-  .book-card {
-    width: 95vw;
-  }
-}

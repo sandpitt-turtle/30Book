@@ -26,6 +26,20 @@
   text-decoration: none;
 }
 
+.book-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: auto;
+}
+
+
 
 .lognav-logo {
 font-size: 36px;
@@ -172,5 +186,4 @@ background-size: 200% 200%;
 .nav-search:focus {
   background: rgba(255, 255, 255, 0.3);
 }
-
 

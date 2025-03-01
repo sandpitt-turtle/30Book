@@ -1,0 +1,58 @@
+@media (max-width: 1024px) {
+    .book-card {
+      width: 85vw;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .book-card {
+      width: 90vw;
+    }
+    .carousel-card {
+      flex-direction: column;
+      height: auto;
+    }
+    .book-cover {
+      width: 100%;
+      height: auto;
+    }
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+    .books-grid {
+      grid-template-columns: 1fr;
+    }
+    .book-card {
+      width: 100%;
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .account-container, .register-container {
+      width: 90%;
+      padding: 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .book-card {
+      width: 95vw;
+    }
+  }
+  
+
+
+@media (max-width: 1024px) {
+    .book-card:hover, 
+    .book-cover:hover, 
+    .details-button:hover, 
+    .checkout-button:hover, 
+    .return-button:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      background-color: inherit !important;
+    }
+  }
+  

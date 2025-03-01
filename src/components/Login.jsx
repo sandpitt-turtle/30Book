@@ -60,7 +60,9 @@ export default function Login({ setToken, setUser }) {
 
   return (
     
+    
     <div className="login-page">
+      
      <div className="logo-wrapper">
       <Link to="/books" className="lognav-logo">BookBuddy</Link>
     </div>
@@ -100,11 +102,13 @@ export default function Login({ setToken, setUser }) {
 
           <button type="submit" className="login-button">Sign in</button>
         </form>
-
-        <p className="forgot-password">Forgot password?</p>
-        <p className="signup-text">
-          New to BookBuddy? <Link to="/register">Sign up</Link>
-        </p>
+        <div className= "login-instr">
+        <h4 >Forgot password?</h4>
+        
+       <h4> New to BookBuddy?</h4> 
+       <div className= "sign-up-link" ><Link to="/register"><h4>Sign up</h4></Link>
+       </div>
+</div>
       </div>
     </div>
     </div>
