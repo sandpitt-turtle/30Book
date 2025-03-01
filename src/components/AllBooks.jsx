@@ -95,6 +95,9 @@ function Books({ isAuthenticated, searchTerm }) {
               </button>
               <h3>{book.title}</h3>
               <p className="book-author"><strong>Author:</strong> {book.author}</p>
+              <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
+        <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
+      </p>
               <button onClick={() => handleDetailsClick(book.id)} className="details-button">
                 See details
               </button>

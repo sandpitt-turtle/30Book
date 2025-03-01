@@ -38,7 +38,7 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
     ) : (
       <div className="nav-links">
         <div className="nav-books">
-        <Link to="/books" className="nav-button">📚 Books</Link>
+        <Link to="/books" className="book-nav-button">📚 Books</Link>
         </div>
       </div>
     )}
