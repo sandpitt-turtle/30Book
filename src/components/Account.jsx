@@ -8,48 +8,62 @@ export default function Account({ user, setUser, setToken }) {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
+  console.log("📌 Account component rendered. User:", user);
+
   useEffect(() => {
-    if (user === null) {
+    if (!user?.id) {
+      console.log("🚨 No user ID found, redirecting to login...");
       navigate("/login");
+      return;
     }
-  }, [user, navigate]);
-
-  useEffect(() => {
-    if (!user?.id) return;
-
+  
     const fetchCheckedOutBooks = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
+          console.warn("⚠️ No token found in local storage. Logging out user...");
           setUser(null);
           setToken(""); 
           navigate("/login");
           return;
         }
-
-        const response = await fetch(
-          `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/${user.id}/checked-out-books`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch checked-out books");
-
+  
+        const apiUrl = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations`;
+        console.log("🔍 Fetching checked-out books from:", apiUrl);
+  
+        const response = await fetch(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (!response.ok) {
+          console.error(`🚨 API request failed! Status: ${response.status} - ${response.statusText}`);
+          throw new Error(`Failed to fetch checked-out books. Status: ${response.status}`);
+        }
+  
         const data = await response.json();
-        setCheckedOutBooks(data.books || []);
+        console.log("📚 Checked-out books response:", data);
+  
+        if (!data.reservation || data.reservation.length === 0) {
+          console.log("✅ You have no books checked out.");
+          setCheckedOutBooks([]); 
+        } else {
+          console.log("🎉 You HAVE checked-out books!", data.reservation);
+          setCheckedOutBooks(data.reservation); // Store books properly
+        }
       } catch (error) {
-        console.error("Error fetching books:", error);
+        console.error("❌ Error fetching books:", error);
       }
     };
-
+  
     fetchCheckedOutBooks();
   }, [user?.id, navigate, setUser, setToken]);
+  
 
   const handleLogout = () => {
+    console.log("👋 Logging out user...");
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
@@ -60,74 +74,57 @@ export default function Account({ user, setUser, setToken }) {
   return (
     <div className="account-page">
       <div className="account-container">
-
-
-
-
-
         <h1 className="account-manage-title">Manage Your Account</h1>
 
-
-<div className="account-section">
-  <div className="section-header">
-    <h3>myBookBuddy</h3>
-  </div>
-  <div className="info-cont">
-    <p className="user-label">Email</p>
-    <p className="user-value">{user?.email || "N/A"}</p>
-    <p className="user-label">Password</p>
-    <p className="user-value">{"*".repeat(8)}</p> {/* Masked password */}
-  </div>
-  <Link to="#" className="account-link-buddy">Manage myBookBuddy</Link>
-</div>
-
-
-       
-<div className="account-section">
-  <div className="section-header">
-            <h3>Your Books</h3>
-            </div>
-
-  
-            <div className="checked-books-container">
-    <p className="check-title">Checked-Out Books</p>
-    <Link to="#" className="view-books-btn" onClick={() => setShowPopup(true)}>
-      View Books
-    </Link>
-  </div>
-          {showPopup && <CheckedOutBooks checkedOutBooks={checkedOutBooks} onClose={() => setShowPopup(false)} />}
-        </div>
-
-
-        {/* <div className="account-section">
-          <div className="section-header">
-            <h3>Your Plans</h3>
-          </div>
-          <h2 className="section-title">Your Subscription</h2>
-          <p className="subscription-plan">Basic Membership</p>
-          <Link to="#" className="account-link">Manage Subscription</Link>
-        </div>
-
-  
         <div className="account-section">
-           <div className="section-header">
-             <h3>Access & Security</h3>
+          <div className="section-header">
+            <h3>myBookBuddy</h3>
           </div>
-          <h2 className="section-title">Security</h2
-          <Link to="#" className="account-link">Manage Devices</Link> 
-         */}
-         
-          <Link to="#" className="logout-link" onClick={handleLogout}>Logout</Link>
-    
+          <div className="info-cont">
+            <p className="user-label">Email</p>
+            <p className="user-value">{user?.email || "N/A"}</p>
+            <p className="user-label">Password</p>
+            <p className="user-value">{"*".repeat(8)}</p> 
+          </div>
+          <Link to="#" className="account-link-buddy">
+            <span className="shiny-text">Manage myBookBuddy</span>
+          </Link>
+        </div>
 
-  
-        {/* <div className="account-footer">
-          <p><Link to="#">Need help? Visit our Help Center</Link></p>
-          <p><Link to="#">Want to delete your account? Learn More</Link></p>
-        </div> */}
+        <div className="account-section">
+          <div className="section-header">
+            <h3>Your Books</h3>
+          </div>
+          <div className="checked-books-container">
+            <p className="check-title">Checked-Out Books</p>
+            <Link
+              to="#"
+              className="view-books-btn"
+              onClick={() => {
+                console.log("📖 View Books button clicked. ShowPopup:", !showPopup);
+                setShowPopup(true);
+              }}
+            >
+              View Books
+            </Link>
+          </div>
+          {showPopup && (
+            <>
+              <CheckedOutBooks
+                checkedOutBooks={checkedOutBooks}
+                onClose={() => {
+                  console.log("❌ Closing the checked-out books popup.");
+                  setShowPopup(false);
+                }}
+              />
+            </>
+          )}
+        </div>
 
+        <Link to="#" className="logout-link" onClick={handleLogout}>
+          Logout
+        </Link>
       </div>
     </div>
-
   );
 }

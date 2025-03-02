@@ -2,8 +2,20 @@ import { useEffect } from "react";
 
 export default function CheckedOutBooks({ checkedOutBooks, onClose }) {
   useEffect(() => {
-    const closeOnEscape = (e) => e.key === "Escape" && onClose();
-    const closeOnOutsideClick = (e) => e.target.id === "popup-overlay" && onClose();
+    console.log("📖 CheckedOutBooks component mounted. Books received:", checkedOutBooks);
+
+    const closeOnEscape = (e) => {
+      if (e.key === "Escape") {
+        console.log("❌ Popup closed with Escape key");
+        onClose();
+      }
+    };
+    const closeOnOutsideClick = (e) => {
+      if (e.target.id === "popup-overlay") {
+        console.log("❌ Popup closed by clicking outside");
+        onClose();
+      }
+    };
 
     document.addEventListener("keydown", closeOnEscape);
     document.addEventListener("click", closeOnOutsideClick);
@@ -12,7 +24,7 @@ export default function CheckedOutBooks({ checkedOutBooks, onClose }) {
       document.removeEventListener("keydown", closeOnEscape);
       document.removeEventListener("click", closeOnOutsideClick);
     };
-  }, [onClose]);
+  }, [onClose, checkedOutBooks]);
 
   return (
     <div id="popup-overlay" className="popup-overlay">

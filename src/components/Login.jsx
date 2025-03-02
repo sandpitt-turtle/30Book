@@ -99,11 +99,11 @@ export default function Login({ setToken, setUser }) {
               required
             />
           </div>
-
+          <button type="submit" className="sign-button">Sign in</button>
         </form>
         </div>
 
-          <button type="submit" className="sign-button">Sign in</button>
+        
           <div className= "login-instr"> 
         {/* <h4 >Forgot password?</h4>  */}
         

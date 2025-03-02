@@ -68,7 +68,7 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
 
           {location.pathname !== "/books" && (
             <div className="nav-center">
-              <Link to="/books" className="book-nav-button"><h2>Books</h2></Link>
+              <Link to="/books" className="book-nav-button">Books</Link>
             </div>
           )}
 

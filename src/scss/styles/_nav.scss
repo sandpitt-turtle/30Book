@@ -57,9 +57,15 @@
   background-size: 200% 200%;
 }
 
+
+
+.lognav-logo:hover {
+  transform: scale(1.05);
+}
+
 .nav-logo,
 .account-title h2,
-.book-nav-button h2 {
+.book-nav-button  {
   font-size: 18px;
   font-weight: bold;
   color: white;
@@ -75,14 +81,22 @@
 .lognav-logo:hover,
 .nav-logo:hover,
 .account-title h2,
-.book-nav-button h2, 
 .book-nav-button h2,
 .book-nav-button:hover
 .sign-button h2, 
 .reg-button h2 {
-  animation: double_flash 1.2s ease-in-out forwards;
+  animation: double_flash 1.5s ease-in-out forwards;
 }
 
+
+
+
+
+.book-nav-button:hover {
+  animation: double_flash 1.5s ease-in-out forwards;
+  transform: scale(1.2);
+ 
+}
 
 .nav-item {
   font-size: 16px;
