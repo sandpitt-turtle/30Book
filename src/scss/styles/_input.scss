@@ -3,8 +3,9 @@
 input:focus {
   outline: none;
   border-color: var(--button-background);
-  box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
+  // box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
 }
+
 
 input::placeholder {
   color: rgba(106, 78, 174, 0.6);
@@ -34,4 +35,11 @@ input::placeholder {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+}
+
+
+.log-input-group {
+    input:focus {
+      box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
+    }
 }

@@ -93,7 +93,7 @@ export default function SingleBook() {
               {book.isAvailable ? "Available" : "Checked Out"}
             </p>
 
-      
+            {/* Checkout & Return Buttons */}
             <div className="exchange-items">
               {token && (
                 <button

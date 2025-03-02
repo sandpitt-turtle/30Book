@@ -112,7 +112,7 @@ button:disabled,
   font-size: 16px;
   font-weight: normal;
   color: white;
-  background: linear-gradient(70deg, #a4fffc, #003b5c);
+  background: linear-gradient(70deg, hwb(178 64% 0%), #003b5c);
   background-clip: text;
   -webkit-background-clip: text;
   display: inline-block;

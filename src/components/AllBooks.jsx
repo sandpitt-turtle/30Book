@@ -64,7 +64,7 @@ function Books({ isAuthenticated, searchTerm }) {
   };
 
   return (
-
+<div classname="main-content">
    <div className="all-page">
     <div className="books-container">
       <h2></h2>
@@ -112,7 +112,7 @@ function Books({ isAuthenticated, searchTerm }) {
         )}
       </div>
     </div>
-    </div>
+    </div></div>
   );
 }  
 

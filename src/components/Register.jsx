@@ -74,7 +74,7 @@ export default function Register({ setToken, setUser }) {
       <form className="register-form" onSubmit={handleSubmit}>
 
 
-        <div className="input-group">
+        <div className="log-input-group">
 
        
 

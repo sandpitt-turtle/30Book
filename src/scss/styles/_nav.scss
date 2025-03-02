@@ -20,6 +20,13 @@
   justify-content: space-between;
 }
 
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .nav-logo,
 .nav-item,
 .nav-button,
@@ -68,14 +75,14 @@
 .lognav-logo:hover,
 .nav-logo:hover,
 .account-title h2,
-.book-nav-button h2 {
+.book-nav-button h2, 
+.book-nav-button h2,
+.book-nav-button:hover
+.sign-button h2, 
+.reg-button h2 {
   animation: double_flash 1.2s ease-in-out forwards;
 }
 
-.book-nav-button:hover h2 {
-  animation: double_flash 1.2s ease-in-out forwards;
-  transform: scale(1.05);
-}
 
 .nav-item {
   font-size: 16px;
@@ -110,8 +117,8 @@
 .nav-button {
   font-size: 15px;
   font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 6px;
+  padding: 8px 8px;
   background: none;
   cursor: pointer;
   transition: background 0.3s;
@@ -132,13 +139,52 @@
   justify-content: center;
 }
 
-.search-wrapper,
-.search-icon {
+
+.search-bar {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+  text-align: left; /* Align text to the left */
+}
+
+
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.5rem;
+}
+
+
+.search-bar:focus {
+  outline: none;
+}
+
+
+
+.search-wrapper
+{
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
 }
+
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.search-icon:hover {
+  transform: scale(1.1);
+}
+
 
 .nav-search {
   width: 200px;
@@ -159,4 +205,35 @@
 
 .nav-search:focus {
   background: rgba(255, 255, 255, 0.3);
+}
+
+
+.search-overlay {
+  position: fixed;
+  top: 64px; /* Right below navbar */
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.4); /* Even more transparent */
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  padding: 0 20px
+}
+
+.close-search {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  color: white;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.close-search:hover {
+  opacity: 0.7;
 }

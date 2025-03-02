@@ -58,3 +58,31 @@
       background: none;
     }
   }
+
+
+  @keyframes shiny-wipe {
+    0% {
+      left: -150%;
+      opacity: 1;
+    }
+    50% {
+      left: 100%;
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0; /* Fades out after swipe */
+    }
+  }
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

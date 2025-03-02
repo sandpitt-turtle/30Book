@@ -43,21 +43,78 @@
   }
 
 
-  .login-container button, .register-container button {
+  // .login-container button, .register-container button {
+  //   width: 90%;
+  //   padding: 14px;
+  //   font-size: 1rem;
+  //   font-weight: bold;
+  //   border-radius: 30px;
+  //   background: black;
+  //   color: white;
+  //   border: none;
+  //   cursor: pointer;
+  //   transition: background 0.3s ease-in-out;
+  //   margin-top: 8px;
+  // }
+
+ 
+  
+  .sign-button, .reg-button {
     width: 90%;
     padding: 14px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: normal;
     border-radius: 30px;
     background: black;
     color: white;
     border: none;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    margin-bottom: 15px;
     margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
   }
   
+
+  .sign-button::before, .reg-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
+    opacity: 0; /* Hidden until hover */
+    transition: none;
+  }
+    
+  .sign-button:hover::before, .reg-button:hover::before {
+    animation: shiny-wipe 2s forwards;
+    opacity: 1;
   
+  }
+
+
+  .sign-button:hover, .reg-button:hover {
+    transform: scale(1.02);
+    
+  } 
+  
+// button:hover,
+// .login-button:hover,
+// .back-button:hover,
+// .submit-button:hover,
+// .checkout-button:hover,
+// .return-button:hover {
+//   background-color: var(--button-hover, #1a5cb0);
+//   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+// }
+
+
+
+
 
 .login-logo, .register-logo {
   width: 160px;

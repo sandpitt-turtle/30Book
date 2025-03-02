@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import ThemeContext from "./ThemeContext";
 import profilePic from "../assets/default-profile.png";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,41 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
   const navigate = useNavigate();
   const location = useLocation(); 
   const [showSearch, setShowSearch] = useState(false);
+  const searchRef = useRef(null);
+
+  // Close search bar when Escape key is pressed
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setShowSearch(false);
+      }
+    };
+
+    if (showSearch) {
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showSearch]);
+
+  // Close search when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearch(false);
+      }
+    };
+
+    if (showSearch) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showSearch]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -21,49 +56,53 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-
-        <Link to="/books" className="nav-logo">BookBuddy</Link>
-
-        
-
-     
-        {location.pathname !== "/books" && (
-          <div className="nav-center">
-            <Link to="/books" className="book-nav-button"><h2>Books</h2></Link>
+    <>
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="nav-left">
+            <Link to="/books" className="nav-logo">BookBuddy</Link>
+            <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
+              <Search size={24} color="white" />
+            </div>
           </div>
-        )}
 
-  
-        <div className="nav-right">
-          {location.pathname === "/books" && (
-            <div className="search-wrapper">
-              <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
-                <Search size={24} color="white" />
-                <span className="search-label"></span> 
-              </div>
-              {showSearch && <SearchBar onSearch={onSearch} className="nav-search" />}
+          {location.pathname !== "/books" && (
+            <div className="nav-center">
+              <Link to="/books" className="book-nav-button"><h2>Books</h2></Link>
             </div>
           )}
 
-          {isAuthenticated ? (
-            <>
-              <button onClick={handleLogout} className="nav-button">Logout</button>
-          
-              <Link to="/account">
-                <img src={profilePic} alt="Profile" className="profile-pic" />
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="nav-button">Login</Link>
-              <Link to="/register" className="nav-button">Register</Link>
-            </>
-          )}
+          <div className="nav-right">
+            {isAuthenticated ? (
+              <>
+                <button onClick={handleLogout} className="nav-button">Logout</button>
+                <Link to="/account">
+                  <img src={profilePic} alt="Profile" className="profile-pic" />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-button">Login</Link>
+                <Link to="/register" className="nav-button">Register</Link>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {showSearch && (
+        <div className="search-overlay" ref={searchRef}>
+          <input
+            type="text"
+            placeholder="Search books..."
+            className="search-bar"
+            autoFocus
+            onChange={(e) => onSearch(e.target.value)}
+          />
+          <button className="close-search" onClick={() => setShowSearch(false)}></button>
+        </div>
+      )}
+    </>
   );
 }
 

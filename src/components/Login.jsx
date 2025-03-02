@@ -74,7 +74,7 @@ export default function Login({ setToken, setUser }) {
 
         <div className="inner-content">
         <div className="logreg-title">
-          <h2>Enter your email to continue</h2>
+          <h2>Enter your email to continue </h2>
           {error && <p className="error-message">{error}</p>}
         </div>
 
@@ -83,7 +83,7 @@ export default function Login({ setToken, setUser }) {
           </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
-          <div className="input-group">
+          <div className="log-input-group">
             <input
               type="email"
               placeholder="Email"
@@ -100,15 +100,17 @@ export default function Login({ setToken, setUser }) {
             />
           </div>
 
-          <button type="submit" className="sign-button">Sign in</button>
         </form>
+        </div>
+
+          <button type="submit" className="sign-button">Sign in</button>
           <div className= "login-instr"> 
         {/* <h4 >Forgot password?</h4>  */}
         
        <h4> New to BookBuddy?</h4> 
        <div className= "sign-up-link" ><Link to="/register"><h4>Sign up</h4></Link>
        </div>
-</div>
+
       </div>
     </div>
     </div>

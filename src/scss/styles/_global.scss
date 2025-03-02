@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+/* Ensure content starts below the navbar */
+
+
+
 body {
   font-family: "Inter", "Helvetica", "Arial", sans-serif;
   font-size: var(--body-font-size, 14px);
@@ -13,6 +17,8 @@ body {
   transition: background 0.5s, color 0.5s;
   line-height: 1.6;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .app-container {
