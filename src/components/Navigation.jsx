@@ -21,48 +21,49 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
   };
 
   return (
-<nav className="navbar">
-  <div className="nav-container">
-    <Link to="/books" className="nav-logo">BookBuddy</Link>
+    <nav className="navbar">
+      <div className="nav-container">
 
-    {location.pathname === "/books" ? (
-      <div className="nav-center">
-        <div className="search-wrapper">
-          <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
-            <Search size={24} color="white" />
-            <span className="search-label">Search</span> 
+        <Link to="/books" className="nav-logo">BookBuddy</Link>
+
+        
+
+     
+        {location.pathname !== "/books" && (
+          <div className="nav-center">
+            <Link to="/books" className="book-nav-button"><h2>Books</h2></Link>
           </div>
-          {showSearch && <SearchBar onSearch={onSearch} className="nav-search" />}
+        )}
+
+  
+        <div className="nav-right">
+          {location.pathname === "/books" && (
+            <div className="search-wrapper">
+              <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
+                <Search size={24} color="white" />
+                <span className="search-label"></span> 
+              </div>
+              {showSearch && <SearchBar onSearch={onSearch} className="nav-search" />}
+            </div>
+          )}
+
+          {isAuthenticated ? (
+            <>
+              <button onClick={handleLogout} className="nav-button">Logout</button>
+          
+              <Link to="/account">
+                <img src={profilePic} alt="Profile" className="profile-pic" />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-button">Login</Link>
+              <Link to="/register" className="nav-button">Register</Link>
+            </>
+          )}
         </div>
       </div>
-    ) : (
-      <div className="nav-links">
-        <div className="nav-books">
-        <Link to="/books" className="book-nav-button">📚 Books</Link>
-        </div>
-      </div>
-    )}
-
-<div className="nav-right">
-  {isAuthenticated ? (
-    <>
-      <button onClick={handleLogout} className="nav-button">Logout</button>
-      <Link to="/account" className="nav-button">Account</Link>
-      <Link to="/account">
-        <img src={profilePic} alt="Profile" className="profile-pic" />
-      </Link>
-    </>
-  ) : (
-    <>
-      <Link to="/login" className="nav-button">Login</Link>
-      <Link to="/register" className="nav-button">Register</Link>
-    </>
-  )}
-</div>
-
-  </div>
-</nav>
-
+    </nav>
   );
 }
 

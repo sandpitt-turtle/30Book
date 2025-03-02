@@ -4,36 +4,79 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100vw;
-  background-color: #0c111b;
-  padding: 32px 24px;
+  padding: 40px 20px;
+  color: var(--text);
 }
 
 
 .account-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; 
-  background: rgba(255, 255, 255, 0.08); 
-  border-radius: 16px;
-  padding: 48px;
-  width: 480px;
-  max-width: 90%;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  animation: fade_in 0.3s ease-out, slide_up 0.5s ease-out;
-  text-align: center; 
+  max-width: 400px;
+  width: 100%;
+  padding: 32px;
+  border-radius: 12px;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  overflow-x: hidden;
 }
 
 
+.account-title h2,
 .account-container h2 {
-  font-size: 1.9rem;
-  font-family: "Inspire-Regular", Helvetica, sans-serif;
-  color: hsl(0, 0%, 97.6%);
+  font-size: 1.5rem;
   font-weight: bold;
+  color: var(--text);
+  text-align: center;
   margin-bottom: 24px;
 }
+
+
+.account-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header {
+  background: rgba(56, 56, 63, 0.475);
+  color: #aaa;
+  padding: 12px 15px;
+  width: 100%;
+  text-align: left;
+  border-radius: 8px 8px 0 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+.user-info p {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.user-label {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.user-value {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
 
 .account-container ul {
   list-style: none;
@@ -53,52 +96,79 @@
   justify-content: space-between;
 }
 
+.info-cont {
+  padding-left: 20px;
+}
 
-.account-container button {
+
+.checked-books-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 14px;
+  padding: 10px 20px;
+}
+
+.check-title {
   font-size: 1rem;
-  font-weight: bold;
-  font-family: "Inspire-Regular", Helvetica, sans-serif;
-  border-radius: 8px;
-  background: #0072d2;
-  color: hsl(0, 0%, 97.6%);
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s;
-  margin-top: 12px;
+  font-weight: normal;
+  margin: 0;
+  color: white;
 }
 
-.account-container button:hover {
-  background: #005bb5;
-  transform: scale(1.02);
+.view-books-btn {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1f80e0;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #1f80e0;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
 }
 
-.account-container button:active {
-  transform: scale(0.98);
-}
-
-
-.account-container .nav-button {
-  background: #d32f2f;
-}
-
-.account-container .nav-button:hover {
-  background: #b71c1c;
+.view-books-btn:hover {
+  background: #1f80e0;
+  color: white;
 }
 
 
-@keyframes fade_in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.account-link,
+.logout-link,
+.account-link-buddy {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1f80e0;
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding: 12px 15px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-@keyframes slide_up {
-  from { transform: translateY(60px); }
-  to { transform: translateY(0); }
+.account-link-buddy {
+  text-align: center;
+  padding: 15px 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.account-link:hover,
+.logout-link:hover {
+  text-decoration: underline;
 }
 
 
-
-
-
+.account-manage-title {
+  font-size: 22px;
+  font-weight: normal;
+  color: white;
+  background: linear-gradient(70deg, #a4fffc, #003B5C);
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
+}

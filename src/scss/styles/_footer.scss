@@ -21,3 +21,18 @@ footer p {
 .theme-toggle {
   margin-left: 10px;
 }
+
+.account-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.account-footer a {
+  color: #1f80e0;
+  text-decoration: none;
+}
+
+.account-footer a:hover {
+  text-decoration: underline;
+}

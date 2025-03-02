@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import fetchBookImage from "../utils/fetchBookImage"; 
+import fetchBookImage from "../utils/fetchBookImage";
 
 export default function SingleBook() {
   const [book, setBook] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [userHasBook, setUserHasBook] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [bookImage, setBookImage] = useState(""); 
+  const [bookImage, setBookImage] = useState("");
+  const [books, setBooks] = useState([]);
+  const [bookImages, setBookImages] = useState({});
   let { bookId } = useParams();
   const navigate = useNavigate();
 
@@ -16,97 +17,57 @@ export default function SingleBook() {
 
     const getBook = async () => {
       try {
-        const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}`);
+        const response = await fetch(
+          `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}`
+        );
         if (!response.ok) throw new Error("Failed to fetch book details");
         const bookDetails = await response.json();
-        
         setBook(bookDetails.book);
-
 
         const image = await fetchBookImage(bookDetails.book.title);
         setBookImage(image);
-
-        if (token) {
-          const userBooksResponse = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/account/books`, {
-            headers: {
-              "Authorization": `Bearer ${token}`,
-            }
-          });
-
-          if (userBooksResponse.ok) {
-            const userBooks = await userBooksResponse.json();
-            if (userBooks.books && userBooks.books.length > 0) {
-              setUserHasBook(userBooks.books.some((userBook) => userBook.id === bookId));
-            } else {
-              setUserHasBook(false);
-            }
-          }
-        }
       } catch (error) {
         console.error(error);
       }
     };
-  
+
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch(
+          "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books"
+        );
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
+
+        const { books } = await response.json();
+        const filteredBooks = books.filter((b) => b.id !== bookId);
+        setBooks(filteredBooks);
+
+        const images = await Promise.all(
+          filteredBooks.map(async (b) => {
+            const image = await fetchBookImage(b.title);
+            return { id: b.id, image };
+          })
+        );
+
+        const imageMap = images.reduce((acc, { id, image }) => {
+          acc[id] = image;
+          return acc;
+        }, {});
+
+        setBookImages(imageMap);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
     if (bookId) {
       getBook();
+      fetchBooks();
     }
   }, [bookId, token]);
 
-  const handleCheckoutClick = async (bookId) => {
-    if (!token) {
-      alert("You must be logged in to checkout a book.");
-      navigate("/login");
-      return;
-    }
-
-    setIsProcessing(true);
-
-    try {
-      const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/checkout/${bookId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error("Failed to checkout book");
-
-      setBook((prevBook) => ({ ...prevBook, isAvailable: false }));
-      setIsProcessing(false);
-    } catch (error) {
-      console.error("Checkout failed:", error);
-      setIsProcessing(false);
-    }
-  };
-
-  const handleReturnClick = async (bookId) => {
-    if (!token) {
-      alert("You must be logged in to return a book.");
-      navigate("/login");
-      return;
-    }
-
-    setIsProcessing(true);
-
-    try {
-      const response = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/return/${bookId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) throw new Error("Failed to return book");
-
-      setBook((prevBook) => ({ ...prevBook, isAvailable: true }));
-      setUserHasBook(false);
-      setIsProcessing(false);
-    } catch (error) {
-      console.error("Return failed:", error);
-      setIsProcessing(false);
-    }
+  const handleDetailsClick = (bookId) => {
+    navigate(`/books/${bookId}`);
   };
 
   if (!book) {
@@ -114,19 +75,16 @@ export default function SingleBook() {
   }
 
   return (
-    <div className="book-details-container">
-      <button className="back-button" onClick={() => navigate(`/books`)}>Back to Books</button>
-      <h2 className="book-title">{book.title}</h2>
-      <p className="book-author"><strong>Author:</strong> {book.author}</p>
-      <p className="book-description"><strong>Description:</strong> {book.description}</p>
-      <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
-        <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
-      </p>
-
-        <div className="single-cover">
-      {bookImage && <img src={bookImage} alt={book.title} className="single-book-cover" />}
-</div>
-<div className= "exchange-items">  
+    <div className="single-book-page">
+      <div className="featured-book" style={{ backgroundImage: `url(${bookImage})` }}>
+        <div className="book-overlay">
+          <h1 className="book-title">{book.title}</h1>
+          <p className="book-author">{book.author}</p>
+          <p className="book-description">{book.description}</p>
+          <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
+            {book.isAvailable ? "Available" : "Checked Out"}
+          </p>
+          <div className= "exchange-items">  
       {token && (
 
         <button
@@ -167,7 +125,24 @@ export default function SingleBook() {
       )}
     </div>
 
+
+          {/* Related books section inside the featured book container */}
+          <div className="related-books">
+            <div className="books-grid">
+              {books.map((b) => (
+                <div key={b.id} className="book-card" onClick={() => handleDetailsClick(b.id)}>
+                  <img src={bookImages[b.id] || "./src/assets/cover.jpeg"} alt={b.title} className="book-cover" />
+                  <h3 className="book-title">{b.title}</h3>
+                  <p className="book-author">{b.author}</p>
+                  <p className={`book-status ${b.isAvailable ? "available" : "checked-out"}`}>
+                    {b.isAvailable ? "Available" : "Checked Out"}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
   );
 }

@@ -67,7 +67,7 @@ function Books({ isAuthenticated, searchTerm }) {
 
    <div className="all-page">
     <div className="books-container">
-      <h2>Books</h2>
+      <h2></h2>
 
       <div className="books-grid">
         {filteredBooks.length ? (
@@ -93,14 +93,18 @@ function Books({ isAuthenticated, searchTerm }) {
         </div>
       )}
               </button>
+              <div className="all-book-title">
               <h3>{book.title}</h3>
-              <p className="book-author"><strong>Author:</strong> {book.author}</p>
-              <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
-        <strong>Status:</strong> {book.isAvailable ? 'Available' : 'Checked out'}
-      </p>
+              </div>
+              <p className="all-book-author"><strong>Author:</strong> {book.author}</p>
               <button onClick={() => handleDetailsClick(book.id)} className="details-button">
                 See details
               </button>
+              
+              <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
+        <strong></strong> {book.isAvailable ? 'Available' : 'Checked out'}
+      </p>
+           
             </div>
           ))
         ) : (
