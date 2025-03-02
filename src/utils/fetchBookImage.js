@@ -1,27 +1,44 @@
-const fetchBookImage = async (title) => {
+const fetchBookImage = async (title, isbn = null) => {
   try {
     const apiKey = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
     if (!apiKey) {
       throw new Error("Google Books API key is missing");
     }
 
-    // Check local storage cache first
+    // Check local storage cache
     const cachedImage = localStorage.getItem(`book-image-${title}`);
     if (cachedImage) return cachedImage;
 
-    // Fetch from Google Books API
-    const googleResponse = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title)}&key=${apiKey}`
-    );
-    const googleData = await googleResponse.json();
-
     let imageUrl = null;
 
-    if (googleData.items && googleData.items.length > 0) {
-      imageUrl = googleData.items[0].volumeInfo.imageLinks?.thumbnail || null;
+    /** ────── 1️⃣ Amazon API (Best Quality) ────── **/
+    if (isbn) {
+      imageUrl = `https://images-na.ssl-images-amazon.com/images/P/${isbn}.jpg`;
     }
 
-    // If no image from Google Books, try Open Library
+    /** ────── 2️⃣ Barnes & Noble (Alternative to Amazon) ────── **/
+    if (!imageUrl && isbn) {
+      imageUrl = `https://prodimage.images-bn.com/pimages/${isbn}.jpg`;
+    }
+
+    /** ────── 3️⃣ Google Books API (Fallback) ────── **/
+    if (!imageUrl) {
+      const googleResponse = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}&maxResults=1&key=${apiKey}`
+      );
+      const googleData = await googleResponse.json();
+
+      if (googleData.items && googleData.items.length > 0) {
+        const bookInfo = googleData.items[0].volumeInfo;
+        if (bookInfo.imageLinks) {
+          imageUrl = bookInfo.imageLinks.large || 
+                     bookInfo.imageLinks.medium || 
+                     bookInfo.imageLinks.thumbnail;
+        }
+      }
+    }
+
+    /** ────── 4️⃣ Open Library API (Backup Option) ────── **/
     if (!imageUrl) {
       const openLibraryResponse = await fetch(
         `https://openlibrary.org/search.json?title=${encodeURIComponent(title)}`
@@ -31,17 +48,22 @@ const fetchBookImage = async (title) => {
       if (openLibraryData.docs && openLibraryData.docs.length > 0) {
         const coverId = openLibraryData.docs[0].cover_i;
         if (coverId) {
-          imageUrl = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
+          imageUrl = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
         }
       }
     }
 
-    // Fallback image if none found
+    /** ────── 5️⃣ Goodreads (Web Scraping as Last Resort) ────── **/
+    if (!imageUrl) {
+      imageUrl = await fetchGoodreadsImage(title);
+    }
+
+    /** ────── 6️⃣ Fallback Image ────── **/
     if (!imageUrl) {
       imageUrl = "/default-cover.jpg";
     }
 
-    // Preload image before returning
+    // Preload image to prevent flickering
     await new Promise((resolve, reject) => {
       const img = new Image();
       img.src = imageUrl;
@@ -55,7 +77,7 @@ const fetchBookImage = async (title) => {
     return imageUrl;
   } catch (error) {
     console.error("Error fetching book image:", error);
-    return "/default-cover.jpg"; // Fallback cover image in case of error
+    return "/default-cover.jpg"; // Final fallback
   }
 };
 

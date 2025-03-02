@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CheckedOutBooks from "./CheckedOutBooks";
+import { Link } from "react-router-dom";
 
-export default function Account({ user, setUser }) {
+export default function Account({ user, setUser, setToken }) {
   const [checkedOutBooks, setCheckedOutBooks] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-   
     if (user === null) {
       navigate("/login");
     }
@@ -22,6 +22,7 @@ export default function Account({ user, setUser }) {
         const token = localStorage.getItem("token");
         if (!token) {
           setUser(null);
+          setToken(""); 
           navigate("/login");
           return;
         }
@@ -46,38 +47,87 @@ export default function Account({ user, setUser }) {
     };
 
     fetchCheckedOutBooks();
-  }, [user?.id, navigate, setUser]);
+  }, [user?.id, navigate, setUser, setToken]);
 
   const handleLogout = () => {
-
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    setUser(null);  
-  
-   
-    navigate("/books", { replace: true }); 
+    setUser(null);
+    setToken("");
+    navigate("/books");
   };
-  
 
   return (
-    <div className="account-container">
-      <h2>Account Details</h2>
-      <ul>
-        <li><b>Username:</b> {user?.username || "N/A"}</li>
-        <li><b>Email:</b> {user?.email || "N/A"}</li>
-      </ul>
+    <div className="account-page">
+      <div className="account-container">
 
-      <button onClick={() => setShowPopup(true)}>View Checked-Out Books</button>
 
-      {showPopup && (
-        <CheckedOutBooks
-          checkedOutBooks={checkedOutBooks}
-          onClose={() => setShowPopup(false)}
-        />
-      )}
 
-      <button onClick={handleLogout} className="nav-button">Logout</button>
-      <button onClick={() => navigate("/")}>Back</button>
+
+
+        <h1 className="account-manage-title">Manage Your Account</h1>
+
+
+<div className="account-section">
+  <div className="section-header">
+    <h3>myBookBuddy</h3>
+  </div>
+  <div className="info-cont">
+    <p className="user-label">Email</p>
+    <p className="user-value">{user?.email || "N/A"}</p>
+    <p className="user-label">Password</p>
+    <p className="user-value">{"*".repeat(8)}</p> {/* Masked password */}
+  </div>
+  <Link to="#" className="account-link-buddy">Manage myBookBuddy</Link>
+</div>
+
+
+       
+<div className="account-section">
+  <div className="section-header">
+            <h3>Your Books</h3>
+            </div>
+
+  
+            <div className="checked-books-container">
+    <p className="check-title">Checked-Out Books</p>
+    <Link to="#" className="view-books-btn" onClick={() => setShowPopup(true)}>
+      View Books
+    </Link>
+  </div>
+          {showPopup && <CheckedOutBooks checkedOutBooks={checkedOutBooks} onClose={() => setShowPopup(false)} />}
+        </div>
+
+
+        {/* <div className="account-section">
+          <div className="section-header">
+            <h3>Your Plans</h3>
+          </div>
+          <h2 className="section-title">Your Subscription</h2>
+          <p className="subscription-plan">Basic Membership</p>
+          <Link to="#" className="account-link">Manage Subscription</Link>
+        </div>
+
+  
+        <div className="account-section">
+           <div className="section-header">
+             <h3>Access & Security</h3>
+          </div>
+          <h2 className="section-title">Security</h2
+          <Link to="#" className="account-link">Manage Devices</Link> 
+         */}
+         
+          <Link to="#" className="logout-link" onClick={handleLogout}>Logout</Link>
+    
+
+  
+        {/* <div className="account-footer">
+          <p><Link to="#">Need help? Visit our Help Center</Link></p>
+          <p><Link to="#">Want to delete your account? Learn More</Link></p>
+        </div> */}
+
+      </div>
     </div>
+
   );
 }

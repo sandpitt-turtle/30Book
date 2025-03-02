@@ -30,7 +30,7 @@
   }
   
   @media (max-width: 600px) {
-    .account-container, .register-container {
+    .register-container {
       width: 90%;
       padding: 30px;
     }
@@ -41,10 +41,17 @@
       width: 95vw;
     }
   }
-  
 
 
-@media (max-width: 1024px) {
+  @media (max-width: 768px) {
+    .account-container {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+
+
+@media (max-width: 768px) {
     .book-card:hover, 
     .book-cover:hover, 
     .details-button:hover, 
@@ -55,4 +62,6 @@
       background-color: inherit !important;
     }
   }
+  
+
   

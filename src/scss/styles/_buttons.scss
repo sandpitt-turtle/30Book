@@ -1,11 +1,10 @@
-
 button,
 .login-button,
 .back-button,
 .submit-button,
 .checkout-button,
 .return-button,
-.details-button {
+.logout-button {
   all: unset;
   display: inline-flex;
   align-items: center;
@@ -24,48 +23,27 @@ button,
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-
-
-.account-container button {
-  width: 100%;
-  padding: 14px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  background: #0072d2;
-  color: hsl(0, 0%, 97.6%);
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s;
-  margin-top: 12px;
-}
-
-
-
-
-
-button:hover, 
-.login-button:hover, 
-.back-button:hover, 
-.submit-button:hover, 
-.checkout-button:hover, 
-.return-button:hover, 
-.details-button:hover {
-  background-color: var(--button-hover, #1a5cb0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
+// button:hover,
+// .login-button:hover,
+// .back-button:hover,
+// .submit-button:hover,
+// .checkout-button:hover,
+// .return-button:hover {
+//   background-color: var(--button-hover, #1a5cb0);
+//   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+// }
 
 button:active {
   background-color: #174c91;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-button:disabled, 
-.login-button:disabled, 
-.back-button:disabled, 
-.submit-button:disabled, 
-.checkout-button:disabled, 
-.return-button:disabled, 
+button:disabled,
+.login-button:disabled,
+.back-button:disabled,
+.submit-button:disabled,
+.checkout-button:disabled,
+.return-button:disabled,
 .details-button:disabled {
   background-color: #6c757d;
   border: none;
@@ -74,15 +52,62 @@ button:disabled,
   box-shadow: none;
 }
 
+.manage-btn,
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  background: #1f80e0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  margin-top: 12px;
+}
+
+.manage-btn:hover {
+  background: #1565c0;
+  transform: scale(1.02);
+}
+
+.logout-btn {
+  background: #d32f2f;
+}
+
+.logout-btn:hover {
+  background: #b71c1c;
+}
 
 .cover-button {
   all: unset;
-  display: contents; 
+  display: contents;
   cursor: pointer;
 }
 
 .cover-button img {
-  display: block; 
+  display: block;
   width: 70%;
   height: auto;
+}
+
+
+.details-button {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1f80e0;
+  
+  width: 100%;
+  text-align: right;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  box-shadow: none;
+ 
+}
+
+.details-button:hover {
+  text-decoration: underline;
 }

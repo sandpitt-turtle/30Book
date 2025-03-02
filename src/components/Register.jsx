@@ -76,7 +76,7 @@ export default function Register({ setToken, setUser }) {
 
         <div className="input-group">
 
-          {/* <label>Email:</label> */}
+       
 
           <input
             type="text"
@@ -98,7 +98,7 @@ export default function Register({ setToken, setUser }) {
         </div>
         
         
-        <button type="submit" className="submit-button">Register</button>
+        <button type="submit" className="reg-button">Register</button>
       </form>
       </div>
     </div>

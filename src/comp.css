@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  max-width: 100%;
 }
 
 body {
@@ -13,6 +14,8 @@ body {
   transition: background 0.5s, color 0.5s;
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 
 .app-container {
@@ -25,19 +28,6 @@ main {
   padding: 20px;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-  }
-  .books-grid {
-    grid-template-columns: 1fr;
-  }
-  .book-card {
-    width: 100%;
-    padding: 15px;
-  }
-}
 .loading-placeholder {
   display: flex;
   justify-content: center;
@@ -95,7 +85,8 @@ code, pre {
   width: 100%;
   top: 0;
   z-index: 100;
-  padding: 0 20px;
+  padding: 0 16px;
+  overflow-x: hidden;
 }
 
 .nav-container {
@@ -113,17 +104,13 @@ code, pre {
   text-decoration: none;
 }
 
-.book-nav-button {
+.nav-books {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  margin: auto;
 }
 
 .lognav-logo {
@@ -139,7 +126,7 @@ code, pre {
   background-size: 200% 200%;
 }
 
-.nav-logo {
+.nav-logo, .account-title h2, .book-nav-button h2 {
   font-size: 22px;
   font-weight: bold;
   color: white;
@@ -152,37 +139,13 @@ code, pre {
   background-size: 200% 200%;
 }
 
-.lognav-logo:hover, .nav-logo:hover {
+.lognav-logo:hover, .nav-logo:hover, .account-title h2, .book-nav-button h2 {
   animation: double_flash 1.2s ease-in-out forwards;
 }
 
-@keyframes double_flash {
-  0% {
-    color: transparent;
-    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5);
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-position: -120% 0;
-  }
-  40% {
-    background-position: 100% 0;
-  }
-  70% {
-    background-position: -80% 0;
-  }
-  90% {
-    background-position: 0% 0;
-  }
-  100% {
-    color: white;
-    background: none;
-  }
-}
-.nav-links {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  gap: 30px;
+.book-nav-button:hover h2 {
+  animation: double_flash 1.2s ease-in-out forwards;
+  transform: scale(1.05);
 }
 
 .nav-item {
@@ -236,6 +199,8 @@ code, pre {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .search-wrapper,
@@ -338,12 +303,12 @@ code, pre {
 }
 
 .book-status {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  padding: 8px 15px;
+  padding: 3px 8px;
   border-radius: 6px;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .available {
@@ -367,7 +332,7 @@ code, pre {
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
+  gap: 25px;
   justify-items: center;
   width: 100%;
   max-width: 1200px;
@@ -393,28 +358,39 @@ code, pre {
   margin: auto;
 }
 
-@media (max-width: 1024px) {
-  .book-card {
-    width: 85vw;
-  }
+.my-book {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+  margin-bottom: 1px;
+  letter-spacing: 1px;
+  padding: 1px;
+  width: 100%;
 }
-@media (max-width: 768px) {
-  .book-card {
-    width: 90vw;
-  }
+
+.my-book h3 {
+  font-size: 14px;
+  background: #aaa;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: left;
+  display: block;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-@media (max-width: 480px) {
-  .book-card {
-    width: 95vw;
-  }
-}
+
 button,
 .login-button,
 .back-button,
 .submit-button,
 .checkout-button,
 .return-button,
-.details-button {
+.details-button,
+.logout-button {
   all: unset;
   display: inline-flex;
   align-items: center;
@@ -433,18 +409,53 @@ button,
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.account-container button {
+.manage-btn, .logout-btn {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
-  background: #0072d2;
-  color: hsl(0, 0%, 97.6%);
+  background: #1f80e0;
+  color: white;
   border: none;
   cursor: pointer;
   transition: background 0.3s ease-in-out, transform 0.2s;
   margin-top: 12px;
+}
+
+.manage-btn:hover {
+  background: #1565c0;
+  transform: scale(1.02);
+}
+
+.manage-btn,
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  background: #1f80e0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  margin-top: 12px;
+}
+
+.logout-btn {
+  background: #d32f2f;
+}
+
+.logout-btn:hover {
+  background: #b71c1c;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
 }
 
 button:hover,
@@ -485,7 +496,7 @@ button:disabled,
 
 .cover-button img {
   display: block;
-  width: 100%;
+  width: 70%;
   height: auto;
 }
 
@@ -510,6 +521,21 @@ footer p {
 
 .theme-toggle {
   margin-left: 10px;
+}
+
+.account-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.account-footer a {
+  color: #1f80e0;
+  text-decoration: none;
+}
+
+.account-footer a:hover {
+  text-decoration: underline;
 }
 
 input:focus {
@@ -653,16 +679,6 @@ input::placeholder {
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .carousel-card {
-    flex-direction: column;
-    height: auto;
-  }
-  .book-cover {
-    width: 100%;
-    height: auto;
-  }
-}
 .carousel-indicators {
   display: flex;
   justify-content: center;
@@ -691,8 +707,6 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
   padding-top: 40px;
 }
 
@@ -702,11 +716,10 @@ input::placeholder {
   flex-direction: column;
   align-items: center;
   background-color: white;
-  border-radius: 24px;
-  padding: 56px 72px;
+  border-radius: 12px;
+  padding: 50px 72px;
   width: 580px;
   max-width: 90%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transform: translateY(50px);
   animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
 }
@@ -750,35 +763,9 @@ input::placeholder {
   margin-bottom: 20px;
 }
 
-@keyframes disney_fade_slide {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes disney_fade_inner {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 .inner-content {
   opacity: 0;
   animation: disney_fade_inner 0.5s ease-out 0.7s forwards;
-}
-@media (max-width: 600px) {
-  .inner-content .register-container {
-    width: 90%;
-    padding: 40px 24px;
-  }
 }
 .inner-content .account-container .signup-text {
   margin-top: 24px;
@@ -799,15 +786,6 @@ input::placeholder {
   font-size: 24px;
   margin-bottom: 10px;
 }
-.inner-content .my-book h3 {
-  color: black;
-  margin-bottom: 10px;
-  text-align: left;
-}
-.inner-content .my-book {
-  width: 100%;
-  text-align: left;
-}
 .inner-content .login-title {
   font-size: 12px;
   margin-bottom: 10px;
@@ -815,13 +793,16 @@ input::placeholder {
 .inner-content .login-instr h4 {
   color: black;
   font-weight: lighter;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 .inner-content .signup-link {
   color: black;
   font-weight: lighter;
-  margin-bottom: 20px;
+  margin-bottom: px;
+}
+.inner-content .login-form {
+  margin-bottom: 1px;
+  margin-top: 10px;
 }
 
 .account-page {
@@ -829,39 +810,116 @@ input::placeholder {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100vw;
-  background-color: #0c111b;
-  padding: 32px 24px;
+  padding: 40px 20px;
+  color: var(--text);
 }
 
 .account-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 48px;
-  width: 480px;
-  max-width: 90%;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  animation: fade_in 0.3s ease-out, slide_up 0.5s ease-out;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  overflow-x: hidden;
+}
+
+.account-title h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);
   text-align: center;
 }
 
+.account-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; /* Ensures content is stacked */
+  align-items: center; /* Centers title and content horizontally */
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  width: 100%; /* Full width underline */
+  padding-bottom: 5px;
+  padding-top: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.account-info {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.user-info p {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
 .account-container h2 {
-  font-size: 1.9rem;
+  font-size: 1rem;
   font-family: "Inspire-Regular", Helvetica, sans-serif;
   color: hsl(0, 0%, 97.6%);
   font-weight: bold;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .account-container ul {
   list-style: none;
   padding: 0;
   width: 100%;
+}
+
+.user-value {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.account-link {
+  color: #1f80e0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 15px 15px;
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.account-link:hover {
+  text-decoration: underline;
+}
+
+.logout-link {
+  color: #e74c3c;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
+}
+
+.subscription-plan {
+  font-size: 1rem;
+  color: #d4d4d4;
+  margin-bottom: 10px;
+}
+
+.user-label {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-weight: 500;
+  margin-top: 10px;
 }
 
 .account-container li {
@@ -876,38 +934,129 @@ input::placeholder {
   justify-content: space-between;
 }
 
-.account-container button {
-  width: 100%;
-  padding: 14px;
-  font-size: 1rem;
+.section-header {
+  background: rgba(56, 56, 63, 0.475); /* Moderate gray */
+  color: #aaa;
+  padding: 12px 15px;
+  width: 100%; /* Make it span full width */
+  text-align: left; /* Align title text to the left */
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+  font-size: 1.2rem;
   font-weight: bold;
-  font-family: "Inspire-Regular", Helvetica, sans-serif;
-  border-radius: 8px;
-  background: #0072d2;
-  color: hsl(0, 0%, 97.6%);
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s;
-  margin-top: 12px;
+  display: flex;
+  justify-content: space-between; /* Distributes header elements */
+  align-items: center;
 }
 
-.account-container button:hover {
-  background: #005bb5;
-  transform: scale(1.02);
+.section-header h3 {
+  margin: 0;
+  font-size: 14px;
 }
 
-.account-container button:active {
-  transform: scale(0.98);
+.right-links {
+  margin-left: auto; /* Push links to the right */
+  text-align: right;
 }
 
-.account-container .nav-button {
-  background: #d32f2f;
+.account-link,
+.logout-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1f80e0;
+  display: block; /* Ensures full width */
+  width: 100%;
+  text-align: right;
+  padding: 12px 15px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box; /* Prevents padding from affecting width */
 }
 
-.account-container .nav-button:hover {
-  background: #b71c1c;
+.account-manage-title {
+  font-size: 22px;
+  font-weight: normal;
+  color: white;
+  background: linear-gradient(70deg, #a4fffc, #003B5C);
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
 }
 
+.account-link-buddy {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1f80e0;
+  display: block; /* Ensures full width */
+  width: 100%;
+  text-align: center;
+  padding: 15px 15px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box; /* Prevents padding from affecting width */
+}
+
+@media (max-width: 1024px) {
+  .book-card {
+    width: 85vw;
+  }
+}
+@media (max-width: 768px) {
+  .book-card {
+    width: 90vw;
+  }
+  .carousel-card {
+    flex-direction: column;
+    height: auto;
+  }
+  .book-cover {
+    width: 100%;
+    height: auto;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+  .book-card {
+    width: 100%;
+    padding: 15px;
+  }
+}
+@media (max-width: 600px) {
+  .register-container {
+    width: 90%;
+    padding: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .book-card {
+    width: 95vw;
+  }
+}
+@media (max-width: 768px) {
+  .account-container {
+    width: 90%;
+    padding: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .book-card:hover,
+  .book-cover:hover,
+  .details-button:hover,
+  .checkout-button:hover,
+  .return-button:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+  }
+}
 @keyframes fade_in {
   from {
     opacity: 0;
@@ -924,10 +1073,46 @@ input::placeholder {
     transform: translateY(0);
   }
 }
-@media (max-width: 600px) {
-  .account-container {
-    width: 90%;
-    padding: 30px;
+@keyframes disney_fade_slide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes disney_fade_inner {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes double_flash {
+  0% {
+    color: transparent;
+    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-position: -120% 0;
+  }
+  40% {
+    background-position: 100% 0;
+  }
+  70% {
+    background-position: -80% 0;
+  }
+  90% {
+    background-position: 0% 0;
+  }
+  100% {
+    color: white;
+    background: none;
   }
 }
 

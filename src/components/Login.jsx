@@ -6,12 +6,12 @@ export default function Login({ setToken, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isMounted, setIsMounted] = useState(false); // 🔵 Track component mount state
+  const [isMounted, setIsMounted] = useState(false); 
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsMounted(true); // 🔵 Set to true after component mounts
+    setIsMounted(true); 
   }, []);
 
   const handleSubmit = async (event) => {
@@ -56,7 +56,7 @@ export default function Login({ setToken, setUser }) {
     }
   };
 
-  if (!isMounted) return null; // 🔵 Prevent rendering before mount (Fixes flickering)
+  if (!isMounted) return null;
 
   return (
     
@@ -79,7 +79,7 @@ export default function Login({ setToken, setUser }) {
         </div>
 
         <div className= "login-instr">
-          <h4>Log in to BookBuddy with your email. If you don't have an account, you can click below to create one. </h4>
+          <h4>Log in to BookBuddy with your email. If you don't have an account, click the link below to create one. </h4>
           </div>
 
         <form className="login-form" onSubmit={handleSubmit}>
@@ -100,10 +100,10 @@ export default function Login({ setToken, setUser }) {
             />
           </div>
 
-          <button type="submit" className="login-button">Sign in</button>
+          <button type="submit" className="sign-button">Sign in</button>
         </form>
-        <div className= "login-instr">
-        <h4 >Forgot password?</h4>
+          <div className= "login-instr"> 
+        {/* <h4 >Forgot password?</h4>  */}
         
        <h4> New to BookBuddy?</h4> 
        <div className= "sign-up-link" ><Link to="/register"><h4>Sign up</h4></Link>

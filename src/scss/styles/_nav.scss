@@ -8,7 +8,8 @@
   width: 100%;
   top: 0;
   z-index: 100;
-  padding: 0 20px;
+  padding: 0 16px;
+  overflow-x: hidden;
 }
 
 .nav-container {
@@ -21,88 +22,59 @@
 
 .nav-logo,
 .nav-item,
-.nav-button, .lognav-logo {
+.nav-button,
+.lognav-logo {
   color: white;
   text-decoration: none;
 }
 
-.book-nav-button {
+.nav-books {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  margin: auto;
 }
-
-
 
 .lognav-logo {
-font-size: 36px;
-font-weight: bold; 
-color: white; 
-background: none;
-background-clip: text; 
--webkit-background-clip: text; 
-display: inline-block;
-padding: 5px;
-transition: transform 0.3s ease-in-out; 
-background-size: 200% 200%; 
-}
-
-
-
-
-.nav-logo {
-  font-size: 22px;
-  font-weight: bold; 
-  color: white; 
-  background: linear-gradient(70deg, #a4fffc, #003B5C); 
-  background-clip: text; 
-  -webkit-background-clip: text; 
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  background: none;
+  background-clip: text;
+  -webkit-background-clip: text;
   display: inline-block;
   padding: 5px;
-  transition: transform 0.3s ease-in-out; 
-  background-size: 200% 200%; 
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
 }
 
-.lognav-logo:hover, .nav-logo:hover {
+.nav-logo,
+.account-title h2,
+.book-nav-button h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(70deg, #a4fffc, #003b5c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
+}
+
+.lognav-logo:hover,
+.nav-logo:hover,
+.account-title h2,
+.book-nav-button h2 {
   animation: double_flash 1.2s ease-in-out forwards;
 }
 
-@keyframes double_flash {
-  0% {
-    color: transparent;
-    background: linear-gradient(90deg, #ff3cac, #784ba0, #2b86c5); 
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-position: -120% 0;
-  }
-  40% {
-    background-position: 100% 0; 
-  }
-  70% {
-    background-position: -80% 0; 
-  }
-  90% {
-    background-position: 0% 0; 
-  }
-  100% {
-    color: white; 
-    background: none;
-  }
-}
-
-
-.nav-links {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  gap: 30px;
+.book-nav-button:hover h2 {
+  animation: double_flash 1.2s ease-in-out forwards;
+  transform: scale(1.05);
 }
 
 .nav-item {
@@ -156,6 +128,8 @@ background-size: 200% 200%;
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .search-wrapper,
@@ -186,4 +160,3 @@ background-size: 200% 200%;
 .nav-search:focus {
   background: rgba(255, 255, 255, 0.3);
 }
-
