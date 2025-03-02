@@ -2,7 +2,6 @@ button,
 .login-button,
 .back-button,
 .submit-button,
-.checkout-button,
 .return-button,
 .logout-button {
   all: unset;
@@ -23,15 +22,6 @@ button,
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-// button:hover,
-// .login-button:hover,
-// .back-button:hover,
-// .submit-button:hover,
-// .checkout-button:hover,
-// .return-button:hover {
-//   background-color: var(--button-hover, #1a5cb0);
-//   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-// }
 
 button:active {
   background-color: #174c91;
@@ -110,4 +100,23 @@ button:disabled,
 
 .details-button:hover {
   text-decoration: underline;
+}
+
+.checkout-button, .return-button {
+  color: white;
+  text-decoration: none;
+  padding-top: 2px;
+}
+
+.checkout-button h1, .return-button h1 {
+  font-size: 16px;
+  font-weight: normal;
+  color: white;
+  background: linear-gradient(70deg, #a4fffc, #003b5c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  padding: 1px;
+  transition: transform 0.3s ease-in-out;
+  background-size: 200% 200%;
 }

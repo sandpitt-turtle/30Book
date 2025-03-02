@@ -23,7 +23,7 @@ export default function SingleBook() {
         if (!response.ok) throw new Error("Failed to fetch book details");
         const bookDetails = await response.json();
         setBook(bookDetails.book);
-        
+        setUserHasBook(bookDetails.book.checkedOutByUser || false);
 
         const image = await fetchBookImage(bookDetails.book.title);
         setBookImage(image);
@@ -42,7 +42,7 @@ export default function SingleBook() {
         const { books } = await response.json();
         const currentBookId = Number(bookId);
         const filteredBooks = books.filter((b) => b.id !== currentBookId);
-        
+
         setBooks(filteredBooks);
 
         const images = await Promise.all(
@@ -69,6 +69,66 @@ export default function SingleBook() {
     }
   }, [bookId, token]);
 
+
+  const handleCheckoutClick = async (bookId) => {
+    if (!book.isAvailable) {
+      alert("This book is already checked out.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/checkout`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Checkout failed");
+
+      setBook((prevBook) => ({ ...prevBook, isAvailable: false }));
+      setUserHasBook(true);
+      alert("You have successfully checked out the book!");
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Failed to check out the book.");
+    }
+  };
+
+ 
+  const handleReturnClick = async (bookId) => {
+    if (!userHasBook) {
+      alert("You don't have this book to return.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/return`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Return failed");
+
+      setBook((prevBook) => ({ ...prevBook, isAvailable: true }));
+      setUserHasBook(false);
+      alert("You have successfully returned the book!");
+    } catch (error) {
+      console.error("Return error:", error);
+      alert("Failed to return the book.");
+    }
+  };
+
   const handleDetailsClick = (bookId) => {
     navigate(`/books/${bookId}`);
   };
@@ -79,11 +139,8 @@ export default function SingleBook() {
 
   return (
     <div className="single-book-page">
- 
-      <div
-        className="featured-book"
-        style={{ backgroundImage: `url(${bookImage})` }}
-      >
+   
+      <div className="featured-book" style={{ backgroundImage: `url(${bookImage})` }}>
         <div className="book-overlay">
           <div className="book-info">
             <h1 className="book-title">{book.title}</h1>
@@ -93,42 +150,25 @@ export default function SingleBook() {
               {book.isAvailable ? "Available" : "Checked Out"}
             </p>
 
-      
-            <div className="exchange-items">
-              {token && (
-                <button
-                  onClick={() => {
-                    if (book.isAvailable) {
-                      handleCheckoutClick(book.id);
-                    } else {
-                      alert("This book is already checked out.");
-                    }
-                  }}
-                  className="checkout-button"
-                >
-                     <h1>Checkout</h1>
+         
+            {token && (
+              <div className="exchange-items">
+                <button onClick={() => handleCheckoutClick(book.id)} className="checkout-button">
+                  Checkout
                 </button>
-              )}
 
-              {token && (
-                <button
-                  onClick={() => {
-                    if (userHasBook) {
-                      handleReturnClick(book.id);
-                    } else {
-                      alert("You don't have this book to return.");
-                    }
-                  }}
-                  className="return-button"
-                >
-                 <h1>Return</h1>
+                <button onClick={() => handleReturnClick(book.id)} className="return-button">
+                  Return
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        <div className="related-books">
+  
+      <div className="related-books">
+        <h2>Related Books</h2>
         <div className="books-grid">
           {books.map((b) => (
             <div key={b.id} className="book-card" onClick={() => handleDetailsClick(b.id)}>
@@ -143,11 +183,5 @@ export default function SingleBook() {
         </div>
       </div>
     </div>
-
-      </div>
-
-    );
-     
+  );
 }
-
-
