@@ -1,191 +1,334 @@
+/* 📌 MAIN PAGE CONTAINER */
+.single-book-page {
+  width: 100%;
 
+  min-height: 100vh;
+  background-color: #0c111b; /* Your desired blue */
+  color: white;
+  display: flex;
+  flex-direction: column;
 
-  .single-book-page {
-    width: 100%;
-    min-height: 100vh; 
-    background-color: #0c111b;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding-top: 64px;
+  position: relative;
+  z-index: 0;
+}
+
+/* 📌 FEATURED BOOK CONTAINER */
+.featured-book {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.featured-book-bg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centers the image */
+  width: 100vw; /* Full width by default */
+  /* Prevents it from getting too large on wide screens */
+  // min-width: 300px; /* Prevents it from being too small on small screens */
+  height: 100vh;
+  background-size: cover;
+  background-position: top-center;
+  background-repeat: no-repeat;
+  z-index: -1;
+
+  /* Smooth fade effect */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+@keyframes fade_scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
   }
-
-  
-  .featured-book {
-    width: 100vw;
-    height: 90vh; 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  
-  
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
-  
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -20px; 
-      left: 0;
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.2) 0%,  
-        rgba(0, 0, 0, 0.1) 50%, 
-        rgba(0, 0, 0, 0) 100%   
-      );
-      pointer-events: none;
-      z-index: 2;
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
-  
+}
 
+@keyframes button_bounce {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-  .featured-cover {
-    position: relative; 
-    background: 
-        linear-gradient(to bottom, 
-            rgba(255,255,255,0) 0%, 
-            rgba(255,255,255,0) 30%,  /* Keep it transparent until 30% */
-            rgba(255,255,255,1) 100% /* Fully opaque at 100% */
-        ),
-        url("path/to/book-cover.jpg") no-repeat center center;
-    background-size: cover;
+.checkout-button,
+.return-button {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: button_bounce 0.6s ease-out 0.8s forwards;
 }
 
 
 
-  .featured-book {
-    animation: fadeIn 0.8s ease-in-out;
+
+.related-books {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fade_slide 0.7s ease-out 1s forwards;
+}
+
+
+.book-card {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fade_scale 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes fade_slide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(1.05); }
-    to { opacity: 1; transform: scale(1); }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.book-overlay {
+  bottom: 20%; /* Adjust this if needed */
+  left: 5%; /* Aligns the text to the left */
+  width: 45%; /* Prevents it from stretching across the whole screen */
+  color: white;
+  text-align: left;
+  margin-left: 30px;
+  padding-top: 30px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fade_slide 0.7s ease-out 0.4s forwards; /* Slightly delayed */
 
   .book-overlay {
-    position: absolute;
-    bottom: 18%; 
-    width: 100%;
-    padding-left: 40px;
-    text-align: left;
-    color: white;
-    z-index: 3; 
-    padding-bottom: 80px;
-  }
+    .book-title {
+      font-size: flex; /* Scales based on screen width */
+      font-weight: bold;
+      margin-bottom: 10px;
 
+      line-height: 1.2;
+    }
 
-  .book-cover {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    image-rendering: crisp-edges;
-  }
-  
-  
-  .featured-book img {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover; 
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
+    .book-author {
+      font-size: flex;
+      font-weight: 300;
+      margin-bottom: 15px;
+      opacity: 0.8;
+    }
 
-  .related-books {
-    .books-grid {
-        display: flex;
-        overflow-x: auto;
-        gap: 15px;
-        white-space: nowrap;
-        scroll-snap-type: x mandatory;
-        position: relative;
-        z-index: 5; 
-      
-        
-        &::-webkit-scrollbar {
-          height: 6px;
-        }
-      
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 4px;
-        }
-      
-        &::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-        }
-      }
-      
-
-       .book-card {
-         flex: 0 0 auto;
-          width: 180px;
-          scroll-snap-align: start;
-          text-align: center;
-          position: relative;
-           z-index: 6; 
-          }
-  
-    @media (max-width: 768px) {
-      .book-overlay {
-        padding: 20px;
-      }
-    
-      .books-grid {
-        gap: 10px;
-        padding: 10px;
-      }
+    .book-description {
+      line-height: 1.6;
+      max-width: 600px;
+      font-size: 8px;
     }
   }
+}
 
+// .book-overlay-gradient {
+//   position: absolute;
+//   width: 100%;
+//   height: 100vh;
+//   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 20%, transparent 50%, #0c111b 90%);
+//   z-index: 1;
+// }
 
+/* 📌 BOOK COVER STYLES */
+.book-cover {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
-.book-card .book-cover {
+.book-card {
+  flex: 0 0 auto;
+  width: 180px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
 
-    background-size: contain;    
-    background-position: center; 
-    background-repeat: no-repeat;
-  
+.book-card:hover {
+  transform: scale(1.05);
+}
+
+.book-card img.book-cover {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+// .book-card-overlay {
+//   position: absolute;
+//   bottom: 0;
+//   width: 100%;
+//   background: rgb(0 0 0 / 60%);
+//   padding: 5px;
+//   color: white;
+// }
+
+/* 📌 BUTTON CONTAINER */
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.checkout-button,
+.return-button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: light;
+  border-radius: 4px;
+  background-color: #3f356f;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-button:disabled,
+.return-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.checkout-button:hover:not(:disabled),
+.return-button:hover:not(:disabled) {
+  background-color: #594a9d;
+}
+
+/* 📌 RELATED BOOKS SECTION */
+.related-books {
+  // margin-top: 100vh;
+  padding: 8px;
+  background: linear-gradient(to bottom, transparent 10%, #0c111b 100%);
+  z-index: 5;
+  margin-left: 30px;
+}
+
+/* 📌 SCROLLBAR STYLING */
+.books-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.books-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.books-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 📌 MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  /* Keep the overlay within the normal layout */
+  .book-overlay {
+    position: relative; /* Keeps it above the grid instead of overlaying */
+    width: 80%;
+    // margin: 0 auto; /* Centers it horizontally */
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
   }
-  
-  
-  
-      .related-books {
-        width: 100%; 
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-      
-  
-      .book-card img.book-cover {
-     
-        width: 100%;
-        height: auto;       
-     
-      
-       
-        object-fit: contain;   
-        object-position: center; 
-      }
 
+  /* Center the text */
+  .book-title,
+  .book-author,
+  .book-description {
+    text-align: left;
+  }
 
-      .exhange-items {
-        z-index: 5;
-      }
+  .book-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .book-author {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+
+  .book-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  /* Stack buttons and make them full-width */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+  .checkout-button,
+  .return-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust the fade effect */
+  .featured-book-bg {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 55%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 55%);
+  }
+
+  .featured-book-bg {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover !important; /* Ensures full coverage */
+    background-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust background image to shrink properly */
+  .featured-book-bg {
+    height: 60vh; /* Reduce height so it shrinks on smaller screens */
+    background-size: contain; /* Ensures the full image is visible */
+    background-position: top center;
+
+    .single-line {
+      width: 100%; /* Ensures it stretches across */
+      height: 1px; /* Thin separator */
+      background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
+      margin-top: 8rem; /* Spacing above */
+    }
+  }
+}
+
+.single-line {
+  width: 100vw; /* Ensures it stretches across */
+  height: 1px; /* Thin separator */
+  background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
+  margin-top: 4rem; /* Spacing above */
+}

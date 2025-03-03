@@ -1,116 +1,106 @@
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
-  width: 100%;
-}
-
-.carousel {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 15px 0;
-  white-space: nowrap;
-  scrollbar-width: none; 
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-item {
-  flex: 0 0 auto;
-  width: 600px; 
-  transition: transform 0.3s ease-in-out;
-}
-
-.carousel-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #141414;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  text-align: left;
-  color: #fff;
-  transition: transform 0.3s ease-in-out;
-  height: 300px;
-}
-
-
-
-
-.carousel-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
-}
-
-.book-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-left: 20px;
-  flex: 1;
-}
-
-.book-cover {
-  width: 50%;
-  height: 100%;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.no-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #333;
-  color: #aaa;
-  width: 50%;
-  height: 100%;
-  border-radius: 8px;
-  font-size: 14px;
-  text-align: center;
-}
-
-
-
-
-
-
-.carousel-indicators {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px;
-  gap: 10px; 
-}
-
-.carousel-indicator {
-  width: 12px;
-  height: 12px; 
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  flex-shrink: 0; 
-  min-width: 12px; 
-  min-height: 12px;
-}
-
-.carousel-indicator.active {
-  background-color: #1f80e0;
-}
-
-
-// h2 {
-//   font-size: 24px;
-//   margin-bottom: 20px;
-//   color: #fff;
+// .carousel-container {
+//   position: relative;
+//   overflow: hidden;
+//   padding: 20px;
+//   width: 100%;
 // }
 
+// .carousel {
+//   display: flex;
+//   gap: 20px;
+//   overflow-x: auto;
+//   scroll-behavior: smooth;
+//   padding: 15px 0;
+//   white-space: nowrap;
+//   scrollbar-width: none;
+// }
+
+// .carousel::-webkit-scrollbar {
+//   display: none;
+// }
+
+// .carousel-item {
+//   flex: 0 0 auto;
+//   width: 600px;
+//   transition: transform 0.3s ease-in-out;
+// }
+
+// .carousel-card {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 20px;
+//   background-color: #141414;
+//   border-radius: 12px;
+//   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+//   width: 100%;
+//   text-align: left;
+//   color: #fff;
+//   transition: transform 0.3s ease-in-out;
+//   height: 300px;
+// }
+
+// .carousel-card:hover {
+//   transform: translateY(-5px);
+//   box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+// }
+
+// .book-details {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: flex-start;
+//   padding-left: 20px;
+//   flex: 1;
+// }
+
+// .book-cover {
+//   width: 50%;
+//   height: 100%;
+//   border-radius: 8px;
+//   object-fit: cover;
+// }
+
+// .no-cover {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: #333;
+//   color: #aaa;
+//   width: 50%;
+//   height: 100%;
+//   border-radius: 8px;
+//   font-size: 14px;
+//   text-align: center;
+// }
+
+// .carousel-indicators {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 12px;
+//   gap: 10px;
+// }
+
+// .carousel-indicator {
+//   width: 12px;
+//   height: 12px;
+//   background-color: rgba(255, 255, 255, 0.5);
+//   border-radius: 50%;
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+//   flex-shrink: 0;
+//   min-width: 12px;
+//   min-height: 12px;
+// }
+
+// .carousel-indicator.active {
+//   background-color: #1f80e0;
+// }
+
+// // h2 {
+// //   font-size: 24px;
+// //   margin-bottom: 20px;
+// //   color: #fff;
+// // }

@@ -5,16 +5,16 @@
 }
 
 /* Ensure content starts below the navbar */
-
-
-
+/////////
 body {
   font-family: "Inter", "Helvetica", "Arial", sans-serif;
   font-size: var(--body-font-size, 14px);
   background: radial-gradient(circle at top, #192133 10%, #0c111b 80%);
   background-attachment: fixed;
   color: var(--text);
-  transition: background 0.5s, color 0.5s;
+  transition:
+    background 0.5s,
+    color 0.5s;
   line-height: 1.6;
   overflow-x: hidden;
   margin: 0;
@@ -52,6 +52,7 @@ main {
   height: 50px;
 }
 
-code, pre {
+code,
+pre {
   font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
 }

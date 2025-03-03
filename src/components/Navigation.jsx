@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect, useRef } from "react";
-import ThemeContext from "./ThemeContext";
+
 import profilePic from "../assets/default-profile.png";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react"; 
-import SearchBar from "./SearchBar";
+
 
 function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
-  const { isDarkMode } = useContext(ThemeContext);
+
   const navigate = useNavigate();
   const location = useLocation(); 
   const [showSearch, setShowSearch] = useState(false);
@@ -68,14 +68,19 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
 
           {location.pathname !== "/books" && (
             <div className="nav-center">
-              <Link to="/books" className="book-nav-button">Books</Link>
+              <Link to="/books" className={`book-nav-button ${location.pathname === "/books" ? "active" : ""}`}>
+                Books
+              </Link>
             </div>
           )}
 
           <div className="nav-right">
             {isAuthenticated ? (
               <>
-                <button onClick={handleLogout} className="nav-button">Logout</button>
+             <Link to="/books" className="nav-button" onClick={handleLogout}>
+  Logout
+</Link>
+
                 <Link to="/account">
                   <img src={profilePic} alt="Profile" className="profile-pic" />
                 </Link>

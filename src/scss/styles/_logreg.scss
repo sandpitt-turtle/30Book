@@ -1,107 +1,105 @@
-
-
-  .login-page, .register-page {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
+.login-page,
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   //   justify-content: center;
   //   height: 100vh;
-    padding-top: 40px; 
-  }
-  
-  .login-container, .register-container {
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    border-radius: 12px;
-    padding: 50px 72px;
-    width: 580px;
-    max-width: 90%;
-    // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  
-    transform: translateY(50px);
-    animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
-  }
-  
-  
-  .login-container input, .register-container input {
-    width: 100%;
-    padding: 14px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background: #f8f8f8;
-    color: #333;
-    margin-bottom: 16px;
-    outline: none;
-  }
+  padding-top: 40px;
+}
 
-  .login-container input::placeholder, .register-container input::placeholder {
-    color: #888;
-  }
+.login-container,
+.register-container {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  padding: 50px 72px;
+  width: 580px;
+  max-width: 90%;
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
+  transform: translateY(50px);
+  animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
+}
 
-  // .login-container button, .register-container button {
-  //   width: 90%;
-  //   padding: 14px;
-  //   font-size: 1rem;
-  //   font-weight: bold;
-  //   border-radius: 30px;
-  //   background: black;
-  //   color: white;
-  //   border: none;
-  //   cursor: pointer;
-  //   transition: background 0.3s ease-in-out;
-  //   margin-top: 8px;
-  // }
+.login-container input,
+.register-container input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  color: #333;
+  margin-bottom: 16px;
+  outline: none;
+}
 
- 
-  
-  .sign-button, .reg-button {
-    width: 90%;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: normal;
-    border-radius: 30px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    margin-bottom: 15px;
-    margin-top: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    position: relative;
-    overflow: hidden;
-  }
-  
+.login-container input::placeholder,
+.register-container input::placeholder {
+  color: #888;
+}
 
-  .sign-button::before, .reg-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 300%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
-    opacity: 0; /* Hidden until hover */
-    transition: none;
-  }
-    
-  .sign-button:hover::before, .reg-button:hover::before {
-    animation: shiny-wipe 2s forwards;
-    opacity: 1;
-  
-  }
+// .login-container button, .register-container button {
+//   width: 90%;
+//   padding: 14px;
+//   font-size: 1rem;
+//   font-weight: bold;
+//   border-radius: 30px;
+//   background: black;
+//   color: white;
+//   border: none;
+//   cursor: pointer;
+//   transition: background 0.3s ease-in-out;
+//   margin-top: 8px;
+// }
 
+.sign-button,
+.reg-button {
+  width: 90%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: normal;
+  border-radius: 30px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  margin-bottom: 15px;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
 
-  .sign-button:hover, .reg-button:hover {
-    transform: scale(1.02);
-    
-  } 
-  
+.sign-button::before,
+.reg-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
+  opacity: 0; /* Hidden until hover */
+  transition: none;
+}
+
+.sign-button:hover::before,
+.reg-button:hover::before {
+  animation: shiny-wipe 2s forwards;
+  opacity: 1;
+}
+
+.sign-button:hover,
+.reg-button:hover {
+  transform: scale(1.02);
+}
+
 // button:hover,
 // .login-button:hover,
 // .back-button:hover,
@@ -112,91 +110,63 @@
 //   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 // }
 
-
-
-
-
-.login-logo, .register-logo {
+.login-logo,
+.register-logo {
   width: 160px;
   margin-bottom: 32px;
 }
 
-
 .logo-wrapper {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
-
-
 
 .inner-content {
   opacity: 0;
-  animation: disney_fade_inner 0.5s ease-out 0.7s forwards; 
+  animation: disney_fade_inner 0.5s ease-out 0.7s forwards;
 
+  .account-container .signup-text {
+    margin-top: 24px;
+    font-size: 0.9rem;
+    color: #666;
+  }
 
+  .account-container .signup-text a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-.account-container .signup-text {
-  margin-top: 24px;
-  font-size: 0.9rem;
-  color: #666;
-}
+  .account-container .signup-text a:hover {
+    text-decoration: underline;
+  }
 
-.account-container .signup-text a {
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
+  .logreg-title h2 {
+    color: black;
+    font-weight: light;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
 
-.account-container .signup-text a:hover {
-  text-decoration: underline;
-}
-  
+  .login-title {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
 
+  .login-instr h4 {
+    color: black;
+    font-weight: lighter;
+    margin-top: 1px;
+    margin-bottom: 10px;
+  }
 
-.logreg-title h2 {
-  color: black;
-  font-weight: light;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+  .signup-link {
+    color: black;
+    font-weight: lighter;
+    margin-bottom: px;
+  }
 
-
-
-
-.login-title {
-  font-size: 12px;
-  margin-bottom: 10px
-
-}
-
-
-
-
-.login-instr h4  {
-  color: black;
-  font-weight: lighter;
-  margin-top: 1px;
-  margin-bottom: 10px;
-
-
-}
-
-
-.signup-link{
-
-  color: black;
-  font-weight: lighter;
-  margin-bottom: px;
-
-}
-
-
-.login-form {
-  margin-bottom: 1px;
-  margin-top: 10px;
-
-}
-
-
-
-
+  .login-form {
+    margin-bottom: 1px;
+    margin-top: 10px;
+  }
 }

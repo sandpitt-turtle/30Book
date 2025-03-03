@@ -1,11 +1,8 @@
-
-
 input:focus {
   outline: none;
   border-color: var(--button-background);
   // box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
 }
-
 
 input::placeholder {
   color: rgba(106, 78, 174, 0.6);
@@ -15,12 +12,10 @@ input::placeholder {
   color: rgba(220, 220, 220, 0.7);
 }
 
-
- .input-group {
+.input-group {
   margin-bottom: 15px;
   text-align: left;
 }
-
 
 .input-group label {
   font-size: 14px;
@@ -28,8 +23,8 @@ input::placeholder {
   margin-bottom: 5px;
 }
 
-
-.input-field, input {
+.input-field,
+input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -37,9 +32,8 @@ input::placeholder {
   font-size: 14px;
 }
 
-
 .log-input-group {
-    input:focus {
-      box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
-    }
+  input:focus {
+    box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
+  }
 }
