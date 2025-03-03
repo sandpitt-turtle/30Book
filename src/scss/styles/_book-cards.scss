@@ -1,183 +1,261 @@
 .book-card {
   width: 260px;
+
   max-width: 100%;
+
   padding: var(--pad, 16px);
+
   border-radius: 15px;
+
   text-align: center;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
   overflow: hidden;
+
   backdrop-filter: blur(8px);
 }
 
-
 .book-details-container {
   max-width: 300px;
+
   margin: 80px auto;
+
   padding: 20px;
+
   background: var(--card-background);
+
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 4px 10px rgb(0 0 0 / 15%);
+
   text-align: center;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
 }
 
 .book-cover {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
-  margin-bottom: 10px;
 
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  transition:
+    filter 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  margin-bottom: 10px;
 }
 
 .book-cover:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-  
+
+  box-shadow: 0 12px 35px rgb(0 0 0 / 40%);
 }
 
 .book-cover-placeholder {
   width: 100px;
+
   height: 150px;
+
   display: block;
+
   margin: auto;
 }
 
 .book-title {
   font-size: 2rem;
+
   font-weight: bold;
 }
 
-
-.book-author, .book-description, .book-status {
+.book-author,
+.book-description,
+.book-status {
   font-size: 1.2rem;
+
   margin-bottom: 10px;
 }
 
-
 .related-books {
-
   .book-author {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgb(255 255 255 / 20%);
+
     color: white;
+
     padding-top: 5px;
-   padding-bottom: 3px;
+
+    padding-bottom: 3px;
+
     font-size: 10px;
   }
 
   .book-title {
-  color:white;
-  
-  font-size: 13px;
-}
+    color: white;
 
+    font-size: 13px;
+  }
 
-.all-book-title {
-  color:white;
-  
-  font-size: 13px;
-}
-}
+  .all-book-title {
+    color: white;
 
+    font-size: 13px;
+  }
+}
 
 .all-book-author {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgb(255 255 255 / 20%);
+
   color: white;
+
   padding-top: 5px;
- padding-bottom: 3px;
+
+  padding-bottom: 3px;
+
   font-size: 12px;
 }
 
 .book-author {
   font-size: 1rem;
+
   font-weight: 500;
+
   color: var(--text);
+
   margin-bottom: 10px;
 }
 
 .book-description {
   font-size: 1rem;
+
   color: var(--text);
+
   line-height: 1.5;
+
   text-align: justify;
+
   max-width: 600px;
+
   margin-bottom: 10px;
 }
 
 .book-status {
   font-size: 0.6rem;
-  font-weight: lighter;
-  padding: 3px 5px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 2px;
 
+  font-weight: lighter;
+
+  padding: 3px 5px;
+
+  border-radius: 4px;
+
+  display: inline-block;
+
+  margin-bottom: 2px;
 }
 
 .available {
   background-color: #d4edda;
+
   color: #155724;
+
   border: 1px solid #c3e6cb;
 }
 
 .checked-out {
- 
-  color: #ffffff;
+  color: #fff;
+
   border: 1px solid #f5c6cb;
 }
 
 .book-actions {
   display: flex;
+
   gap: 15px;
+
   margin-top: 20px;
 }
 
 .books-grid {
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  // gap: 25px;
+
+  // gap: 25px;gap
+
   justify-items: center;
+
   width: 100%;
+
   max-width: 1200px;
+
   margin: 20px auto;
+
   padding: 20px;
 }
 
 .books-container {
   padding-top: 60px;
+
   width: 100%;
+
   text-align: center;
 }
 
 .my-book {
   font-size: 1.5rem;
+
   font-weight: bold;
-  color: #ffffff;
+
+  color: #fff;
+
   text-align: left;
+
   letter-spacing: 1px;
+
   padding: 1px;
+
   width: 100%;
+
   margin-bottom: 1px;
 }
 
 .my-book h3 {
   font-size: 14px;
+
   background: #aaa;
+
   -webkit-background-clip: text;
+
   -webkit-text-fill-color: transparent;
+
   font-weight: bold;
+
   letter-spacing: 1px;
+
   text-align: left;
+
   display: block;
+
   width: 100%;
+
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
 }
 
 .login-page,
@@ -191,18 +269,4 @@
   margin-bottom: 10px;
 }
 
-
-
 ////// SINGLE BOOK SPECIFIC
-
-
-
-
-
-
-
-
-
-
-
-

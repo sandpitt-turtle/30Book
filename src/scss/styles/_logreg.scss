@@ -9,22 +9,23 @@
     padding-top: 40px; 
   }
   
-  .login-container, .register-container {
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    border-radius: 12px;
-    padding: 50px 72px;
-    width: 580px;
-    max-width: 90%;
-    // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+.login-container, .register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 50px 72px;
+  width: 100%; /* Ensure full width of the container */
+  max-width: 580px; /* Prevent the container from stretching too wide */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+  transform: translateY(50px);
+  animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
+}
   
-    transform: translateY(50px);
-    animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
-  }
-  
+
+
+
   
   .login-container input, .register-container input {
     width: 100%;
@@ -37,6 +38,8 @@
     margin-bottom: 16px;
     outline: none;
   }
+
+
 
   .login-container input::placeholder, .register-container input::placeholder {
     color: #888;
@@ -58,49 +61,51 @@
   // }
 
  
-  
-  .sign-button, .reg-button {
-    width: 90%;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: normal;
-    border-radius: 30px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    margin-bottom: 15px;
-    margin-top: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-    position: relative;
-    overflow: hidden;
-  }
-  
-
-  .sign-button::before, .reg-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 300%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
-    opacity: 0; /* Hidden until hover */
-    transition: none;
-  }
-    
-  .sign-button:hover::before, .reg-button:hover::before {
-    animation: shiny-wipe 2s forwards;
-    opacity: 1;
-  
-  }
+.sign-button, .reg-button {
+  width: 100%; /* Ensure buttons take full width */
+  padding: 14px;  /* Keep padding for aesthetics */
+  font-size: 1rem;
+  font-weight: normal;
+  border-radius: 30px;
+  // border: 1px solid #ddd; /* Border to match inputs */
+  background: black;
+  color: white;
+  margin: 0; /* Remove any margin that could create space */
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  box-sizing: border-box; /* Ensure padding and border are included in width calculation */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+}
 
 
-  .sign-button:hover, .reg-button:hover {
-    transform: scale(1.02);
-    
-  } 
+
+
+/* Button animation on hover */
+.sign-button::before, .reg-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
+  opacity: 0; /* Hidden until hover */
+  transition: none;
+}
+
+.sign-button:hover::before, .reg-button:hover::before {
+  animation: shiny-wipe 2s forwards;
+  opacity: 1
+
+}
+
+.sign-button:hover, .reg-button:hover {
+  transform: scale(1.02);
+}
   
 // button:hover,
 // .login-button:hover,

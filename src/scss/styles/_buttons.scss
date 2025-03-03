@@ -4,28 +4,47 @@ button,
 .submit-button,
 .return-button,
 .logout-button {
+
   all: unset;
+
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
+
   text-align: center;
+
   padding: 4px 6px;
+
   margin: 5px;
+
   font-size: 0.9rem;
+
   font-weight: 500;
+
   border-radius: 4px;
+
   background-color: var(--button-background);
+
   color: white;
+
   border: 1px solid transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  transition:
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
-
 button:active {
+
   background-color: #174c91;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
 }
 
 button:disabled,
@@ -35,88 +54,139 @@ button:disabled,
 .checkout-button:disabled,
 .return-button:disabled,
 .details-button:disabled {
+
   background-color: #6c757d;
+
   border: none;
+
   cursor: not-allowed;
-  opacity: 0.6;
+
+  opacity: 60%;
+
   box-shadow: none;
 }
 
 .manage-btn,
 .logout-btn {
+
   width: 100%;
+
   padding: 12px;
+
   font-size: 1rem;
+
   font-weight: bold;
+
   border-radius: 8px;
+
   background: #1f80e0;
+
   color: white;
+
   border: none;
+
   cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s;
+
+  transition:
+    background 0.3s ease-in-out,
+    transform 0.2s;
+
   margin-top: 12px;
 }
 
 .manage-btn:hover {
+
   background: #1565c0;
+
   transform: scale(1.02);
 }
 
 .logout-btn {
+
   background: #d32f2f;
 }
 
 .logout-btn:hover {
+
   background: #b71c1c;
 }
 
 .cover-button {
+
   all: unset;
+
   display: contents;
+
   cursor: pointer;
 }
 
 .cover-button img {
+
   display: block;
+
   width: 70%;
+
   height: auto;
 }
 
-
 .details-button {
+
   font-size: 0.75rem;
+
   font-weight: 500;
+
   text-decoration: none;
+
   color: #1f80e0;
-  
+
   width: 100%;
+
   text-align: right;
+
   margin: 0;
+
   box-sizing: border-box;
+
   background-color: transparent;
+
   box-shadow: none;
- 
 }
 
 .details-button:hover {
+
   text-decoration: underline;
 }
 
-.checkout-button, .return-button {
+.checkout-button,
+.return-button {
+
   color: white;
+
   text-decoration: none;
+
   padding-top: 2px;
 }
 
-.checkout-button h1, .return-button h1 {
+.checkout-button h1,
+.return-button h1 {
+
   font-size: 16px;
+
   font-weight: normal;
+
   color: white;
-  background: linear-gradient(70deg, hwb(178 64% 0%), #003b5c);
+
+  background: linear-gradient(70deg, hwb(178deg 64% 0%), #003b5c);
+
   background-clip: text;
+
   -webkit-background-clip: text;
+
   display: inline-block;
+
   padding: 1px;
+
   transition: transform 0.3s ease-in-out;
+
   background-size: 200% 200%;
 }

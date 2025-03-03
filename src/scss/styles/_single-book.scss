@@ -1,191 +1,459 @@
+/* 📌 MAIN PAGE CONTAINER */
 
+.single-book-page {
 
-  .single-book-page {
-    width: 100%;
-    min-height: 100vh; 
-    background-color: #0c111b;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  width: 100%;
 
-  
-  .featured-book {
-    width: 100vw;
-    height: 90vh; 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  
-  
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
-  
+  min-height: 100vh;
 
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -20px; 
-      left: 0;
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.2) 0%,  
-        rgba(0, 0, 0, 0.1) 50%, 
-        rgba(0, 0, 0, 0) 100%   
-      );
-      pointer-events: none;
-      z-index: 2;
-    }
-  }
-  
+  background-color: #0c111b;
 
+  color: white;
 
-  .featured-cover {
-    position: relative; 
-    background: 
-        linear-gradient(to bottom, 
-            rgba(255,255,255,0) 0%, 
-            rgba(255,255,255,0) 30%,  /* Keep it transparent until 30% */
-            rgba(255,255,255,1) 100% /* Fully opaque at 100% */
-        ),
-        url("path/to/book-cover.jpg") no-repeat center center;
-    background-size: cover;
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding-top: 64px;
 }
 
+/* 📌 FEATURED BOOK CONTAINER */
 
+.featured-book {
 
-  .featured-book {
-    animation: fadeIn 0.8s ease-in-out;
+  position: relative;
+
+  width: 100vw;
+
+  height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  overflow: hidden;
+}
+
+.featured-book-bg {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100vh;
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  z-index: -1;
+
+  opacity: 90%;
+}
+
+.book-overlay {
+
+  position: absolute;
+
+  bottom: 20%;
+
+  left: 10%;
+
+  color: white;
+
+  max-width: 50%;
+
+  z-index: 2;
+}
+
+.book-overlay-gradient {
+
+  position: absolute;
+
+  width: 100%;
+
+  height: 100vh;
+
+  background: linear-gradient(to bottom, rgb(0 0 0 / 70%) 20%, transparent 50%, #0c111b 90%);
+
+  z-index: 0;
+}
+
+.book-overlay-content {
+
+  max-width: 50%;
+
+  padding-left: 40px;
+
+  padding-bottom: 80px;
+}
+
+/* ✅ FIX: KEEP BOOK COVER FULLY VISIBLE */
+
+.book-cover {
+
+  width: 100%;
+
+  max-width: 100%;
+
+  height: auto;
+
+  image-rendering: crisp-edges;
+}
+
+/* ✅ ANIMATION FOR FADE-IN EFFECT */
+
+.featured-book {
+
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity: 0%;
+
+    transform: scale(1.05);
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(1.05); }
-    to { opacity: 1; transform: scale(1); }
+
+  to {
+
+    opacity: 100%;
+
+    transform: scale(1);
   }
+}
 
-  .book-overlay {
-    position: absolute;
-    bottom: 18%; 
-    width: 100%;
-    padding-left: 40px;
-    text-align: left;
-    color: white;
-    z-index: 3; 
-    padding-bottom: 80px;
-  }
+/* ✅ FIX: RELATED BOOKS SECTION */
 
+.related-books {
 
-  .book-cover {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    image-rendering: crisp-edges;
-  }
-  
-  
-  .featured-book img {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover; 
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
+  margin-top: 100vh; /* Moves related books below the featured book */
 
-  .related-books {
-    .books-grid {
-        display: flex;
-        overflow-x: auto;
-        gap: 15px;
-        white-space: nowrap;
-        scroll-snap-type: x mandatory;
-        position: relative;
-        z-index: 5; 
-      
-        
-        &::-webkit-scrollbar {
-          height: 6px;
-        }
-      
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 4px;
-        }
-      
-        &::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-        }
-      }
-      
+  padding: 40px 20px;
 
-       .book-card {
-         flex: 0 0 auto;
-          width: 180px;
-          scroll-snap-align: start;
-          text-align: center;
-          position: relative;
-           z-index: 6; 
-          }
-  
-    @media (max-width: 768px) {
-      .book-overlay {
-        padding: 20px;
-      }
-    
-      .books-grid {
-        gap: 10px;
-        padding: 10px;
-      }
-    }
-  }
+  background: linear-gradient(to bottom, transparent 10%, #0c111b 100%);
 
+  z-index: 5;
+}
 
+.books-grid {
+
+  display: flex;
+
+  overflow-x: auto;
+
+  gap: 15px;
+
+  padding: 10px;
+}
+
+/* 📌 SCROLLBAR STYLING */
+
+.books-grid::-webkit-scrollbar {
+
+  height: 6px;
+}
+
+.books-grid::-webkit-scrollbar-thumb {
+
+  background: rgb(255 255 255 / 30%);
+
+  border-radius: 4px;
+}
+
+.books-grid::-webkit-scrollbar-track {
+
+  background: rgb(255 255 255 / 10%);
+}
+
+/* ✅ FIX: BOOK CARDS */
+
+.book-card {
+
+  flex: 0 0 auto;
+
+  width: 180px;
+
+  text-align: center;
+
+  position: relative;
+}
+
+/* 📌 BOOK COVER IMAGES */
 
 .book-card .book-cover {
 
-    background-size: contain;    
-    background-position: center; 
-    background-repeat: no-repeat;
-  
+  background-size: contain;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+}
+
+.book-card img.book-cover {
+
+  width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+
+  object-position: center;
+}
+
+.book-card-overlay {
+
+  position: absolute;
+
+  bottom: 0;
+
+  width: 100%;
+
+  background: rgb(0 0 0 / 60%);
+
+  padding: 5px;
+
+  color: white;
+}
+
+/* 📌 CHECKOUT & RETURN BUTTON CONTAINER */
+
+.exchange-items {
+
+  z-index: 5;
+}
+
+/* ✅ MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+
+  .book-overlay {
+
+    padding: 20px;
   }
-  
-  
-  
-      .related-books {
-        width: 100%; 
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-      
-  
-      .book-card img.book-cover {
-     
-        width: 100%;
-        height: auto;       
-     
-      
-       
-        object-fit: contain;   
-        object-position: center; 
-      }
 
+  .books-grid {
 
-      .exhange-items {
-        z-index: 5;
-      }
+    gap: 10px;
+
+    padding: 10px;
+  }
+}
+
+.button-container {
+
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+/* Hero Section */
+
+.hero-section {
+
+  position: relative;
+
+  height: 500px;
+
+  background-size: cover;
+
+  background-position: center;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.hero-overlay {
+
+  background: rgb(0 0 0 / 70%);
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.hero-content {
+
+  text-align: center;
+
+  max-width: 600px;
+}
+
+.hero-title {
+
+  font-size: 2.5rem;
+
+  font-weight: bold;
+}
+
+.hero-author {
+
+  font-size: 1.2rem;
+
+  margin: 10px 0;
+}
+
+.hero-description {
+
+  font-size: 1rem;
+
+  margin-bottom: 20px;
+}
+
+.hero-status {
+
+  font-size: 1rem;
+
+  padding: 5px 10px;
+
+  border-radius: 5px;
+
+  display: inline-block;
+}
+
+.available {
+
+  color: #2ecc71;
+}
+
+.checked-out {
+
+  color: #e74c3c;
+}
+
+.hero-buttons {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.hero-btn {
+
+  padding: 10px 20px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition: background 0.3s;
+}
+
+.checkout-btn {
+
+  background: #3498db;
+
+  color: white;
+}
+
+.checkout-btn:hover {
+
+  background: #2980b9;
+}
+
+.return-btn {
+
+  background: #e74c3c;
+
+  color: white;
+}
+
+.return-btn:hover {
+
+  background: #c0392b;
+}
+
+.books-grid {
+
+  display: flex;
+
+  gap: 20px;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+}
+
+.book-card {
+
+  width: 180px;
+
+  cursor: pointer;
+
+  transition: transform 0.3s ease-in-out;
+
+  position: relative;
+}
+
+.book-card:hover {
+
+  transform: scale(1.05);
+}
+
+.book-cover {
+
+  width: 100%;
+
+  height: 260px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+.book-card-overlay {
+
+  position: absolute;
+
+  bottom: 0;
+
+  background: rgb(0 0 0 / 70%);
+
+  width: 100%;
+
+  padding: 10px;
+
+  text-align: center;
+}
+
+.book-title {
+
+  font-size: 1rem;
+
+  font-weight: bold;
+}
+
+.book-author {
+
+  font-size: 0.9rem;
+}

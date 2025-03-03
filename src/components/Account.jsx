@@ -8,7 +8,7 @@ export default function Account({ user, setUser, setToken }) {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
-  console.log("📌 Account component rendered. User:", user);
+ 
 
   useEffect(() => {
     if (!user?.id) {
@@ -98,15 +98,16 @@ export default function Account({ user, setUser, setToken }) {
           <div className="checked-books-container">
             <p className="check-title">Checked-Out Books</p>
             <Link
-              to="#"
-              className="view-books-btn"
-              onClick={() => {
-                console.log("📖 View Books button clicked. ShowPopup:", !showPopup);
-                setShowPopup(true);
-              }}
-            >
-              View Books
-            </Link>
+  to="#"
+  className="view-books-btn"
+  onClick={() => {
+    console.log("📖 View Books button clicked. ShowPopup:", !showPopup);
+    setShowPopup(true); // This should toggle the state properly
+  }}
+>
+  View Books
+</Link>
+
           </div>
           {showPopup && (
             <>
@@ -128,3 +129,14 @@ export default function Account({ user, setUser, setToken }) {
     </div>
   );
 }
+
+import PropTypes from "prop-types";
+
+Account.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
+};

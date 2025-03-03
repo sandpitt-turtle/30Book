@@ -1,84 +1,253 @@
+/* ✅ Fix: Responsive Styles (Tablet & Mobile) */
 @media (max-width: 1024px) {
-    .book-card {
-      width: 85vw;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .book-card {
-      width: 90vw;
-    }
-    .carousel-card {
-      flex-direction: column;
-      height: auto;
-    }
-    .book-cover {
-      width: 100%;
-      height: auto;
-    }
-    .navbar {
-      flex-direction: column;
-      align-items: center;
-    }
-    .books-grid {
-      grid-template-columns: 1fr;
-    }
-    .book-card {
-      width: 100%;
-      padding: 15px;
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .register-container {
-      width: 90%;
-      padding: 30px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .book-card {
-      width: 95vw;
-    }
-  }
 
+  .book-card {
 
-  @media (max-width: 768px) {
-    .account-container {
-      width: 90%;
-      padding: 20px;
-    }
-  }
-
-
-@media (max-width: 768px) {
-    .book-card:hover, 
-    .book-cover:hover, 
-    .details-button:hover, 
-    .checkout-button:hover, 
-    .return-button:hover {
-      transform: none !important;
-      box-shadow: none !important;
-      background-color: inherit !important;
-    }
-  }
-  
-
-  @media (max-width: 768px) {
-  .book-title {
-    font-size: 1.5rem;
-  }
-  .book-author, .book-description, .book-status {
-    font-size: 1rem;
-  }
-  .book-overlay {
-    padding: 20px;
+    width: 85vw;
   }
 }
 
-
+/* ✅ Fix: Tablet (768px) */
 @media (max-width: 768px) {
-  .book-overlay {
+
+  .book-card {
+
+    width: 90vw;
+
+    padding: 15px;
+  }
+
+  .carousel-card {
+
+    flex-direction: column;
+
+    height: auto;
+  }
+
+  .book-cover {
+
+    width: 100%;
+
+    height: auto;
+  }
+
+  .navbar {
+
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .account-container {
+
+    width: 90%;
+
     padding: 20px;
+  }
+
+  /* Ensure proper hover behavior */
+
+  .book-card:hover,
+  .book-cover:hover,
+  .details-button:hover,
+  .return-button:hover {
+
+    transform: none !important;
+
+    box-shadow: none !important;
+
+    background-color: inherit !important;
+  }
+
+  /* Improve text scaling */
+
+  .book-title {
+
+    font-size: 1.5rem;
+  }
+
+  .book-author,
+  .book-description,
+  .book-status {
+
+    font-size: 1rem;
+  }
+
+  .book-overlay {
+
+    padding: 20px;
+  }
+
+  /* ✅ Fix: Mobile Login & Register */
+
+  .login-container,
+  .register-container {
+
+    width: 90%;
+
+    max-width: 400px;
+
+    padding: 40px;
+
+    transform: translateY(30px);
+  }
+
+  .sign-button,
+  .reg-button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    font-size: 1rem;
+
+    border-radius: 25px;
+  }
+
+  .login-logo,
+  .register-logo {
+
+    width: 140px;
+
+    margin-bottom: 24px;
+  }
+
+  .input-group label {
+
+    font-size: 14px;
+  }
+
+  .input-field,
+  input {
+
+    font-size: 16px;
+
+    padding: 12px;
+  }
+
+  .login-container input,
+  .register-container input {
+
+    font-size: 1rem;
+
+    padding: 12px;
+  }
+
+  .inner-content {
+
+    padding: 10px;
+  }
+}
+
+/* ✅ Fix: Small Screens (600px) */
+@media (max-width: 600px) {
+
+  .register-container {
+
+    width: 90%;
+
+    padding: 30px;
+  }
+
+  .login-container,
+  .register-container {
+
+    width: 95%;
+
+    padding: 30px;
+  }
+
+  .sign-button,
+  .reg-button {
+
+    padding: 12px;
+
+    font-size: 0.9rem;
+  }
+
+  .login-logo,
+  .register-logo {
+
+    width: 120px;
+
+    margin-bottom: 20px;
+  }
+
+  .input-group label {
+
+    font-size: 13px;
+  }
+
+  .input-field,
+  input {
+
+    font-size: 14px;
+
+    padding: 10px;
+  }
+
+  .login-container input,
+  .register-container input {
+
+    font-size: 0.9rem;
+
+    padding: 10px;
+  }
+
+  .inner-content {
+
+    padding: 8px;
+  }
+}
+
+/* ✅ Fix: Ultra-Small Screens (iPhone SE, 480px) */
+@media (max-width: 480px) {
+
+  .book-card {
+
+    width: 95vw;
+  }
+
+  .login-container,
+  .register-container {
+
+    width: 98%;
+
+    padding: 25px;
+  }
+
+  .sign-button,
+  .reg-button {
+
+    padding: 10px;
+
+    font-size: 0.85rem;
+  }
+
+  .login-logo,
+  .register-logo {
+
+    width: 100px;
+  }
+
+  .input-group label {
+
+    font-size: 12px;
+  }
+
+  .input-field,
+  input {
+
+    font-size: 14px;
+
+    padding: 8px;
+  }
+
+  .login-container input,
+  .register-container input {
+
+    font-size: 0.85rem;
+
+    padding: 8px;
   }
 }

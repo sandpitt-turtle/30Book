@@ -1,12 +1,12 @@
 :root {
   --background: linear-gradient(to bottom, #e0e4ec, #c0c9d7);
-  --text: #2e2e2e;
-  --card-background: #ffffff;
+  --text: white;
+  --card-background: #fff;
   --card-border: #a8a8a8;
   --button-background: #3f356f;
   --button-hover: #594a9d;
   --input-background: #f4f4f4;
-  --overlay-background: rgba(0, 0, 0, 0.4);
+  --overlay-background: rgb(0 0 0 / 40%);
 }
 
 .dark-theme {
@@ -17,5 +17,5 @@
   --button-background: #444;
   --button-hover: #666;
   --input-background: #262626;
-  --overlay-background: rgba(0, 0, 0, 0.8);
+  --overlay-background: rgb(0 0 0 / 80%);
 }

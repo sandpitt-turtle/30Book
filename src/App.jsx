@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"; 
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider } from "./components/ThemeContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"; 
 import Books from "./components/AllBooks";
@@ -8,8 +7,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import SingleBook from "./components/SingleBook"; 
 import Account from "./components/Account"; 
-import './scss/App.scss'; 
+import './scsS/App.scss'; 
 // import './index.css';
+import { ThemeProvider } from "./components/ThemeContext"; // Adjust path if needed
 
 
 function App() {

@@ -1,45 +1,56 @@
-
-
 input:focus {
+
   outline: none;
+
   border-color: var(--button-background);
-  // box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
+
+  // box-shadow: 0 0 4px rgb(160 95 255 / 50%);box-shadow
 }
 
-
 input::placeholder {
-  color: rgba(106, 78, 174, 0.6);
+
+  color: rgb(106 78 174 / 60%);
 }
 
 .dark-theme input::placeholder {
-  color: rgba(220, 220, 220, 0.7);
+
+  color: rgb(220 220 220 / 70%);
 }
 
+.input-group {
 
- .input-group {
   margin-bottom: 15px;
+
   text-align: left;
 }
 
-
 .input-group label {
+
   font-size: 14px;
+
   display: block;
+
   margin-bottom: 5px;
 }
 
+.input-field,
+input {
 
-.input-field, input {
   width: 100%;
+
   padding: 10px;
+
   border: 1px solid #ccc;
+
   border-radius: 5px;
+
   font-size: 14px;
 }
 
-
 .log-input-group {
-    input:focus {
-      box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
-    }
+
+  input:focus {
+
+    box-shadow: 0 0 4px rgb(160 95 255 / 50%);
+  }
 }

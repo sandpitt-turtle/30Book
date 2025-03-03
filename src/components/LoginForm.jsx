@@ -86,3 +86,8 @@ export default function LoginForm({ isVisible, setIsVisible }) {
     </div>
   );
 }
+
+LoginForm.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
+};

@@ -1,16 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
-const ThemeContext = createContext();
+// ✅ Declare ThemeContext FIRST
+export const ThemeContext = createContext();
 
+// ✅ Then define the ThemeProvider
 export function ThemeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    document.body.classList.add("dark-theme", isDarkMode);
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -23,4 +19,8 @@ export function ThemeProvider({ children }) {
   );
 }
 
-export default ThemeContext;
+// ✅ Add PropTypes validation
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+

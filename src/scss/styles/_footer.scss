@@ -1,38 +1,57 @@
 footer {
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
-  background: rgba(10, 15, 30, 0.9);
+
+  background: rgb(10 15 30 / 90%);
+
   color: white;
+
   padding: 15px;
+
   font-size: 14px;
+
   text-align: center;
+
   position: fixed;
+
   bottom: 0;
+
   width: 100%;
 }
 
-
 footer p {
+
   margin: 0;
+
   font-size: 14px;
 }
 
 .theme-toggle {
+
   margin-left: 10px;
 }
 
 .account-footer {
+
   text-align: center;
+
   font-size: 0.9rem;
+
   color: #aaa;
 }
 
 .account-footer a {
+
   color: #1f80e0;
+
   text-decoration: none;
 }
 
 .account-footer a:hover {
+
   text-decoration: underline;
 }

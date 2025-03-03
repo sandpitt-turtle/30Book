@@ -5,7 +5,6 @@ import fetchBookImage from "../utils/fetchBookImage";
 export default function SingleBook() {
   const [book, setBook] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [userHasBook, setUserHasBook] = useState(false);
   const [bookImage, setBookImage] = useState("");
   const [books, setBooks] = useState([]);
   const [bookImages, setBookImages] = useState({});
@@ -23,7 +22,6 @@ export default function SingleBook() {
         if (!response.ok) throw new Error("Failed to fetch book details");
         const bookDetails = await response.json();
         setBook(bookDetails.book);
-        
 
         const image = await fetchBookImage(bookDetails.book.title);
         setBookImage(image);
@@ -42,7 +40,7 @@ export default function SingleBook() {
         const { books } = await response.json();
         const currentBookId = Number(bookId);
         const filteredBooks = books.filter((b) => b.id !== currentBookId);
-        
+
         setBooks(filteredBooks);
 
         const images = await Promise.all(
@@ -79,75 +77,56 @@ export default function SingleBook() {
 
   return (
     <div className="single-book-page">
- 
-      <div
-        className="featured-book"
+      {/* Fullscreen Background */}
+      <div 
+        className="featured-book-bg"
         style={{ backgroundImage: `url(${bookImage})` }}
-      >
-        <div className="book-overlay">
-          <div className="book-info">
-            <h1 className="book-title">{book.title}</h1>
-            <p className="book-author">{book.author}</p>
-            <p className="book-description">{book.description}</p>
-            <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
-              {book.isAvailable ? "Available" : "Checked Out"}
-            </p>
-
-            {/* Checkout & Return Buttons */}
-            <div className="exchange-items">
-              {token && (
-                <button
-                  onClick={() => {
-                    if (book.isAvailable) {
-                      handleCheckoutClick(book.id);
-                    } else {
-                      alert("This book is already checked out.");
-                    }
-                  }}
-                  className="checkout-button"
-                >
-                     <h1>Checkout</h1>
-                </button>
-              )}
-
-              {token && (
-                <button
-                  onClick={() => {
-                    if (userHasBook) {
-                      handleReturnClick(book.id);
-                    } else {
-                      alert("You don't have this book to return.");
-                    }
-                  }}
-                  className="return-button"
-                >
-                 <h1>Return</h1>
-                </button>
-              )}
-            </div>
+      ></div>
+  
+      {/* Gradient Overlay */}
+      <div className="book-overlay-gradient"></div>
+  
+      {/* Book Overlay */}
+      <div className="book-overlay">
+        <h1 className="book-title">{book.title}</h1>
+        <p className="book-author">{book.author}</p>
+        <p className="book-description">{book.description}</p>
+        <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
+          {book.isAvailable ? "Available" : "Checked Out"}
+        </p>
+  
+        {/* Checkout & Return Buttons */}
+        {token && (
+          <div className="button-container">
+            <button className="checkout-button" disabled={!book.isAvailable}>
+              Checkout
+            </button>
+            <button className="return-button" disabled={book.isAvailable}>
+              Return
+            </button>
           </div>
-        </div>
-
-        <div className="related-books">
+        )}
+      </div>
+  
+      {/* Related Books Section - Move BELOW Featured Book */}
+      <div className="related-books">
+        <h2>More Books</h2>
         <div className="books-grid">
           {books.map((b) => (
             <div key={b.id} className="book-card" onClick={() => handleDetailsClick(b.id)}>
-              <img src={bookImages[b.id] || "./src/assets/cover.jpeg"} alt={b.title} className="book-cover" />
-              <h3 className="book-title">{b.title}</h3>
-              <p className="book-author">{b.author}</p>
-              <p className={`book-status ${b.isAvailable ? "available" : "checked-out"}`}>
-                {b.isAvailable ? "Available" : "Checked Out"}
-              </p>
+              <img
+                src={bookImages[b.id] || "./src/assets/cover.jpeg"}
+                alt={b.title}
+                className="book-cover"
+              />
+              <div className="book-card-overlay">
+                <h3 className="book-title">{b.title}</h3>
+                <p className="book-author">{b.author}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </div>
-
-      </div>
-
-    );
-     
-}
-
-
+  );
+}  

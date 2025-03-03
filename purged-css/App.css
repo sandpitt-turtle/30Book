@@ -1,23 +1,22 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  max-width: 100%;
 }
 
+/* Ensure content starts below the navbar */
 body {
   font-family: "Inter", "Helvetica", "Arial", sans-serif;
   font-size: var(--body-font-size, 14px);
   background: radial-gradient(circle at top, #192133 10%, #0c111b 80%);
   background-attachment: fixed;
   color: var(--text);
-  transition:
-    background 0.5s,
-    color 0.5s;
+  transition: background 0.5s, color 0.5s;
   line-height: 1.6;
   overflow-x: hidden;
-  width: 100vw;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .app-container {
@@ -51,11 +50,6 @@ main {
   height: 50px;
 }
 
-code,
-pre {
-  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
-}
-
 :root {
   --background: linear-gradient(to bottom, #e0e4ec, #c0c9d7);
   --text: #2e2e2e;
@@ -65,17 +59,6 @@ pre {
   --button-hover: #594a9d;
   --input-background: #f4f4f4;
   --overlay-background: rgba(0, 0, 0, 0.4);
-}
-
-.dark-theme {
-  --background: linear-gradient(180deg, #121826, #0a0f1a);
-  --text: #e5e5e5;
-  --card-background: #1e1e1e;
-  --card-border: #333;
-  --button-background: #444;
-  --button-hover: #666;
-  --input-background: #262626;
-  --overlay-background: rgba(0, 0, 0, 0.8);
 }
 
 .navbar {
@@ -90,6 +73,7 @@ pre {
   z-index: 100;
   padding: 0 16px;
   overflow-x: hidden;
+  text-decoration: none;
 }
 
 .nav-container {
@@ -98,23 +82,39 @@ pre {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-decoration: none;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-center {
+  text-decoration: none;
+}
+
+.book-nav-button.active {
+  text-decoration: none;
+}
+
+.book-nav-button {
+  text-decoration: none;
+}
+
+.book-nav-button:hover,
+.book-nav-button:focus,
+.book-nav-button:active,
+.book-nav-button.active {
+  text-decoration: none !important;
 }
 
 .nav-logo,
-.nav-item,
 .nav-button,
 .lognav-logo {
   color: white;
   text-decoration: none;
-}
-
-.nav-books {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .lognav-logo {
@@ -131,8 +131,7 @@ pre {
 }
 
 .nav-logo,
-.account-title h2,
-.book-nav-button h2 {
+.book-nav-button {
   font-size: 18px;
   font-weight: bold;
   color: white;
@@ -147,24 +146,15 @@ pre {
 
 .lognav-logo:hover,
 .nav-logo:hover,
-.account-title h2,
-.book-nav-button h2 {
-  animation: double_flash 1.2s ease-in-out forwards;
+.book-nav-button h2,
+.book-nav-button:hover .sign-button h2,
+.reg-button h2 {
+  animation: double_flash 1.5s ease-in-out forwards;
 }
 
-.book-nav-button:hover h2 {
-  animation: double_flash 1.2s ease-in-out forwards;
-  transform: scale(1.05);
-}
-
-.nav-item {
-  font-size: 16px;
-  font-weight: 500;
-  transition: opacity 0.3s;
-}
-
-.nav-item:hover {
-  opacity: 0.7;
+.book-nav-button:hover {
+  animation: double_flash 1.5s ease-in-out forwards;
+  transform: scale(1.2);
 }
 
 .nav-right {
@@ -188,10 +178,10 @@ pre {
 }
 
 .nav-button {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 6px;
+  padding: 8px 8px;
   background: none;
   cursor: pointer;
   transition: background 0.3s;
@@ -212,33 +202,66 @@ pre {
   justify-content: center;
 }
 
-.search-wrapper,
+.search-bar {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+  text-align: left; /* Align text to the left */
+}
+
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.5rem;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
 .search-icon {
   display: flex;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-.nav-search {
-  width: 200px;
-  height: 32px;
-  padding: 5px 10px;
-  font-size: 14px;
-  border: 1px solid white;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
+.search-icon:hover {
+  transform: scale(1.1);
+}
+
+.search-overlay {
+  position: fixed;
+  top: 64px; /* Right below navbar */
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.4); /* Even more transparent */
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  padding: 0 20px;
+}
+
+.close-search {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
   color: white;
-  outline: none;
-  transition: background 0.3s;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.nav-search::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.nav-search:focus {
-  background: rgba(255, 255, 255, 0.3);
+.close-search:hover {
+  opacity: 0.7;
 }
 
 .book-card {
@@ -250,24 +273,9 @@ pre {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
   backdrop-filter: blur(8px);
-}
-
-.book-details-container {
-  max-width: 300px;
-  margin: 80px auto;
-  padding: 20px;
-  background: var(--card-background);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .book-cover {
@@ -275,9 +283,7 @@ pre {
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  transition:
-    filter 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
   margin-bottom: 10px;
 }
 
@@ -286,19 +292,14 @@ pre {
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
-.book-cover-placeholder {
-  width: 100px;
-  height: 150px;
-  display: block;
-  margin: auto;
+.book-title {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.book-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--text);
+.book-author, .book-description, .book-status {
+  font-size: 1.2rem;
   margin-bottom: 10px;
-  margin-top: 10px;
 }
 
 .related-books .book-author {
@@ -322,7 +323,7 @@ pre {
   color: white;
   padding-top: 5px;
   padding-bottom: 3px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .book-author {
@@ -342,12 +343,13 @@ pre {
 }
 
 .book-status {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: lighter;
   padding: 3px 5px;
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 2px;
+  margin-bottom: 10px;
 }
 
 .available {
@@ -357,17 +359,11 @@ pre {
 }
 
 .checked-out {
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   border: 1px solid #f5c6cb;
 }
 
-.book-actions {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.books-grid {
+.allbooks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
@@ -419,113 +415,13 @@ pre {
   margin-bottom: 10px;
 }
 
-.exchange-items {
-  padding: px;
-}
-
-.single-book-page {
-  width: 100%;
-  min-height: 100vh; /* Ensures full-page height but allows it to grow */
-  background-color: #0c111b;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.featured-book {
-  width: 100%;
-  flex-grow: 1; /* Ensures it takes up available space but doesn't force extra height */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Ensures content is always aligned at the bottom */
-  filter: brightness(90%);
-}
-
-.book-overlay {
-  width: 100%;
-  padding: 40px;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  text-align: left;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 20%,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.6) 65%,
-    rgba(0, 0, 0, 0.85) 85%,
-    rgb(0, 0, 0) 100%
-  );
-}
-
-.book-cover {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  image-rendering: crisp-edges;
-}
-
-.related-books .books-grid {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding: 10px 20px;
-  white-space: nowrap;
-  scroll-snap-type: x mandatory;
-}
-.related-books .books-grid::-webkit-scrollbar {
-  height: 6px;
-}
-.related-books .books-grid::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-}
-.related-books .books-grid::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-.related-books .book-card {
-  flex: 0 0 auto;
-  width: 180px;
-  scroll-snap-align: start;
-  text-align: center;
-}
-@media (max-width: 768px) {
-  .related-books .book-overlay {
-    padding: 20px;
-  }
-  .related-books .books-grid {
-    gap: 10px;
-    padding: 10px;
-  }
-}
-
-.related-books {
-  width: 100%;
-  margin-top: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 button,
-.login-button,
-.back-button,
-.submit-button,
-.checkout-button,
-.return-button,
-.logout-button {
+.login-button {
   all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 4px 6px;
-  margin: 5px;
   font-size: 0.9rem;
   font-weight: 500;
   border-radius: 4px;
@@ -534,9 +430,32 @@ button,
   border: 1px solid transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition:
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button {
+  color: white;
+  text-decoration: none;
+}
+
+button,
+.checkout-button, .return-button {
+  font-size: 0.8em;
+  font-weight: lighter;
+  padding: 4px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 2px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: none;
+  color: white;
+  border: 1px solid white;
+}
+
+.checkout-button:hover, .return-button:hover {
+  background: #1f80e0;
+  color: white;
 }
 
 button:active {
@@ -546,46 +465,12 @@ button:active {
 
 button:disabled,
 .login-button:disabled,
-.back-button:disabled,
-.submit-button:disabled,
-.checkout-button:disabled,
-.return-button:disabled,
 .details-button:disabled {
   background-color: #6c757d;
   border: none;
   cursor: not-allowed;
   opacity: 0.6;
   box-shadow: none;
-}
-
-.manage-btn,
-.logout-btn {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 8px;
-  background: #1f80e0;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition:
-    background 0.3s ease-in-out,
-    transform 0.2s;
-  margin-top: 12px;
-}
-
-.manage-btn:hover {
-  background: #1565c0;
-  transform: scale(1.02);
-}
-
-.logout-btn {
-  background: #d32f2f;
-}
-
-.logout-btn:hover {
-  background: #b71c1c;
 }
 
 .cover-button {
@@ -601,12 +486,13 @@ button:disabled,
 }
 
 .details-button {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
   color: #1f80e0;
+  border: none;
   width: 100%;
-  text-align: right;
+  text-align: center;
   margin: 0;
   box-sizing: border-box;
   background-color: transparent;
@@ -636,37 +522,13 @@ footer p {
   font-size: 14px;
 }
 
-.theme-toggle {
-  margin-left: 10px;
-}
-
-.account-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-.account-footer a {
-  color: #1f80e0;
-  text-decoration: none;
-}
-
-.account-footer a:hover {
-  text-decoration: underline;
-}
-
 input:focus {
   outline: none;
   border-color: var(--button-background);
-  box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
 }
 
 input::placeholder {
   color: rgba(106, 78, 174, 0.6);
-}
-
-.dark-theme input::placeholder {
-  color: rgba(220, 220, 220, 0.7);
 }
 
 .input-group {
@@ -680,13 +542,16 @@ input::placeholder {
   margin-bottom: 5px;
 }
 
-.input-field,
-input {
+ input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+}
+
+.log-input-group input:focus {
+  box-shadow: 0 0 4px rgba(160, 95, 255, 0.5);
 }
 
 .popup-overlay {
@@ -784,19 +649,6 @@ input {
   object-fit: cover;
 }
 
-.no-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #333;
-  color: #aaa;
-  width: 50%;
-  height: 100%;
-  border-radius: 8px;
-  font-size: 14px;
-  text-align: center;
-}
-
 .carousel-indicators {
   display: flex;
   justify-content: center;
@@ -821,31 +673,27 @@ input {
   background-color: #1f80e0;
 }
 
-.login-page,
-.register-page {
+.login-page, .register-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
 }
 
-.login-container,
-.register-container {
+.login-container, .register-container {
   opacity: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: white;
   border-radius: 12px;
   padding: 50px 72px;
   width: 580px;
   max-width: 90%;
   transform: translateY(50px);
-  animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
+  animation: _fade_slide 0.7s ease-out 0.2s forwards;
 }
 
-.login-container input,
-.register-container input {
+.login-container input, .register-container input {
   width: 100%;
   padding: 14px;
   font-size: 1rem;
@@ -857,30 +705,47 @@ input {
   outline: none;
 }
 
-.login-container input::placeholder,
-.register-container input::placeholder {
+.login-container input::placeholder, .register-container input::placeholder {
   color: #888;
 }
 
-.login-container button,
-.register-container button {
+.sign-button, .reg-button {
   width: 90%;
   padding: 14px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: normal;
   border-radius: 30px;
   background: black;
   color: white;
   border: none;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  margin-bottom: 15px;
   margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
 }
 
-.login-logo,
-.register-logo {
-  width: 160px;
-  margin-bottom: 32px;
+.sign-button::before, .reg-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
+  opacity: 0; /* Hidden until hover */
+  transition: none;
+}
+
+.sign-button:hover::before, .reg-button:hover::before {
+  animation: shiny-wipe 2s forwards;
+  opacity: 1;
+}
+
+.sign-button:hover, .reg-button:hover {
+  transform: scale(1.02);
 }
 
 .logo-wrapper {
@@ -889,20 +754,7 @@ input {
 
 .inner-content {
   opacity: 0;
-  animation: disney_fade_inner 0.5s ease-out 0.7s forwards;
-}
-.inner-content .account-container .signup-text {
-  margin-top: 24px;
-  font-size: 0.9rem;
-  color: #666;
-}
-.inner-content .account-container .signup-text a {
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
-.inner-content .account-container .signup-text a:hover {
-  text-decoration: underline;
+  animation: _fade_inner 0.5s ease-out 0.7s forwards;
 }
 .inner-content .logreg-title h2 {
   color: black;
@@ -910,23 +762,18 @@ input {
   font-size: 24px;
   margin-bottom: 10px;
 }
-.inner-content .login-title {
-  font-size: 12px;
-  margin-bottom: 10px;
-}
 .inner-content .login-instr h4 {
   color: black;
   font-weight: lighter;
   margin-top: 1px;
-}
-.inner-content .signup-link {
-  color: black;
-  font-weight: lighter;
-  margin-bottom: px;
+  margin-bottom: 10px;
 }
 .inner-content .login-form {
   margin-bottom: 1px;
   margin-top: 10px;
+}
+.inner-content .log-input-group {
+  text-align: left;
 }
 
 .account-page {
@@ -948,7 +795,7 @@ input {
   overflow-x: hidden;
 }
 
-.account-title h2,
+
 .account-container h2 {
   font-size: 1.5rem;
   font-weight: bold;
@@ -959,7 +806,7 @@ input {
 
 .account-section {
   background: rgba(255, 255, 255, 0.08);
-  border-radius: 2px;
+  border-radius: 8px;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -970,7 +817,6 @@ input {
   background: rgba(56, 56, 63, 0.475);
   color: #aaa;
   padding: 12px 15px;
-  width: 100%;
   text-align: left;
   border-radius: 8px 8px 0 0;
   font-size: 1.2rem;
@@ -983,11 +829,6 @@ input {
 .section-header h3 {
   margin: 0;
   font-size: 14px;
-}
-
-.user-info p {
-  font-size: 1rem;
-  color: #e0e0e0;
 }
 
 .user-label {
@@ -1056,7 +897,7 @@ input {
   color: white;
 }
 
-.account-link,
+
 .logout-link,
 .account-link-buddy {
   font-size: 0.95rem;
@@ -1067,17 +908,16 @@ input {
   width: 100%;
   text-align: right;
   padding: 12px 15px;
-  margin: 0;
   box-sizing: border-box;
 }
 
 .account-link-buddy {
   text-align: center;
-  padding: 15px 15px;
+  padding: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.account-link:hover,
+
 .logout-link:hover {
   text-decoration: underline;
 }
@@ -1086,7 +926,7 @@ input {
   font-size: 22px;
   font-weight: normal;
   color: white;
-  background: linear-gradient(70deg, #a4fffc, #003b5c);
+  background: linear-gradient(70deg, #a4fffc, #003B5C);
   background-clip: text;
   -webkit-background-clip: text;
   display: inline-block;
@@ -1095,14 +935,17 @@ input {
   background-size: 200% 200%;
 }
 
+/* ✅ Fix: Responsive Styles (Tablet & Mobile) */
 @media (max-width: 1024px) {
   .book-card {
     width: 85vw;
   }
 }
+/* ✅ Fix: Tablet (768px) */
 @media (max-width: 768px) {
   .book-card {
     width: 90vw;
+    padding: 15px;
   }
   .carousel-card {
     flex-direction: column;
@@ -1116,40 +959,121 @@ input {
     flex-direction: column;
     align-items: center;
   }
-  .books-grid {
-    grid-template-columns: 1fr;
+  .account-container {
+    width: 90%;
+    padding: 20px;
   }
-  .book-card {
+  /* Ensure proper hover behavior */
+  .book-card:hover,
+  .book-cover:hover,
+  .details-button:hover,
+  .return-button:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+  }
+  /* Improve text scaling */
+  .book-title {
+    font-size: 1.5rem;
+  }
+  .book-author, .book-description, .book-status {
+    font-size: 1rem;
+  }
+  .book-overlay {
+    padding: 20px;
+  }
+  /* ✅ Fix: Mobile Login & Register */
+  .login-container,
+  .register-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 40px;
+    transform: translateY(30px);
+  }
+  .sign-button,
+  .reg-button {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+  .input-group label {
+    font-size: 14px;
+  }
+  
+  input {
+    font-size: 16px;
+    padding: 12px;
+  }
+  .login-container input,
+  .register-container input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  .inner-content {
+    padding: 10px;
   }
 }
+/* ✅ Fix: Small Screens (600px) */
 @media (max-width: 600px) {
   .register-container {
     width: 90%;
     padding: 30px;
   }
+  .login-container,
+  .register-container {
+    width: 95%;
+    padding: 30px;
+  }
+  .sign-button,
+  .reg-button {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+  .input-group label {
+    font-size: 13px;
+  }
+  
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .login-container input,
+  .register-container input {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .inner-content {
+    padding: 8px;
+  }
 }
+/* ✅ Fix: Ultra-Small Screens (iPhone SE, 480px) */
 @media (max-width: 480px) {
   .book-card {
     width: 95vw;
   }
-}
-@media (max-width: 768px) {
-  .account-container {
-    width: 90%;
-    padding: 20px;
+  .login-container,
+  .register-container {
+    width: 98%;
+    padding: 25px;
   }
-}
-@media (max-width: 768px) {
-  .book-card:hover,
-  .book-cover:hover,
-  .details-button:hover,
-  .checkout-button:hover,
-  .return-button:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    background-color: inherit !important;
+  .sign-button,
+  .reg-button {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  .input-group label {
+    font-size: 12px;
+  }
+  
+  input {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .login-container input,
+  .register-container input {
+    font-size: 0.85rem;
+    padding: 8px;
   }
 }
 @keyframes fade_in {
@@ -1168,7 +1092,7 @@ input {
     transform: translateY(0);
   }
 }
-@keyframes disney_fade_slide {
+@keyframes _fade_slide {
   0% {
     opacity: 0;
     transform: translateY(50px);
@@ -1178,7 +1102,7 @@ input {
     transform: translateY(0);
   }
 }
-@keyframes disney_fade_inner {
+@keyframes _fade_inner {
   0% {
     opacity: 0;
     transform: translateY(10px);
@@ -1210,5 +1134,172 @@ input {
     background: none;
   }
 }
+@keyframes shiny-wipe {
+  0% {
+    left: -150%;
+    opacity: 1;
+  }
+  50% {
+    left: 100%;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0; /* Fades out after swipe */
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 📌 MAIN PAGE CONTAINER */
+.single-book-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0c111b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 64px;
+}
 
-/*# sourceMappingURL=App.css.map */
+/* 📌 FEATURED BOOK CONTAINER */
+.featured-book {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* ✅ FIX: BACKGROUND FADE EFFECT */
+.featured-book-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* 🔹 The fade effect is applied only to this background */
+  mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 45%);
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 45%);
+  z-index: 1; /* ✅ Keeps it behind everything */
+}
+
+/* ✅ FIX: BOOK DETAILS OVERLAY (Above the Background) */
+.book-overlay {
+  position: absolute;
+  bottom: 18%;
+  width: 100%;
+  padding-left: 40px;
+  text-align: left;
+  color: white;
+  z-index: 3; /* ✅ Higher than background */
+  padding-bottom: 80px;
+}
+
+/* ✅ FIX: KEEP BOOK COVER FULLY VISIBLE */
+.book-cover {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  image-rendering: crisp-edges;
+}
+
+/* ✅ ANIMATION FOR FADE-IN EFFECT */
+.featured-book {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* ✅ FIX: RELATED BOOKS SECTION */
+.related-books {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  z-index: 4; /* ✅ Keeps it above fading effect */
+}
+
+/* 📌 RELATED BOOKS GRID */
+.books-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  position: relative;
+  z-index: 5;
+}
+
+/* 📌 SCROLLBAR STYLING */
+.books-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.books-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.books-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ✅ FIX: BOOK CARDS */
+.book-card {
+  flex: 0 0 auto;
+  width: 180px;
+  scroll-snap-align: start;
+  text-align: center;
+  position: relative;
+  z-index: 6; /* ✅ Ensure books are fully visible */
+}
+
+/* 📌 BOOK COVER IMAGES */
+.book-card .book-cover {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.book-card img.book-cover {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* 📌 CHECKOUT & RETURN BUTTON CONTAINER */
+.exchange-items {
+  z-index: 5;
+}
+
+/* ✅ MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  .book-overlay {
+    padding: 20px;
+  }
+  .books-grid {
+    gap: 10px;
+    padding: 10px;
+  }
+}
