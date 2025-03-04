@@ -90,26 +90,30 @@ export default function SingleBook() {
 
   return (
     <div className="single-book-page">
-      {/* Fullscreen Background */}
       <div
         className="featured-book-bg"
         style={{ backgroundImage: `url(${bookImage})` }}
       ></div>
+  
 
-      {/* Gradient Overlay */}
+  <button className="back-to-books-button" onClick={() => navigate("/books")}>
+          Back to Books
+        </button>
+
+
       <div className="book-overlay-gradient"></div>
-
-      {/* Book Overlay */}
+  
       <div className="book-overlay">
-        
+
+      
+  
         <h1 className="book-title">{book.title}</h1>
         <p className="book-author">{book.author}</p>
         <p className="book-description">{book.description}</p>
         <p className={`book-status ${book.isAvailable ? "available" : "checked-out"}`}>
           {book.isAvailable ? "Available" : "Checked Out"}
         </p>
-
-        {/* Checkout & Return Buttons */}
+  
         {token && (
           <div className="button-container">
             <button className="checkout-button" disabled={!book.isAvailable}>
@@ -122,9 +126,8 @@ export default function SingleBook() {
         )}
       </div>
       <div className="single-line"></div>
-
-     {/* Related Books Section */}
-     <div className="related-books">
+  
+      <div className="related-books">
         <h2>More Books</h2>
         <div className="books-grid">
           {books.map((b) => (
@@ -148,4 +151,5 @@ export default function SingleBook() {
       </div>
     </div>
   );
+  
 }

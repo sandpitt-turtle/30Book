@@ -21,7 +21,7 @@
     align-items: center;
   }
   .books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller boxes */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
   }
   .book-card {
     width: 100%;
@@ -52,9 +52,8 @@
 @media (max-width: 768px) {
   .book-card:hover,
   .book-cover:hover,
-  .details-button:hover,
-  .checkout-button:hover,
-  .return-button:hover {
+  .details-button:hover
+  {
     transform: none !important;
     box-shadow: none !important;
     background-color: inherit !important;
@@ -65,14 +64,21 @@
   .book-title {
     font-size: 1.5rem;
   }
-  .book-author,
-  .book-description,
   .book-status {
     font-size: 1rem;
+    align-items: left; 
+
+  }
+
+  .book-author,
+  .book-description {
+    font-size: 1rem;
+
   }
   .book-overlay {
     padding: 20px;
   }
+  
 }
 
 @media (max-width: 768px) {

@@ -8,11 +8,10 @@ export default function Account({ user, setUser, setToken }) {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
-  console.log("📌 Account component rendered. User:", user);
 
   useEffect(() => {
     if (!user?.id) {
-      console.log("🚨 No user ID found, redirecting to login...");
+
       navigate("/login");
       return;
     }
@@ -29,7 +28,7 @@ export default function Account({ user, setUser, setToken }) {
         }
   
         const apiUrl = `https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations`;
-        console.log("🔍 Fetching checked-out books from:", apiUrl);
+
   
         const response = await fetch(apiUrl, {
           headers: {
@@ -39,22 +38,22 @@ export default function Account({ user, setUser, setToken }) {
         });
   
         if (!response.ok) {
-          console.error(`🚨 API request failed! Status: ${response.status} - ${response.statusText}`);
+         
           throw new Error(`Failed to fetch checked-out books. Status: ${response.status}`);
         }
   
         const data = await response.json();
-        console.log("📚 Checked-out books response:", data);
+   
   
         if (!data.reservation || data.reservation.length === 0) {
-          console.log("✅ You have no books checked out.");
+        
           setCheckedOutBooks([]); 
         } else {
-          console.log("🎉 You HAVE checked-out books!", data.reservation);
-          setCheckedOutBooks(data.reservation); // Store books properly
+
+          setCheckedOutBooks(data.reservation); 
         }
       } catch (error) {
-        console.error("❌ Error fetching books:", error);
+
       }
     };
   
@@ -63,7 +62,7 @@ export default function Account({ user, setUser, setToken }) {
   
 
   const handleLogout = () => {
-    console.log("👋 Logging out user...");
+   
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
@@ -101,7 +100,7 @@ export default function Account({ user, setUser, setToken }) {
               to="#"
               className="view-books-btn"
               onClick={() => {
-                console.log("📖 View Books button clicked. ShowPopup:", !showPopup);
+              
                 setShowPopup(true);
               }}
             >
@@ -113,7 +112,7 @@ export default function Account({ user, setUser, setToken }) {
               <CheckedOutBooks
                 checkedOutBooks={checkedOutBooks}
                 onClose={() => {
-                  console.log("❌ Closing the checked-out books popup.");
+ 
                   setShowPopup(false);
                 }}
               />

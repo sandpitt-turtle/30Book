@@ -4,8 +4,7 @@
   padding: 0;
 }
 
-/* Ensure content starts below the navbar */
-/////////
+
 body {
   font-family: "Inter", "Helvetica", "Arial", sans-serif;
   font-size: var(--body-font-size, 14px);
@@ -27,9 +26,7 @@ body {
   min-height: 100vh;
 }
 
-main {
-  padding: 20px;
-}
+
 
 .loading-placeholder {
   display: flex;

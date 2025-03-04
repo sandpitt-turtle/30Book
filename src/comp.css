@@ -1,11 +1,9 @@
-@charset "UTF-8";
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Ensure content starts below the navbar */
 body {
   font-family: "Inter", "Helvetica", "Arial", sans-serif;
   font-size: var(--body-font-size, 14px);
@@ -23,10 +21,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-main {
-  padding: 20px;
 }
 
 .loading-placeholder {
@@ -59,22 +53,17 @@ pre {
   --background: linear-gradient(to bottom, #e0e4ec, #c0c9d7);
   --text: #2e2e2e;
   --card-background: #ffffff;
-  --card-border: #a8a8a8;
   --button-background: #3f356f;
   --button-hover: #594a9d;
   --input-background: #f4f4f4;
-  --overlay-background: rgba(0, 0, 0, 0.4);
 }
 
 .dark-theme {
   --background: linear-gradient(180deg, #121826, #0a0f1a);
   --text: #e5e5e5;
   --card-background: #1e1e1e;
-  --card-border: #333;
   --button-background: #444;
   --button-hover: #666;
-  --input-background: #262626;
-  --overlay-background: rgba(0, 0, 0, 0.8);
 }
 
 .navbar {
@@ -184,6 +173,10 @@ l .lognav-logo:hover {
   animation: double_flash 1.5s ease-in-out forwards;
 }
 
+.lognav-logo:hover {
+  transform: scale(1.02);
+}
+
 .book-nav-button:hover {
   animation: double_flash 1.5s ease-in-out forwards;
   transform: scale(1.2);
@@ -253,7 +246,7 @@ l .lognav-logo:hover {
   background: transparent;
   color: white;
   outline: none;
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 .search-bar::placeholder {
@@ -306,16 +299,17 @@ l .lognav-logo:hover {
 
 .search-overlay {
   position: fixed;
-  top: 64px; /* Right below navbar */
+  top: 64px;
   left: 0;
   width: 100%;
   height: 64px;
-  background: rgba(0, 0, 0, 0.4); /* Even more transparent */
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   z-index: 99;
   padding: 0 20px;
+  margin-bottom: 20px;
 }
 
 .close-search {
@@ -356,20 +350,23 @@ l .lognav-logo:hover {
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  position: relative;
   backdrop-filter: blur(8px);
 }
 
 .book-details-container {
-  max-width: 300px;
-  margin: 80px auto;
-  padding: 20px;
-  background: var(--card-background);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 15px;
+  border-radius: 0 0 12px 12px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .book-cover {
@@ -377,7 +374,7 @@ l .lognav-logo:hover {
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   margin-bottom: 10px;
 }
 
@@ -445,14 +442,11 @@ l .lognav-logo:hover {
 }
 
 .available {
-  background-color: #d4edda;
   color: #155724;
-  border: 1px solid #c3e6cb;
 }
 
 .checked-out {
-  color: #ffffff;
-  border: 1px solid #f5c6cb;
+  color: #ff0000;
 }
 
 .book-actions {
@@ -463,13 +457,13 @@ l .lognav-logo:hover {
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller boxes */
-  gap: 10px; /* Reducing gap between books */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
   justify-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 90vw;
   margin: 0 auto;
-  padding: 10px; /* Reduce padding to reduce overall spacing */
+  padding: 10px;
 }
 
 .books-container {
@@ -492,6 +486,7 @@ l .lognav-logo:hover {
 .my-book h3 {
   font-size: 14px;
   background: #aaa;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
@@ -514,25 +509,15 @@ l .lognav-logo:hover {
   margin-bottom: 10px;
 }
 
-button,
-.login-button,
-.back-button,
-.submit-button,
-.logout-button {
+button {
   all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 4px 6px;
-  margin: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
   border-radius: 4px;
-  background-color: var(--button-background);
-  color: white;
-  border: 1px solid transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
@@ -611,27 +596,6 @@ button:disabled,
 
 .details-button:hover {
   text-decoration: underline;
-}
-
-button,
-.checkout-button,
-.return-button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4px 4px;
-  margin: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 4px;
-  background-color: var(--button-background);
-  color: white;
-  border: 1px solid transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 footer {
@@ -725,7 +689,7 @@ input {
 .popup-content {
   background: var(--card-background);
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
   min-width: 300px;
   max-width: 500px;
   text-align: center;
@@ -734,7 +698,7 @@ input {
 .close-btn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   position: absolute;
   top: 10px;
   right: 15px;
@@ -810,18 +774,22 @@ input {
   width: 300%;
   height: 100%;
   background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
-  opacity: 0; /* Hidden until hover */
+  opacity: 0;
   transition: none;
 }
 
 .sign-button:hover::before,
-.reg-button:hover::before {
+.reg-button:hover::before,
+.checkout-button:hover::before,
+.return-button:hover::before {
   animation: shiny-wipe 2s forwards;
   opacity: 1;
 }
 
 .sign-button:hover,
-.reg-button:hover {
+.reg-button:hover,
+.checkout-button,
+.return.button:hover {
   transform: scale(1.02);
 }
 
@@ -876,6 +844,13 @@ input {
 .inner-content .login-form {
   margin-bottom: 1px;
   margin-top: 10px;
+}
+
+.login-instr h4 {
+  color: black;
+  font-weight: lighter;
+  margin-top: 1px;
+  margin-bottom: 2px;
 }
 
 .account-page {
@@ -1064,7 +1039,7 @@ input {
     align-items: center;
   }
   .books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller boxes */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   .book-card {
     width: 100%;
@@ -1091,9 +1066,7 @@ input {
 @media (max-width: 768px) {
   .book-card:hover,
   .book-cover:hover,
-  .details-button:hover,
-  .checkout-button:hover,
-  .return-button:hover {
+  .details-button:hover {
     transform: none !important;
     box-shadow: none !important;
     background-color: inherit !important;
@@ -1103,9 +1076,12 @@ input {
   .book-title {
     font-size: 1.5rem;
   }
-  .book-author,
-  .book-description,
   .book-status {
+    font-size: 1rem;
+    align-items: left;
+  }
+  .book-author,
+  .book-description {
     font-size: 1rem;
   }
   .book-overlay {
@@ -1186,7 +1162,7 @@ input {
   }
   100% {
     left: 100%;
-    opacity: 0; /* Fades out after swipe */
+    opacity: 0;
   }
 }
 @keyframes fadeIn {
@@ -1199,11 +1175,10 @@ input {
     transform: translateY(0);
   }
 }
-/* 📌 MAIN PAGE CONTAINER */
-.single-book-page {
+.single-book-page,
+.all-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #0c111b; /* Your desired blue */
   color: white;
   display: flex;
   flex-direction: column;
@@ -1212,7 +1187,6 @@ input {
   z-index: 0;
 }
 
-/* 📌 FEATURED BOOK CONTAINER */
 .featured-book {
   position: relative;
   width: 100vw;
@@ -1227,30 +1201,84 @@ input {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%); /* Centers the image */
-  width: 100vw; /* Full width by default */
-  /* Prevents it from getting too large on wide screens */
+  transform: translateX(-50%);
+  width: 100vw;
   height: 100vh;
   background-size: cover;
   background-position: top-center;
   background-repeat: no-repeat;
   z-index: -1;
-  /* Smooth fade effect */
   -webkit-mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%);
   mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%);
 }
 
+@keyframes fade_scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes button_bounce {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.checkout-button,
+.return-button {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: button_bounce 0.6s ease-out 0.8s forwards;
+}
+
+.related-books {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fade_slide 0.7s ease-out 1s forwards;
+}
+
+.book-card {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fade_scale 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes fade_slide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .book-overlay {
-  bottom: 20%; /* Adjust this if needed */
-  left: 5%; /* Aligns the text to the left */
-  width: 45%; /* Prevents it from stretching across the whole screen */
+  bottom: 20%;
+  left: 5%;
+  width: 45%;
   color: white;
   text-align: left;
   margin-left: 30px;
   padding-top: 30px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fade_slide 0.7s ease-out 0.4s forwards;
 }
 .book-overlay .book-overlay .book-title {
-  font-size: flex; /* Scales based on screen width */
+  font-size: flex;
   font-weight: bold;
   margin-bottom: 10px;
   line-height: 1.2;
@@ -1267,7 +1295,6 @@ input {
   font-size: 8px;
 }
 
-/* 📌 BOOK COVER STYLES */
 .book-cover {
   width: 100%;
   height: 260px;
@@ -1295,27 +1322,10 @@ input {
   object-position: center;
 }
 
-/* 📌 BUTTON CONTAINER */
 .button-container {
   display: flex;
   gap: 15px;
   margin-top: 20px;
-}
-
-.checkout-button,
-.return-button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  font-size: 1rem;
-  font-weight: light;
-  border-radius: 4px;
-  background-color: #3f356f;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .checkout-button:disabled,
@@ -1326,18 +1336,17 @@ input {
 
 .checkout-button:hover:not(:disabled),
 .return-button:hover:not(:disabled) {
-  background-color: #594a9d;
+  background-color: #174c91;
 }
 
-/* 📌 RELATED BOOKS SECTION */
 .related-books {
   padding: 8px;
   background: linear-gradient(to bottom, transparent 10%, #0c111b 100%);
   z-index: 5;
   margin-left: 30px;
+  overflow: hidden;
 }
 
-/* 📌 SCROLLBAR STYLING */
 .books-grid::-webkit-scrollbar {
   height: 6px;
 }
@@ -1351,17 +1360,14 @@ input {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* 📌 MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-  /* Keep the overlay within the normal layout */
   .book-overlay {
-    position: relative; /* Keeps it above the grid instead of overlaying */
+    position: relative;
     width: 80%;
     text-align: center;
     padding: 20px;
     margin-top: 60px;
   }
-  /* Center the text */
   .book-title,
   .book-author,
   .book-description {
@@ -1381,24 +1387,15 @@ input {
     line-height: 1.6;
     max-width: 100%;
   }
-  /* Stack buttons and make them full-width */
   .button-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: left;
     padding-top: 30px;
-  }
-  .checkout-button,
-  .return-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    border-radius: 6px;
   }
 }
 @media (max-width: 768px) {
-  /* Adjust the fade effect */
   .featured-book-bg {
     -webkit-mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%);
     mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%);
@@ -1406,29 +1403,38 @@ input {
   .featured-book-bg {
     width: 100vw;
     height: 100vh;
-    background-size: cover !important; /* Ensures full coverage */
+    background-size: cover !important;
     background-position: center;
   }
 }
 @media (max-width: 768px) {
-  /* Adjust background image to shrink properly */
   .featured-book-bg {
-    height: 60vh; /* Reduce height so it shrinks on smaller screens */
-    background-size: contain; /* Ensures the full image is visible */
+    height: 60vh;
+    background-size: contain;
     background-position: top center;
   }
   .featured-book-bg .single-line {
-    width: 100%; /* Ensures it stretches across */
-    height: 1px; /* Thin separator */
-    background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
-    margin-top: 8rem; /* Spacing above */
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin-top: 8rem;
   }
 }
 .single-line {
-  width: 100vw; /* Ensures it stretches across */
-  height: 1px; /* Thin separator */
-  background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
-  margin-top: 4rem; /* Spacing above */
+  width: 100vw;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-top: 4rem;
+}
+
+.related-books .books-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 10px;
 }
 
 /*# sourceMappingURL=comp.css.map */

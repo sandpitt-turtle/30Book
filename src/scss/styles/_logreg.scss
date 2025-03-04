@@ -3,8 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  //   justify-content: center;
-  //   height: 100vh;
+
   padding-top: 40px;
 }
 
@@ -13,13 +12,12 @@
   opacity: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   background-color: white;
   border-radius: 12px;
   padding: 50px 72px;
   width: 580px;
   max-width: 90%;
-  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
   transform: translateY(50px);
   animation: disney_fade_slide 0.7s ease-out 0.2s forwards;
@@ -42,20 +40,6 @@
 .register-container input::placeholder {
   color: #888;
 }
-
-// .login-container button, .register-container button {
-//   width: 90%;
-//   padding: 14px;
-//   font-size: 1rem;
-//   font-weight: bold;
-//   border-radius: 30px;
-//   background: black;
-//   color: white;
-//   border: none;
-//   cursor: pointer;
-//   transition: background 0.3s ease-in-out;
-//   margin-top: 8px;
-// }
 
 .sign-button,
 .reg-button {
@@ -85,30 +69,24 @@
   width: 300%;
   height: 100%;
   background: linear-gradient(120deg, transparent 30%, #ff3cac 45%, #784ba0 50%, #2b86c5 55%, transparent 70%);
-  opacity: 0; /* Hidden until hover */
+  opacity: 0;
   transition: none;
 }
 
 .sign-button:hover::before,
-.reg-button:hover::before {
+.reg-button:hover::before,
+.checkout-button:hover::before,
+.return-button:hover::before {
   animation: shiny-wipe 2s forwards;
   opacity: 1;
 }
 
 .sign-button:hover,
-.reg-button:hover {
+.reg-button:hover,
+.checkout-button,
+.return.button:hover {
   transform: scale(1.02);
 }
-
-// button:hover,
-// .login-button:hover,
-// .back-button:hover,
-// .submit-button:hover,
-// .checkout-button:hover,
-// .return-button:hover {
-//   background-color: var(--button-hover, #1a5cb0);
-//   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-// }
 
 .login-logo,
 .register-logo {
@@ -169,4 +147,11 @@
     margin-bottom: 1px;
     margin-top: 10px;
   }
+}
+
+.login-instr h4 {
+  color: black;
+  font-weight: lighter;
+  margin-top: 1px;
+  margin-bottom: 2px;
 }

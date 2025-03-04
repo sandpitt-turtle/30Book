@@ -1,8 +1,4 @@
 .books-grid {
-  // .book-card:hover {
-  //   transform: scale(1.05) !important;
-  //   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
-  // }
   .book-cover:hover {
     transform: scale(1.05) !important;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
@@ -30,20 +26,25 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
   overflow: hidden;
+  position: relative;
   backdrop-filter: blur(8px);
 }
 
 .book-details-container {
-  max-width: 300px;
-  margin: 80px auto;
-  padding: 20px;
-  background: var(--card-background);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 15px;
+  border-radius: 0 0 12px 12px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
 }
 
 .book-cover {
@@ -52,8 +53,8 @@
   object-fit: cover;
   border-radius: 12px;
   transition:
-    filter 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   margin-bottom: 10px;
 }
 
@@ -117,33 +118,14 @@
   margin-bottom: 10px;
 }
 
-// .book-description {
-//   font-size: 1rem;
-//   color: var(--text);
-//   line-height: 1.5;
-//   text-align: justify;
-//   max-width: 600px;
-//   margin-bottom: 10px;
-// }
 
-.book-status {
-  font-size: 0.6rem;
-  font-weight: lighter;
-  padding: 3px 5px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 2px;
-}
 
 .available {
-  background-color: #d4edda;
   color: #155724;
-  border: 1px solid #c3e6cb;
 }
 
 .checked-out {
-  color: #ffffff;
-  border: 1px solid #f5c6cb;
+  color: #ff0000;
 }
 
 .book-actions {
@@ -154,13 +136,13 @@
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller boxes */
-  gap: 10px; /* Reducing gap between books */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
   justify-items: center;
   width: 100%;
   max-width: 90vw;
   margin: 0 auto;
-  padding: 10px; /* Reduce padding to reduce overall spacing */
+  padding: 10px;
 }
 
 .books-container {
@@ -205,5 +187,3 @@
 .book-description {
   margin-bottom: 10px;
 }
-
-////// SINGLE BOOK SPECIFIC

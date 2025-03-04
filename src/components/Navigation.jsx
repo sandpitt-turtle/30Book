@@ -3,17 +3,14 @@ import { useContext, useState, useEffect, useRef } from "react";
 
 import profilePic from "../assets/default-profile.png";
 import { useNavigate } from "react-router-dom";
-import { Search } from "lucide-react"; 
-
+import { Search } from "lucide-react";
 
 function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
-
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
   const [showSearch, setShowSearch] = useState(false);
   const searchRef = useRef(null);
 
-  // Close search bar when Escape key is pressed
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -30,7 +27,6 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [showSearch]);
 
-  // Close search when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -55,20 +51,30 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
     navigate("/books");
   };
 
+
+  const isOnBooksPage = location.pathname === "/books";
+  const isOnSingleBookPage = /^\/books\/\d+$/.test(location.pathname); 
+
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-left">
             <Link to="/books" className="nav-logo">BookBuddy</Link>
-            <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
-              <Search size={24} color="white" />
-            </div>
+
+ 
+         {isOnBooksPage && (
+  <div className="search-icon" onClick={() => setShowSearch(!showSearch)}>
+    <Search size={24} color="white" />
+  </div>
+)}
+
+            
           </div>
 
           {location.pathname !== "/books" && (
             <div className="nav-center">
-              <Link to="/books" className={`book-nav-button ${location.pathname === "/books" ? "active" : ""}`}>
+              <Link to="/books" className={`book-nav-button ${isOnBooksPage ? "active" : ""}`}>
                 Books
               </Link>
             </div>
@@ -77,10 +83,9 @@ function Navigation({ isAuthenticated, setUser, setToken, onSearch }) {
           <div className="nav-right">
             {isAuthenticated ? (
               <>
-             <Link to="/books" className="nav-button" onClick={handleLogout}>
-  Logout
-</Link>
-
+                <Link to="/books" className="nav-button" onClick={handleLogout}>
+                  Logout
+                </Link>
                 <Link to="/account">
                   <img src={profilePic} alt="Profile" className="profile-pic" />
                 </Link>

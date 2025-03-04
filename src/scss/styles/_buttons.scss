@@ -8,7 +8,9 @@ button {
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 button:active {
@@ -116,37 +118,4 @@ button:disabled,
 
 .details-button:hover {
   text-decoration: underline;
-}
-
-// .checkout-button,
-// .return-button {
-
-//   color: white;
-
-//   text-decoration: none;
-
-//   padding-top: 2px;
-// }
-
-button,
-.checkout-button,
-.return-button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4px 4px;
-  margin: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 4px;
-  background-color: var(--button-background);
-  color: white;
-  border: 1px solid transparent;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
 }

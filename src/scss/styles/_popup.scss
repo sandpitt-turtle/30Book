@@ -13,7 +13,7 @@
 .popup-content {
   background: var(--card-background);
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
   min-width: 300px;
   max-width: 500px;
   text-align: center;
@@ -22,7 +22,7 @@
 .close-btn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   position: absolute;
   top: 10px;
   right: 15px;

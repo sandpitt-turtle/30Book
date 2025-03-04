@@ -1,9 +1,15 @@
-/* 📌 MAIN PAGE CONTAINER */
-.single-book-page {
+
+
+
+
+
+
+.single-book-page,
+.all-page {
   width: 100%;
 
   min-height: 100vh;
-  background-color: #0c111b; /* Your desired blue */
+
   color: white;
   display: flex;
   flex-direction: column;
@@ -13,7 +19,6 @@
   z-index: 0;
 }
 
-/* 📌 FEATURED BOOK CONTAINER */
 .featured-book {
   position: relative;
   width: 100vw;
@@ -28,17 +33,15 @@
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%); /* Centers the image */
-  width: 100vw; /* Full width by default */
-  /* Prevents it from getting too large on wide screens */
-  // min-width: 300px; /* Prevents it from being too small on small screens */
+  transform: translateX(-50%);
+  width: 100vw;
+
   height: 100vh;
   background-size: cover;
   background-position: top-center;
   background-repeat: no-repeat;
   z-index: -1;
 
-  /* Smooth fade effect */
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
 }
@@ -76,15 +79,11 @@
   animation: button_bounce 0.6s ease-out 0.8s forwards;
 }
 
-
-
-
 .related-books {
   opacity: 0;
   transform: translateY(30px);
   animation: fade_slide 0.7s ease-out 1s forwards;
 }
-
 
 .book-card {
   opacity: 0;
@@ -104,20 +103,20 @@
 }
 
 .book-overlay {
-  bottom: 20%; /* Adjust this if needed */
-  left: 5%; /* Aligns the text to the left */
-  width: 45%; /* Prevents it from stretching across the whole screen */
+  bottom: 20%;
+  left: 5%;
+  width: 45%;
   color: white;
   text-align: left;
   margin-left: 30px;
   padding-top: 30px;
   opacity: 0;
   transform: translateY(50px);
-  animation: fade_slide 0.7s ease-out 0.4s forwards; /* Slightly delayed */
+  animation: fade_slide 0.7s ease-out 0.4s forwards;
 
   .book-overlay {
     .book-title {
-      font-size: flex; /* Scales based on screen width */
+      font-size: flex;
       font-weight: bold;
       margin-bottom: 10px;
 
@@ -136,18 +135,11 @@
       max-width: 600px;
       font-size: 8px;
     }
+
+
   }
 }
 
-// .book-overlay-gradient {
-//   position: absolute;
-//   width: 100%;
-//   height: 100vh;
-//   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 20%, transparent 50%, #0c111b 90%);
-//   z-index: 1;
-// }
-
-/* 📌 BOOK COVER STYLES */
 .book-cover {
   width: 100%;
   height: 260px;
@@ -175,36 +167,10 @@
   object-position: center;
 }
 
-// .book-card-overlay {
-//   position: absolute;
-//   bottom: 0;
-//   width: 100%;
-//   background: rgb(0 0 0 / 60%);
-//   padding: 5px;
-//   color: white;
-// }
-
-/* 📌 BUTTON CONTAINER */
 .button-container {
   display: flex;
   gap: 15px;
   margin-top: 20px;
-}
-
-.checkout-button,
-.return-button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  font-size: 1rem;
-  font-weight: light;
-  border-radius: 4px;
-  background-color: #3f356f;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .checkout-button:disabled,
@@ -215,19 +181,17 @@
 
 .checkout-button:hover:not(:disabled),
 .return-button:hover:not(:disabled) {
-  background-color: #594a9d;
+  background-color: #174c91;
 }
 
-/* 📌 RELATED BOOKS SECTION */
 .related-books {
-  // margin-top: 100vh;
   padding: 8px;
   background: linear-gradient(to bottom, transparent 10%, #0c111b 100%);
   z-index: 5;
-  margin-left: 30px;
+
+  overflow: hidden;
 }
 
-/* 📌 SCROLLBAR STYLING */
 .books-grid::-webkit-scrollbar {
   height: 6px;
 }
@@ -241,19 +205,25 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* 📌 MOBILE RESPONSIVENESS */
+.related-books h2{
+  margin-left: 22px;
+}
+
+
+
 @media (max-width: 768px) {
-  /* Keep the overlay within the normal layout */
   .book-overlay {
-    position: relative; /* Keeps it above the grid instead of overlaying */
+    position: relative;
     width: 80%;
-    // margin: 0 auto; /* Centers it horizontally */
-    text-align: center;
+
+    // text-align: center;
     padding: 20px;
     margin-top: 60px;
   }
 
-  /* Center the text */
+
+
+
   .book-title,
   .book-author,
   .book-description {
@@ -277,26 +247,18 @@
     max-width: 100%;
   }
 
-  /* Stack buttons and make them full-width */
   .button-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: left;
     padding-top: 30px;
   }
 
-  .checkout-button,
-  .return-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    border-radius: 6px;
-  }
+
 }
 
 @media (max-width: 768px) {
-  /* Adjust the fade effect */
   .featured-book-bg {
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 55%);
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 55%);
@@ -305,30 +267,64 @@
   .featured-book-bg {
     width: 100vw;
     height: 100vh;
-    background-size: cover !important; /* Ensures full coverage */
+    background-size: cover !important;
     background-position: center;
   }
 }
 
 @media (max-width: 768px) {
-  /* Adjust background image to shrink properly */
   .featured-book-bg {
-    height: 60vh; /* Reduce height so it shrinks on smaller screens */
-    background-size: contain; /* Ensures the full image is visible */
+    height: 60vh;
+    background-size: contain;
     background-position: top center;
 
     .single-line {
-      width: 100%; /* Ensures it stretches across */
-      height: 1px; /* Thin separator */
-      background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
-      margin-top: 8rem; /* Spacing above */
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-top: 8rem;
     }
   }
 }
 
 .single-line {
-  width: 100vw; /* Ensures it stretches across */
-  height: 1px; /* Thin separator */
-  background-color: rgba(255, 255, 255, 0.3); /* Subtle white line */
-  margin-top: 4rem; /* Spacing above */
+  width: 100vw;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-top: 4rem;
 }
+
+.related-books {
+  .books-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 10px;
+  }
+
+}
+
+.back-to-books-button {
+  display: block; 
+  width: fit-content; 
+  margin-left: 20px; 
+  padding: 10px 16px;
+
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.back-to-books-button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+

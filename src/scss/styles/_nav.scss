@@ -17,7 +17,7 @@
 
   z-index: 100;
 
-  padding: 0 16px;
+  padding: 0 32px;
 
   overflow-x: hidden;
 
@@ -25,8 +25,6 @@
 }
 
 .nav-container {
-  max-width: 1400px;
-
   width: 100%;
 
   display: flex;
@@ -44,13 +42,19 @@
   align-items: center;
 
   gap: 15px;
+
+  flex: 1;
 }
 
 .nav-center {
   text-decoration: none;
+  flex: 2;
+  display: flex;
+  justify-content: center;
 }
 
-.book-nav-button.active {
+.book-nav-button.active,
+.back-to-books-button {
   text-decoration: none;
 }
 
@@ -142,9 +146,15 @@ l .lognav-logo:hover {
 .nav-logo:hover,
 .account-title h2,
 .book-nav-button h2,
+.back-to-books-button h2,
+.back-to-books-button:hover,
 .book-nav-button:hover .sign-button h2,
 .reg-button h2 {
   animation: double_flash 1.5s ease-in-out forwards;
+}
+
+.lognav-logo:hover {
+  transform: scale(1.02);
 }
 
 .book-nav-button:hover {
@@ -248,7 +258,7 @@ l .lognav-logo:hover {
 
   outline: none;
 
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 .search-bar::placeholder {
@@ -318,7 +328,7 @@ l .lognav-logo:hover {
 .search-overlay {
   position: fixed;
 
-  top: 64px; /* Right below navbar */
+  top: 64px;
 
   left: 0;
 
@@ -326,7 +336,7 @@ l .lognav-logo:hover {
 
   height: 64px;
 
-  background: rgb(0 0 0 / 40%); /* Even more transparent */
+  background: rgb(0 0 0 / 40%);
 
   backdrop-filter: blur(5px);
 
@@ -337,6 +347,8 @@ l .lognav-logo:hover {
   z-index: 99;
 
   padding: 0 20px;
+
+  margin-bottom: 20px;
 }
 
 .close-search {

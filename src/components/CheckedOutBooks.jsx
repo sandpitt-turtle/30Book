@@ -2,17 +2,17 @@ import { useEffect } from "react";
 
 export default function CheckedOutBooks({ checkedOutBooks, onClose }) {
   useEffect(() => {
-    console.log("📖 CheckedOutBooks component mounted. Books received:", checkedOutBooks);
+
 
     const closeOnEscape = (e) => {
       if (e.key === "Escape") {
-        console.log("❌ Popup closed with Escape key");
+     
         onClose();
       }
     };
     const closeOnOutsideClick = (e) => {
       if (e.target.id === "popup-overlay") {
-        console.log("❌ Popup closed by clicking outside");
+    
         onClose();
       }
     };

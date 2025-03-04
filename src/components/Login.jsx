@@ -105,7 +105,7 @@ export default function Login({ setToken, setUser }) {
 
         
           <div className= "login-instr"> 
-        {/* <h4 >Forgot password?</h4>  */}
+
         
        <h4> New to BookBuddy?</h4> 
        <div className= "sign-up-link" ><Link to="/register"><h4>Sign up</h4></Link>

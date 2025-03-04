@@ -21,7 +21,7 @@ function Books({ isAuthenticated, searchTerm }) {
           setBooks(books);
           setFilteredBooks(books);
 
-          // Fetch book images
+
           const images = await Promise.all(
             books.map(async (book) => {
               const image = await fetchBookImage(book.title);
@@ -120,58 +120,4 @@ export default Books;
 
 
 
-//   return (
-//     <div className="books-container">
-//       <h2>Books</h2>
-//       <div className="carousel-container">
-//         <div className="carousel">
-//           {filteredBooks.length ? (
-//             filteredBooks.map((book, index) => (
-//               <div key={book.id} className="carousel-item">
-//                 <div className="carousel-card">
-//                 {bookImages[book.id] ? (
-//   <img
-//     src={bookImages[book.id]}
-//     alt={book.title}
-//     className="book-cover"
-//     onError={(e) => (e.target.src = "./src/assets/cover.jpeg")}
-//   />
-// ) : (
-//   <div className="book-cover loading-placeholder">
-//     <img
-//       src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gray_circles_rotate.gif"
-//       alt="Loading..."
-//       className="loading-spinner"
-//       onError={(e) => (e.target.src = "./src/assets/cover.jpeg")}
-//     />
-//   </div>
-// )}
-
-
-
-//                    <div className= "book-details">  
-//                   <h3>{book.title}</h3>
-//                   <p className="book-author"><strong>Author:</strong> {book.author}</p>
-                 
-//                   <button onClick={() => handleDetailsClick(book.id)} className="details-button">
-//                     See details
-//                   </button>
-//                 </div>
-//               </div>
-//               </div>
-//             ))
-//           ) : (
-//             <p>No books found.</p>
-//           )}
-//         </div>
-//         <div className="carousel-indicators">
-//           {filteredBooks.map((_, index) => (
-//             <div
-//               key={index}
-//               className={`carousel-indicator ${index === currentIndex ? "active" : ""}`}
-//               onClick={() => handleIndicatorClick(index)}
-//             ></div>
-//           ))}
-//         </div>
-//       </div>
-     
+//  
