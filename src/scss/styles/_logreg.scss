@@ -12,7 +12,7 @@
   opacity: 0;
   display: flex;
   flex-direction: column;
-  // align-items: center;
+
   background-color: white;
   border-radius: 12px;
   padding: 50px 72px;
@@ -114,7 +114,11 @@
     font-weight: bold;
   }
 
-  .account-container .signup-text a:hover {
+  .account-container a:hover {
+    text-decoration: underline;
+  }
+
+  .signup-text a:hover {
     text-decoration: underline;
   }
 
@@ -155,3 +159,11 @@
   margin-top: 1px;
   margin-bottom: 2px;
 }
+
+
+.account-container .signup-text,
+.login-instr {
+  opacity: 0;
+  animation: disney_fade_slide 0.7s ease-out 0.3s forwards;
+}
+
